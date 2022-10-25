@@ -18,7 +18,7 @@ const StyledHeader = styled.div`
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 0px 20px 0px 20px;
+  padding: 0px 20px;
 `;
 
 const Title = styled.h1`
