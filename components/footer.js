@@ -11,66 +11,66 @@ export default function Footer() {
   const { pathname } = useRouter();
 
   return (
-      <StyledFooter>
-        <Link href="/">
-          <NavElement active={pathname === "/"}>
-            <Image
-              src={dashboardIcon}
-              alt="Dashboard Icon"
-              height={50}
-              objectFit="contain"
-            />
-          </NavElement>
-        </Link>
-        <Link href="/expenses">
-          <NavElement active={pathname === "/expenses"}>
-            <Image
-              src={expensesIcon}
-              alt="Expenses Icon"
-              height={50}
-              objectFit="contain"
-            />
-          </NavElement>
-        </Link>
-        <Link href="/revenues">
-          <NavElement active={pathname === "/revenues"}>
-            <Image
-              src={revenuesIcon}
-              alt="Revenues Icon"
-              height={50}
-              objectFit="contain"
-            />
-          </NavElement>
-        </Link>
-        <Link href="/profile">
-          <NavElement active={pathname === "/profile"}>
-            <Image
-              src={profileIcon}
-              alt="Profile Icon"
-              height={50}
-              objectFit="contain"
-            />
-          </NavElement>
-        </Link>
-      </StyledFooter>
+    <StyledFooter>
+      <Link href="/">
+        <NavElement active={pathname === "/"}>
+          <Image
+            src={dashboardIcon}
+            alt="Dashboard Icon"
+            height={50}
+            objectFit="contain"
+          />
+        </NavElement>
+      </Link>
+      <Link href="/expenses">
+        <NavElement active={pathname === "/expenses"}>
+          <Image
+            src={expensesIcon}
+            alt="Expenses Icon"
+            height={50}
+            objectFit="contain"
+          />
+        </NavElement>
+      </Link>
+      <Link href="/revenues">
+        <NavElement active={pathname === "/revenues"}>
+          <Image
+            src={revenuesIcon}
+            alt="Revenues Icon"
+            height={50}
+            objectFit="contain"
+          />
+        </NavElement>
+      </Link>
+      <Link href="/profile">
+        <NavElement active={pathname === "/profile"}>
+          <Image
+            src={profileIcon}
+            alt="Profile Icon"
+            height={50}
+            objectFit="contain"
+          />
+        </NavElement>
+      </Link>
+    </StyledFooter>
   );
 }
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.footer`
   background-color: #cfd6de;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const NavElement = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${({ active }) => (active ? "#64A1E8" : "none")};
+  ${({ active }) => active && `background-color: #64A1E8;`};
   width: 100%;
   height: 50px;
   padding: 10px;
