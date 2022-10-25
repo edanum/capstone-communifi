@@ -1,4 +1,4 @@
-import { getAllExpenses } from "../../../services/expensesServices";
+import { getAllExpenses } from "../../../services/expenseServices";
 
 export default async function handler(request, response) {
   switch (request.method) {
