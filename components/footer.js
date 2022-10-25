@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <StyledFooter>
-      <Link href="/">
+      {/* <Link href="/">
         <NavElement active={pathname === "/"}>
           <Image
             src={dashboardIcon}
@@ -21,7 +21,7 @@ export default function Footer() {
             objectFit="contain"
           />
         </NavElement>
-      </Link>
+      </Link> */}
       <Link href="/expenses">
         <NavElement active={pathname === "/expenses"}>
           <Image
@@ -32,7 +32,7 @@ export default function Footer() {
           />
         </NavElement>
       </Link>
-      <Link href="/revenues">
+      {/* <Link href="/revenues">
         <NavElement active={pathname === "/revenues"}>
           <Image
             src={revenuesIcon}
@@ -51,7 +51,7 @@ export default function Footer() {
             objectFit="contain"
           />
         </NavElement>
-      </Link>
+      </Link> */}
     </StyledFooter>
   );
 }
