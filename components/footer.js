@@ -11,7 +11,6 @@ export default function Footer() {
   const { pathname } = useRouter();
 
   return (
-    <>
       <StyledFooter>
         <Link href="/">
           <NavElement active={pathname === "/"}>
@@ -54,7 +53,6 @@ export default function Footer() {
           </NavElement>
         </Link>
       </StyledFooter>
-    </>
   );
 }
 
