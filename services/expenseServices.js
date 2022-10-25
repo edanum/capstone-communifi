@@ -1,7 +1,7 @@
-import { promises } from "fs";
+import { expenseData } from "../data/expenses";
 
 export async function getAllExpenses() {
-  const data = await promises.readFile("data/expenses.json", "utf-8");
-  return JSON.parse(data);
+  const data = expenseData;
+  return data;
 }
 
