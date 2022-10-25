@@ -11,10 +11,6 @@ export default function Home() {
       <div>
         Welcome to CommuniFI! This is an MVP holding a minimum of functions of
         the app. Please use the navbar to navigate to the first page "expenses".
-        Or click
-        <Link href="/expenses">
-          <a>here</a>
-        </Link>
       </div>
     </>
   );
