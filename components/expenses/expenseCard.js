@@ -15,7 +15,7 @@ export default function ExpenseCard({ expense }) {
   );
 }
 
-const Card = styled.div`
+const Card = styled.article`
   background-color: #f9f1f1;
   position: relative;
   display: flex;
