@@ -10,7 +10,7 @@ export default function Home() {
       </Head>
       <div>
         Welcome to CommuniFI! This is an MVP holding a minimum of functions of
-        the app. Please use the navbar to navigate to the first page "expenses".
+        the app. Please use the navbar to navigate to the first page called Ausgaben.
       </div>
     </>
   );
