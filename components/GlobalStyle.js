@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   
       body {
           font-family: 'Noto Sans', sans-serif;
-          background-color: var(--background-primary)
+          background-color: var(--background-primary);
           color: var(--text-primary);
       }
   `;
