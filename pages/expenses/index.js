@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { getAllExpenses } from "../../services/expenseServices";
-import ExpenseCard from "../../components/Expenses/expenseCard";
+import ExpenseCard from "../../components/expenses/expenseCard";
 
 
 export async function getServerSideProps() {
