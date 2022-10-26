@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getAllExpenses } from "../../services/expenseServices";
 import ExpenseCard from "../../components/expenses/expenseCard";
 import AddButton from "../../components/buttons/addButton";
+import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
 
 export async function getServerSideProps() {
   const expenseData = await getAllExpenses();
@@ -14,6 +15,8 @@ export async function getServerSideProps() {
 
 export default function Ausgaben({ expenseData }) {
   const expenses = expenseData;
+
+  sortArrayByReceiptNumber(expenses,"decending");
 
   return (
     <>
