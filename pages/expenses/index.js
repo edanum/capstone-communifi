@@ -2,19 +2,16 @@ import styled from "styled-components";
 import { getAllExpenses } from "../../services/expenseServices";
 import ExpenseCard from "../../components/expenses/expenseCard";
 
-
 export async function getServerSideProps() {
   const expenseData = await getAllExpenses();
-
+  
   return {
     props: { expenseData },
   };
 }
 
-
 export default function Ausgaben({ expenseData }) {
-    const expenses = expenseData;
-
+  const expenses = expenseData;
 
   return (
     <StyledExpenses>
