@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function ExpenseCard({ expense }) {
   return (
       <Card>
-        <CardHeader>#{expense.id}</CardHeader>
+        <CardHeader>#{expense.receiptNumber}</CardHeader>
         <Amount>{expense.amount}€</Amount>
         <Description>{expense.description}</Description>
 
