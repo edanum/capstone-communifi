@@ -15,6 +15,11 @@ const GlobalStyle = createGlobalStyle`
           background-color: var(--background-primary);
           color: var(--text-primary);
       }
+
+      #__next {
+  height: 0px;
+};
+
   `;
 
 export default GlobalStyle;
