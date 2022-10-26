@@ -33,22 +33,16 @@ export async function getAllExpenses() {
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
 
-  const dateOfSubmit = today();
-  const name = "Marc Becker";
-  const receiptNumber = highestReceiptNumber(expenses) + 1;
-  const receipt =
-    "https://i.postimg.cc/5yRwt6GD/26-Hornbach-schrauben-und-bohrer-PDF-Image-125305.png";
-
   const newExpense = await Expense.create({
-    receiptNumber: receiptNumber,
+    receiptNumber: highestReceiptNumber(expenses) + 1,
     amount: expense.amount,
     description: expense.description,
-    dateOfSubmit: "22.10.2022",
+    dateOfSubmit: today(),
     comment: expense.comment,
-    receipt: receipt,
-    name: name,
+    receipt:
+      "https://i.postimg.cc/5yRwt6GD/26-Hornbach-schrauben-und-bohrer-PDF-Image-125305.png",
+    name: "Marc Becker",
   });
-  console.log("das ist newExpense auf expenseSerices");
-  console.log(newExpense);
+  
   return newExpense;
 }
