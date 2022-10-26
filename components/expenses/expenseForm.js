@@ -9,7 +9,6 @@ export default function ExpeneForm({ onSubmit }) {
       amount,
       description,
       comment,
-   
     };
     onSubmit(data);
     Router.push("/expenses");
@@ -21,7 +20,7 @@ export default function ExpeneForm({ onSubmit }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Label htmlFor="description">Beschreibung</Label>
+      <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"
         name="description"
@@ -30,9 +29,10 @@ export default function ExpeneForm({ onSubmit }) {
         onChange={(event) => setDescription(event.target.value)}
         required
       ></Input>
-      <Label htmlFor="amount">Betrag</Label>
+      <Label htmlFor="amount">Betrag*</Label>
       <Input
         type="number"
+        step=".01"
         name="amount"
         id="amount"
         min="0"
@@ -49,7 +49,6 @@ export default function ExpeneForm({ onSubmit }) {
         rows="5"
         value={comment}
         onChange={(event) => setComment(event.target.value)}
-        required
       />
       <Button type="submit">Ausgabe hinzufügen</Button>
     </Form>
@@ -91,3 +90,5 @@ const Textarea = styled.textarea`
   font-size: 18px;
   color: #5b5b5b;
 `;
+
+
