@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 export default function ExpenseCard({ expense }) {
   return (
-      <Card>
-        <CardHeader>#{expense.receiptNumber}</CardHeader>
-        <Amount>{expense.amount}€</Amount>
-        <Description>{expense.description}</Description>
+    <Card>
+      <CardHeader>#{expense.receiptNumber}</CardHeader>
+      <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
+      <Description>{expense.description}</Description>
 
-        <CardFooter>
-          <Date>{expense.dateOfSubmit}</Date>
-          <Name>{expense.name}</Name>
-        </CardFooter>
-      </Card>
+      <CardFooter>
+        <Date>{expense.dateOfSubmit}</Date>
+        <Name>{expense.name}</Name>
+      </CardFooter>
+    </Card>
   );
 }
 
