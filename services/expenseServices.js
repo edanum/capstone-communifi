@@ -30,6 +30,33 @@ export async function getAllExpenses() {
   return mappedExpenses;
 }
 
+export async function getExpenseById(expenseId) {
+  await dbConnect();
+
+  const expense = await Expense.findById(expenseId);
+
+  const {
+    id,
+    receiptNumber,
+    amount,
+    description,
+    dateOfSubmit,
+    comment,
+    receipt,
+    name,
+  } = expense;
+  return {
+    id,
+    receiptNumber,
+    amount,
+    description,
+    dateOfSubmit,
+    comment,
+    receipt,
+    name,
+  };
+}
+
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
 
@@ -43,6 +70,6 @@ export async function addExpense(expense) {
       "https://i.postimg.cc/5yRwt6GD/26-Hornbach-schrauben-und-bohrer-PDF-Image-125305.png",
     name: "Marc Becker",
   });
-  
+
   return newExpense;
 }
