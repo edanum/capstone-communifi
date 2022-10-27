@@ -3,30 +3,10 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import backButton from "../public/back_button.svg";
 import Image from "next/image";
+import { printSubhead } from "../library/printSubhead";
 
 export default function Header() {
   const { pathname } = useRouter();
-
-  function printSubhead(pathname) {
-    switch (pathname) {
-      case "/":
-        return "Dashboard";
-      case "/expenses":
-        return "Ausgaben";
-      case "/expenses/add":
-        return "Ausgabe hinzufügen";
-      case "/expenses/details/":
-        return "Ausgabendetails";
-      case "/revenues":
-        return "Einnahmen";
-      case "/profile":
-        return "Profil";
-    }
-
-    if (pathname.includes("/expenses/details/")) {
-      return "Ausgabendetails";
-    }
-  }
 
   return (
     <StyledHeader>
