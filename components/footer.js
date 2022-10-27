@@ -74,4 +74,8 @@ const NavElement = styled.div`
   width: 100%;
   height: 50px;
   padding: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
