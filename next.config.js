@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ["i.postimg.cc"],
+  }
 };
 
 module.exports = nextConfig;
