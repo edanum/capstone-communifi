@@ -10,7 +10,12 @@ export default function ExpenseDetail({ expense }) {
         <Description>{expense.description}</Description>
         {}
         <Receipt>
-          <Image src={expense.receipt} layout="fill" objectFit="contain" />
+          <Image
+            src={expense.receipt}
+            layout="fill"
+            objectFit="contain"
+            alt="receipt image"
+          />
         </Receipt>
         <CardDetailContainer>
           <Date>
