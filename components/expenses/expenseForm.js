@@ -27,6 +27,7 @@ export default function ExpeneForm({ onSubmit }) {
         id="description"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
+        pattern=".*[^\s]{1,}.*"
         required
       ></Input>
       <Label htmlFor="amount">Betrag*</Label>
@@ -39,7 +40,7 @@ export default function ExpeneForm({ onSubmit }) {
         max="1000000"
         value={amount}
         onChange={(event) => setAmount(event.target.value)}
-        redquired
+        required
       ></Input>
 
       <Label htmlFor="comment">Kommentar</Label>
