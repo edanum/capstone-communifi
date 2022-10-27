@@ -36,6 +36,7 @@ export default function ExpeneForm({ onSubmit }) {
         name="amount"
         id="amount"
         min="0"
+        max="1000000"
         value={amount}
         onChange={(event) => setAmount(event.target.value)}
         redquired
@@ -90,5 +91,3 @@ const Textarea = styled.textarea`
   font-size: 18px;
   color: #5b5b5b;
 `;
-
-
