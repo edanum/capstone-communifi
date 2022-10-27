@@ -1,4 +1,4 @@
-import ExpenseDetail from "../../components/Expenses/expenseDetail";
+import ExpenseDetail from "../../components/expenses/expenseDetail";
 import styled from "styled-components";
 import { getExpenseById } from "../../services/expenseServices";
 
