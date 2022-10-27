@@ -8,8 +8,6 @@ export default function Header() {
   const { pathname } = useRouter();
 
   function printSubhead(pathname) {
-    console.log(pathname.includes("/expenses/details/"));
-
     switch (pathname) {
       case "/":
         return "Dashboard";
