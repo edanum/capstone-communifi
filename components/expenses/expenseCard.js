@@ -1,17 +1,20 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function ExpenseCard({ expense }) {
   return (
-    <Card>
-      <CardHeader>#{expense.receiptNumber}</CardHeader>
-      <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
-      <Description>{expense.description}</Description>
+    <Link href={"/expenses/" + expense.id}>
+      <Card>
+        <CardHeader>#{expense.receiptNumber}</CardHeader>
+        <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
+        <Description>{expense.description}</Description>
 
-      <CardFooter>
-        <Date>{expense.dateOfSubmit}</Date>
-        <Name>{expense.name}</Name>
-      </CardFooter>
-    </Card>
+        <CardFooter>
+          <Date>{expense.dateOfSubmit}</Date>
+          <Name>{expense.name}</Name>
+        </CardFooter>
+      </Card>
+    </Link>
   );
 }
 
