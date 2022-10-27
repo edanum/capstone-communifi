@@ -1,6 +1,6 @@
-import ExpenseDetail from "../../components/expenses/expenseDetail";
+import ExpenseDetail from "../../../components/expenses/expenseDetail";
 import styled from "styled-components";
-import { getExpenseById } from "../../services/expenseServices";
+import { getExpenseById } from "../../../services/expenseServices";
 
 export async function getServerSideProps(ctx) {
   const { id } = ctx.params;

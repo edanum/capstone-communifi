@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ExpenseCard({ expense }) {
   return (
-    <Link href={"/expenses/" + expense.id}>
+    <Link href={"/expenses/details/" + expense.id}>
       <Card>
         <CardHeader>#{expense.receiptNumber}</CardHeader>
         <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
