@@ -46,7 +46,7 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
   }, [receipt]);
 
   return (
-    <Form onSubmit={handleSubmit} onChange={handleChange}>
+    <Form onSubmit={handleSubmit}>
       <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"
@@ -84,7 +84,12 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
         />
       )}
 
-      <FileInput type="file" ref={fileInputRef} required />
+      <FileInput
+        type="file"
+        ref={fileInputRef}
+        onChange={handleChange}
+        required
+      />
       <Label htmlFor="comment">Kommentar</Label>
       <Textarea
         type="text"
