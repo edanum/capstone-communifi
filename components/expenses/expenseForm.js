@@ -52,12 +52,12 @@ export default function ExpeneForm({ onSubmit }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <Button type="submit">Ausgabe hinzufügen</Button>
+      <SubmitButton type="submit">Ausgabe hinzufügen</SubmitButton>
     </Form>
   );
 }
 
-const Button = styled.button`
+const SubmitButton = styled.button`
   margin-top: 15px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background-color: #64a1e8;
@@ -66,6 +66,7 @@ const Button = styled.button`
   border-radius: 5px;
   color: white;
   font-size: 20px;
+  cursor: pointer;
 `;
 
 const Form = styled.form`

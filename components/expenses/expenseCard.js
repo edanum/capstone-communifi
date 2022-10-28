@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ExpenseCard({ expense }) {
   return (
-    <Link href={"/expenses/" + expense.id}>
+    <Link href={"/expenses/details/" + expense.id}>
       <Card>
         <CardHeader>#{expense.receiptNumber}</CardHeader>
         <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
@@ -29,6 +29,10 @@ const Card = styled.article`
   background: #f9f1f1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 9px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Amount = styled.h2`
