@@ -1,8 +1,18 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Router from "next/router";
+import addImageButton from "../../public/add_image_button.png";
+import Image from "next/image";
 
 export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
+  const fileInputRef = useRef();
+
+  const [description, setDescription] = useState(expense?.description ?? "");
+  const [amount, setAmount] = useState(expense?.amount ?? "");
+  const [comment, setComment] = useState(expense?.comment ?? "");
+  const [receipt, setReceipt] = useState();
+  const [receiptPreview, setReceiptPreview] = useState();
+
   function handleSubmit(event) {
     event.preventDefault();
     const data = {
@@ -13,12 +23,30 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
     onSubmit(data);
   }
 
-  const [description, setDescription] = useState(expense?.description ?? "");
-  const [amount, setAmount] = useState(expense?.amount ?? "");
-  const [comment, setComment] = useState(expense?.comment ?? "");
+  //This function handles the imagefile inputed in the form
+  function handleChange(event) {
+    const file = event.target.files[0];
+    if (file && file.type.substr(0, 5) === "image") {
+      setReceipt(file);
+    } else {
+      setReceipt(null);
+    }
+  }
+  //This UseEffect takes the receipt image and mages a DataUrl out of it
+  useEffect(() => {
+    if (receipt) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setReceiptPreview(reader.result);
+      };
+      reader.readAsDataURL(receipt);
+    } else {
+      setReceiptPreview(null);
+    }
+  }, [receipt]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} onChange={handleChange}>
       <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"
@@ -41,7 +69,22 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
         onChange={(event) => setAmount(event.target.value)}
         required
       ></Input>
+      <Label>Beleg*</Label>
 
+      {receiptPreview ? (
+        <img src={receiptPreview} />
+      ) : (
+        <ImageUploadButton
+          src={addImageButton}
+          object-fit="responsive"
+          onClick={(event) => {
+            event.preventDefault();
+            fileInputRef.current.click();
+          }}
+        />
+      )}
+
+      <FileInput type="file" ref={fileInputRef} required />
       <Label htmlFor="comment">Kommentar</Label>
       <Textarea
         type="text"
@@ -84,6 +127,10 @@ const Input = styled.input`
   border: none;
 `;
 
+const FileInput = styled.input`
+  display: none;
+`;
+
 const Label = styled.label``;
 
 const Textarea = styled.textarea`
@@ -91,4 +138,8 @@ const Textarea = styled.textarea`
   border: none;
   font-size: 18px;
   color: #5b5b5b;
+`;
+
+const ImageUploadButton = styled(Image)`
+  cursor: pointer;
 `;
