@@ -15,5 +15,5 @@ export default function ExpenseAdd() {
     }
   }
 
-  return <ExpeneForm onSubmit={onSubmit} />;
+  return <ExpeneForm onSubmit={onSubmit} buttonLabel="hinzufügen"/>;
 }
