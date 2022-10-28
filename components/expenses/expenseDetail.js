@@ -6,7 +6,7 @@ export default function ExpenseDetail({ expense }) {
     <>
       <Card>
         <CardHeader>#{expense.receiptNumber}</CardHeader>
-        <Amount>{expense.amount}€</Amount>
+        <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
         <Description>{expense.description}</Description>
         {}
         <Receipt>
@@ -79,7 +79,7 @@ const Comment = styled.section`
   margin: 0px;
 `;
 
-const Date = styled.p`
+const Date = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -108,6 +108,7 @@ const Receipt = styled.div`
   height: 300px;
 `;
 
-const ToBold = styled.div`
+const ToBold = styled.p`
   font-weight: bold;
+  margin: 0px;
 `;
