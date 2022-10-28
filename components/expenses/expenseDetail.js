@@ -69,7 +69,7 @@ const CardHeader = styled.div`
   font-size: 0.8rem;
 `;
 
-const Comment = styled.p`
+const Comment = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -87,12 +87,14 @@ const Date = styled.p`
   margin: 0px;
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 1.2rem;
+  text-align: center;
+  width: 100%;
   margin: 0px;
 `;
 
-const Name = styled.p`
+const Name = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
