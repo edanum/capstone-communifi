@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import Router from "next/router";
 
-export default function ExpeneForm({ onSubmit }) {
+export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
   function handleSubmit(event) {
     event.preventDefault();
     const data = {
@@ -11,12 +11,11 @@ export default function ExpeneForm({ onSubmit }) {
       comment,
     };
     onSubmit(data);
-    Router.push("/expenses");
   }
 
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-  const [comment, setComment] = useState("");
+  const [description, setDescription] = useState(expense?.description ?? "");
+  const [amount, setAmount] = useState(expense?.amount ?? "");
+  const [comment, setComment] = useState(expense?.comment ?? "");
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -52,7 +51,7 @@ export default function ExpeneForm({ onSubmit }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <SubmitButton type="submit">Ausgabe hinzufügen</SubmitButton>
+      <SubmitButton type="submit">Ausgabe {buttonLabel}</SubmitButton>
     </Form>
   );
 }
