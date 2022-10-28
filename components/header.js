@@ -19,7 +19,7 @@ export default function Header() {
         </>
       ) : (
         <>
-          <Image
+          <BackButton
             onClick={() => Router.back()}
             src={backButton}
             width={50}
@@ -51,3 +51,7 @@ const Title = styled.h1`
 const SubTitle = styled.p`
   font-size: 18px;
 `;
+
+const BackButton = styled(Image)`
+cursor: pointer;
+`
