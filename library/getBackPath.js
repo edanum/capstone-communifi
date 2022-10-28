@@ -1,3 +1,5 @@
+import Router from "next/router";
+
 export function getBackPath(pathname) {
   if (pathname.includes("/expenses/add")) {
     Router.push("/expenses");
