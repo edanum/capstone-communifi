@@ -1,11 +1,11 @@
 import Image from "next/image";
-import addButton from "../../public/add_button.svg";
+import editButton from "../../public/edit_button.svg";
 import styled from "styled-components";
 
-export default function AddButton() {
+export default function EditButton() {
   return (
     <ToPosition>
-      <Image src={addButton} width={60} height={60} alt="addButton" />
+      <Image src={editButton} width={60} height={60} />
     </ToPosition>
   );
 }
