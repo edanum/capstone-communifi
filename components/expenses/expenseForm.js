@@ -1,8 +1,9 @@
-import styled from "styled-components";
+ import styled, { ThemeConsumer } from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import Router from "next/router";
 import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
+import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
 
 export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
   const fileInputRef = useRef();
@@ -10,43 +11,41 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
   const [description, setDescription] = useState(expense?.description ?? "");
   const [amount, setAmount] = useState(expense?.amount ?? "");
   const [comment, setComment] = useState(expense?.comment ?? "");
-  const [receipt, setReceipt] = useState();
-  const [receiptPreview, setReceiptPreview] = useState();
+  const [receipt, setReceipt] = useState(expense?.receipt ?? "");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
+
+    //Grab the File input, upload it on cloudinary and save the cloudinary data inside of the states receipt and receiptPreview
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === "file"
+    );
+    const fileList = fileInput.files;
+    const uploadedFiles = await uploadOnCloudinary(fileList);
+    setReceipt(uploadedFiles.secure_url);
+
+    //send all data to expenseAdd page (upload to MongoDB after that step)
     const data = {
       amount,
       description,
       comment,
+      receipt,
     };
     onSubmit(data);
   }
 
-  //This function handles the imagefile inputed in the form
-  function handleChange(event) {
-    const file = event.target.files[0];
-    if (file && file.type.substr(0, 5) === "image") {
-      setReceipt(file);
-    } else {
-      setReceipt(null);
-    }
+  function handleChange(changeEvent) {
+    //This function allows to set a preview image before uploading it to cloudinary
+    const reader = new FileReader();
+    reader.onload = function (onLoadEvent) {
+      setReceipt(onLoadEvent.target.result);
+    };
+    reader.readAsDataURL(changeEvent.target.files[0]);
   }
-  //This UseEffect takes the receipt image and mages a DataUrl out of it
-  useEffect(() => {
-    if (receipt) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setReceiptPreview(reader.result);
-      };
-      reader.readAsDataURL(receipt);
-    } else {
-      setReceiptPreview(null);
-    }
-  }, [receipt]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} autocomplete="off">
       <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"
@@ -69,10 +68,13 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
         onChange={(event) => setAmount(event.target.value)}
         required
       ></Input>
-      <Label>Beleg*</Label>
+      <Label>Beleg</Label>
 
-      {receiptPreview ? (
-        <img src={receiptPreview} />
+      {receipt ? (
+        <>
+          <button onClick={() => setReceipt("")}>Foto löschen</button>
+          <img src={receipt} />
+        </>
       ) : (
         <ImageUploadButton
           src={addImageButton}
@@ -87,8 +89,10 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
       <FileInput
         type="file"
         ref={fileInputRef}
+        id="file"
+        name="file"
         onChange={handleChange}
-        required
+        accept="image/*"
       />
       <Label htmlFor="comment">Kommentar</Label>
       <Textarea
