@@ -59,6 +59,7 @@ export async function getExpenseById(expenseId) {
 
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
+ 
 
   const newExpense = await Expense.create({
     receiptNumber: highestReceiptNumber(expenses) + 1,
@@ -66,8 +67,7 @@ export async function addExpense(expense) {
     description: expense.description,
     dateOfSubmit: today(),
     comment: expense.comment,
-    receipt:
-      "https://i.postimg.cc/5yRwt6GD/26-Hornbach-schrauben-und-bohrer-PDF-Image-125305.png",
+    receipt: expense.receipt,
     name: "Marc Becker",
   });
 
