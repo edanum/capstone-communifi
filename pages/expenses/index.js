@@ -1,27 +1,28 @@
-import Link from "next/link";
-import styled from "styled-components";
-import { getAllExpenses } from "../../services/expenseServices";
+import useSWR from "swr";
 import ExpenseCard from "../../components/expenses/expenseCard";
+import styled from "styled-components";
+import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
 
-export async function getServerSideProps() {
-  const expenseData = await getAllExpenses();
+const fetcher = async () => {
+  const response = await fetch("/api/expenses");
+  const data = await response.json();
+  return data;
+};
 
-  return {
-    props: { expenseData },
-  };
-}
+export default function Einnahmen() {
+  const { data, error } = useSWR("expenses", fetcher);
+  if (error) return "An error has occured";
+  if (!data) return "Loading";
+  const expenses = data;
 
-export default function Ausgaben({ expenseData }) {
-  const expenses = expenseData;
-
-  sortArrayByReceiptNumber(expenses,"decending");
+  sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
       <StyledExpenses>
-        {expenses.map((expense) => {
+        {expenses?.map((expense) => {
           return <ExpenseCard key={expense.id} expense={expense} />;
         })}
       </StyledExpenses>
