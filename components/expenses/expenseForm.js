@@ -69,7 +69,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       ></Input>
       <Label>Beleg</Label>
 
-      {receipt ? (
+      {receipt !== "" ? (
         <>
           <ImageDeleteButton onClick={() => setReceipt("")}>
             Foto löschen
@@ -111,7 +111,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <SubmitButton type="submit">Ausgabe {buttonLabel}</SubmitButton>
+      <SubmitButton type="submit">{buttonLabel}</SubmitButton>
     </Form>
   );
 }

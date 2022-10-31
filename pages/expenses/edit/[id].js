@@ -30,7 +30,7 @@ export default function ExpenseEdit({ expense }) {
     <ExpeneForm
       onSubmit={onSubmit}
       expense={expense}
-      buttonLabel="bearbeiten"
+      buttonLabel="Änderungen speichern"
     />
   );
 }

@@ -8,15 +8,19 @@ export default function ExpenseDetail({ expense }) {
         <CardHeader>#{expense.receiptNumber}</CardHeader>
         <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
         <Description>{expense.description}</Description>
-        {}
-        <Receipt>
+        {expense.receipt === "" ? (
+          ""
+        ) : (
+          <Receipt>
             <Image
               src={expense.receipt}
               layout="fill"
               objectFit="contain"
               alt="receipt image"
             />
-        </Receipt>
+          </Receipt>
+        )}
+
         <CardDetailContainer>
           <Date>
             <ToBold>Eingereicht am:</ToBold>
