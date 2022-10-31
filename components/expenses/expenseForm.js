@@ -5,7 +5,7 @@ import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
 import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
 
-export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
+export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   const fileInputRef = useRef();
 
   const [description, setDescription] = useState(expense?.description ?? "");
@@ -17,7 +17,7 @@ export default function ExpeneForm({ onSubmit, buttonLabel, expense }) {
     event.preventDefault();
     const form = event.currentTarget;
 
-    //Grab the File input, upload it on cloudinary and save the cloudinary data inside of the states receipt and receiptPreview
+    //Grab the File input, upload it on cloudinary and save the cloudinary data inside of the state receipt 
     const fileInput = Array.from(form.elements).find(
       ({ name }) => name === "file"
     );
