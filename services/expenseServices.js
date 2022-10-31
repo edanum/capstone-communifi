@@ -4,7 +4,7 @@ import today from "../library/today";
 import { highestReceiptNumber } from "../library/highestReceiptNumber";
 
 export async function getAllExpenses() {
-  await dbConnect();
+  // await dbConnect();
   const expenses = await Expense.find();
   const mappedExpenses = expenses.map(
     ({
@@ -31,7 +31,7 @@ export async function getAllExpenses() {
 }
 
 export async function getExpenseById(expenseId) {
-  await dbConnect();
+  // await dbConnect();
 
   const expense = await Expense.findById(expenseId);
 
