@@ -6,8 +6,8 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["i.postimg.cc"],
-  }
+    domains: ["i.postimg.cc", "res.cloudinary.com"],
+  },
 };
 
 module.exports = nextConfig;

@@ -8,15 +8,19 @@ export default function ExpenseDetail({ expense }) {
         <CardHeader>#{expense.receiptNumber}</CardHeader>
         <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
         <Description>{expense.description}</Description>
-        {}
-        <Receipt>
-          <Image
-            src={expense.receipt}
-            layout="fill"
-            objectFit="contain"
-            alt="receipt image"
-          />
-        </Receipt>
+        {expense.receipt === "" ? (
+          ""
+        ) : (
+          <Receipt>
+            <Image
+              src={expense.receipt}
+              layout="fill"
+              objectFit="contain"
+              alt="receipt image"
+            />
+          </Receipt>
+        )}
+
         <CardDetailContainer>
           <Date>
             <ToBold>Eingereicht am:</ToBold>
@@ -94,7 +98,7 @@ const Description = styled.p`
   margin: 0px;
 `;
 
-const Name = styled.p`
+const Name = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,6 +107,8 @@ const Name = styled.p`
 `;
 
 const Receipt = styled.div`
+  display: ${(props) => (props.receipt === "" ? "none" : "flex")};
+  justify-content: center;
   position: relative;
   width: 100%;
   height: 300px;
