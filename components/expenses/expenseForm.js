@@ -70,19 +70,23 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       <Label>Beleg</Label>
 
       {receipt ? (
-        <ImagePreviewContainer>
-          <button onClick={() => setReceipt("")}>Foto löschen</button>
-          <Image
-            src={receipt}
-            layout={"fill"}
-            ocject-fit={"contain"}
-            alt="receipt"
-          />
-        </ImagePreviewContainer>
+        <>
+          <ImageDeleteButton onClick={() => setReceipt("")}>
+            Foto löschen
+          </ImageDeleteButton>
+          <ImagePreviewContainer>
+            <Image
+              src={receipt}
+              layout="fill"
+              objectFit="contain"
+              alt="receipt"
+            />
+          </ImagePreviewContainer>
+        </>
       ) : (
         <ImageUploadButton
           src={addImageButton}
-          object-fit="responsive"
+          objectFit="contain"
           onClick={(event) => {
             event.preventDefault();
             fileInputRef.current.click();
@@ -162,4 +166,8 @@ const ImagePreviewContainer = styled.div`
   width: 100%;
   height: 500px;
   overflow: hidden;
+`;
+
+const ImageDeleteButton = styled.button`
+  z-index: 2;
 `;
