@@ -5,7 +5,7 @@ import styled from "styled-components";
 export default function EditButton() {
   return (
     <ToPosition>
-      <Image src={editButton} width={60} height={60} />
+      <Image src={editButton} width={60} height={60} alt="edit Button" />
     </ToPosition>
   );
 }

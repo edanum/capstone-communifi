@@ -1,6 +1,5 @@
- import styled, { ThemeConsumer } from "styled-components";
-import { useState, useRef, useEffect } from "react";
-import Router from "next/router";
+import styled, { ThemeConsumer } from "styled-components";
+import { useState, useRef } from "react";
 import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
 import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
@@ -17,7 +16,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
     event.preventDefault();
     const form = event.currentTarget;
 
-    //Grab the File input, upload it on cloudinary and save the cloudinary data inside of the state receipt 
+    //Grab the File input, upload it on cloudinary and save the cloudinary data inside of the state receipt
     const fileInput = Array.from(form.elements).find(
       ({ name }) => name === "file"
     );
@@ -71,10 +70,15 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       <Label>Beleg</Label>
 
       {receipt ? (
-        <>
+        <ImagePreviewContainer>
           <button onClick={() => setReceipt("")}>Foto löschen</button>
-          <img src={receipt} />
-        </>
+          <Image
+            src={receipt}
+            layout={"fill"}
+            ocject-fit={"contain"}
+            alt="receipt"
+          />
+        </ImagePreviewContainer>
       ) : (
         <ImageUploadButton
           src={addImageButton}
@@ -151,4 +155,11 @@ const Textarea = styled.textarea`
 
 const ImageUploadButton = styled(Image)`
   cursor: pointer;
+`;
+
+const ImagePreviewContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
 `;
