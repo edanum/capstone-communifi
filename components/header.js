@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import backButton from "../public/back_button.svg";
 import Image from "next/image";
 import { printSubhead } from "../library/printSubhead";
-import { getBackPath } from "../library/getBackPath";
 
 export default function Header() {
   const { pathname } = useRouter();
 
   return (
     <StyledHeader>
-      {pathname === "/" ||
+      {pathname === "/" ? "" :
       pathname === "/expenses" ||
       pathname === "/revenues" ||
       pathname === "/profile" ? (
@@ -20,7 +20,7 @@ export default function Header() {
       ) : (
         <>
           <BackButton
-            onClick={() => getBackPath(pathname)}
+            onClick={() => Router.back()}
             src={backButton}
             width={50}
             height={50}
@@ -53,5 +53,5 @@ const SubTitle = styled.p`
 `;
 
 const BackButton = styled(Image)`
-  cursor: pointer;
-`;
+cursor: pointer;
+`
