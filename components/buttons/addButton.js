@@ -17,4 +17,5 @@ const ToPosition = styled.button`
   z-index: 3;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
