@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Router from "next/router";
 import backButton from "../public/back_button.svg";
 import Image from "next/image";
 import { printSubhead } from "../library/printSubhead";
@@ -10,10 +11,11 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      {pathname === "/" ||
-      pathname === "/expenses" ||
-      pathname === "/revenues" ||
-      pathname === "/profile" ? (
+      {pathname === "/" ? (
+        false
+      ) : pathname === "/expenses" ||
+        pathname === "/revenues" ||
+        pathname === "/profile" ? (
         <>
           <Title>CommuniFI</Title> <SubTitle>{printSubhead(pathname)}</SubTitle>
         </>

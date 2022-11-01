@@ -1,18 +1,41 @@
 import ExpeneForm from "../../../components/expenses/expenseForm";
 import Router from "next/router";
-import { getExpenseById } from "../../../services/expenseServices";
+import { useState, useEffect, useRef } from "react";
+import lottie from "lottie-web";
 
-export async function getServerSideProps(context) {
-  const { id } = context.params;
-  const expense = await getExpenseById(id);
+export default function ExpenseEdit() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
-  return {
-    props: { expense },
-  };
-}
+  const container = useRef(null);
 
-export default function ExpenseEdit({ expense }) {
- 
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      render: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../../public/loading_animation.json"),
+    });
+  }, []);
+
+  useEffect(() => {
+    const pathArray = window.location.pathname.split("/");
+    const id = pathArray[3];
+    setLoading(true);
+    fetch(`/api/expenses/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <div ref={container}></div>;
+  if (!data) <div ref={container}></div>;
+
+  const expense = data;
+
   async function onSubmit(formData) {
     try {
       const response = await fetch(`/api/expenses/${expense.id}`, {
