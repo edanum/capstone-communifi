@@ -92,4 +92,5 @@ const Button = styled.div`
   background-color: #0570db;
   position: relative;
   font-size: 24px;
+  cursor: pointer;
 `;
