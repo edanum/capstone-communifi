@@ -42,7 +42,7 @@ export default function ExpenseDetails() {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <div ref={container}></div>;
   if (!data) return <div ref={container}></div>;
 
   const expense = data;
