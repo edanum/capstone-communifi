@@ -83,9 +83,10 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 50px;
   border-radius: 10px;
-  margin: 30px;
+  margin: 30px auto;
   color: white;
   background-color: #0570db;
   position: relative;
