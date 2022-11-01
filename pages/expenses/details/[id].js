@@ -4,7 +4,7 @@ import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
 import useSWR from "swr";
 import lottie from "lottie-web";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const fetcher = async () => {
   const pathArray = window.location.pathname.split("/");
@@ -15,8 +15,10 @@ const fetcher = async () => {
 };
 
 export default function ExpenseDetails() {
-  const container = useRef(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
+  const container = useRef(null);
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current,
@@ -27,9 +29,22 @@ export default function ExpenseDetails() {
     });
   }, []);
   //Loading Data via SWR
-  const { data, error } = useSWR("expensedetail", fetcher);
-  if (error) return "An error has occured";
+
+  useEffect(() => {
+    const pathArray = window.location.pathname.split("/");
+    const id = pathArray[3];
+    setLoading(true);
+    fetch(`/api/expenses/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
   if (!data) return <div ref={container}></div>;
+
   const expense = data;
 
   return (
