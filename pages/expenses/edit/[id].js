@@ -3,6 +3,7 @@ import Router from "next/router";
 import { getExpenseById } from "../../../services/expenseServices";
 
 export async function getServerSideProps(context) {
+  console.log("...loading Editpage")
   const { id } = context.params;
   const expense = await getExpenseById(id);
 
