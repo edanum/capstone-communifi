@@ -29,7 +29,7 @@ export default function ExpenseDetails() {
   //Loading Data via SWR
   const { data, error } = useSWR("expensedetail", fetcher);
   if (error) return "An error has occured";
-  if (!data) return "loading";
+  if (!data) return <div ref={container}></div>;
   const expense = data;
 
   return (
