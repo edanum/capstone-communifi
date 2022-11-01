@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
 import useSWR from "swr";
+import lottie from "lottie-web";
 
 const fetcher = async () => {
   const pathArray = window.location.pathname.split("/");
@@ -13,6 +14,17 @@ const fetcher = async () => {
 };
 
 export default function ExpenseDetails() {
+  const container = useRef(null);
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      render: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../../public/loading_animation.json"),
+    });
+  }, []);
   //Loading Data via SWR
   const { data, error } = useSWR("expensedetail", fetcher);
   if (error) return "An error has occured";
