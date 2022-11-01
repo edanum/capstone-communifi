@@ -4,17 +4,13 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import lottie from "lottie-web";
-
-const fetcher = async () => {
-  const response = await fetch("/api/revenues");
-  const data = await response.json();
-  return data;
-};
 
 export default function Ausgaben() {
   const container = useRef(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -26,8 +22,17 @@ export default function Ausgaben() {
     });
   }, []);
 
-  const { data, error } = useSWR("expenses", fetcher);
-  if (error) return "An error has occured";
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/revenues")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <div ref={container}></div>;
   if (!data) return <div ref={container}></div>;
   const revenues = data;
 
