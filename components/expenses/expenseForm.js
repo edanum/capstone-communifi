@@ -21,7 +21,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(fileList);
+    const uploadedFiles = await uploadOnCloudinary(fileList,"communifi_expenses");
     setReceipt(uploadedFiles.secure_url);
 
     //send all data to expenseAdd page (upload to MongoDB after that step)

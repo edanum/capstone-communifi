@@ -21,7 +21,10 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(fileList);
+    const uploadedFiles = await uploadOnCloudinary(
+      fileList,
+      "communifi_revenues"
+    );
     setReceipt(uploadedFiles.secure_url);
 
     //send all data to revenueAdd page (upload to MongoDB after that step)
