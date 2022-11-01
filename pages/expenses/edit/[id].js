@@ -1,19 +1,28 @@
 import ExpeneForm from "../../../components/expenses/expenseForm";
 import Router from "next/router";
-import { getExpenseById } from "../../../services/expenseServices";
+import { useState, useEffect } from "react";
 
-export async function getServerSideProps(context) {
-  console.log("...loading Editpage")
-  const { id } = context.params;
-  const expense = await getExpenseById(id);
+export default function ExpenseEdit() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
-  return {
-    props: { expense },
-  };
-}
+  useEffect(() => {
+    const pathArray = window.location.pathname.split("/");
+    const id = pathArray[3];
+    setLoading(true);
+    fetch(`/api/expenses/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
 
-export default function ExpenseEdit({ expense }) {
- 
+  if (isLoading) return <div></div>;
+  if (!data) return <div></div>;
+
+  const expense = data;
+
   async function onSubmit(formData) {
     try {
       const response = await fetch(`/api/expenses/${expense.id}`, {
