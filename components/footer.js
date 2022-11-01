@@ -32,7 +32,7 @@ export default function Footer() {
           />
         </NavElement>
       </Link>
-      {/* <Link href="/revenues">
+      <Link href="/revenues">
         <NavElement active={pathname === "/revenues"}>
           <Image
             src={revenuesIcon}
@@ -42,7 +42,7 @@ export default function Footer() {
           />
         </NavElement>
       </Link>
-      <Link href="/profile">
+      {/* <Link href="/profile">
         <NavElement active={pathname === "/profile"}>
           <Image
             src={profileIcon}

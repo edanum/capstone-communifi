@@ -19,4 +19,12 @@ export function printSubhead(pathname) {
   if (pathname.includes("/expenses/edit/")) {
     return "Ausgabe editieren";
   }
+
+  if (pathname.includes("/revenues/details/")) {
+    return "Einnahmendetails";
+  }
+
+  if (pathname.includes("/revenues/edit/")) {
+    return "Einnahme editieren";
+  }
 }
