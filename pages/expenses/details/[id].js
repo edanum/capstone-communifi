@@ -5,7 +5,6 @@ import EditButton from "../../../components/buttons/editButton";
 import lottie from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
-
 export default function ExpenseDetails() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -39,13 +38,14 @@ export default function ExpenseDetails() {
 
   const expense = data;
   console.log(expense.id);
+  console.log(typeof expense.id);
 
   return (
     <>
       <StyledExpenseDetails>
         <ExpenseDetail expense={expense} />
       </StyledExpenseDetails>
-      <Link href={"/expenses/edit/" + expense.id}>
+      <Link href={`/expenses/edit/${expense.id}`}>
         <a>
           <EditButton />
         </a>
