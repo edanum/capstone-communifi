@@ -46,6 +46,7 @@ export default function ExpenseDetails() {
   if (!data) return <div ref={container}></div>;
 
   const expense = data;
+  console.log(expense.id);
 
   return (
     <>
