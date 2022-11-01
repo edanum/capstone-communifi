@@ -23,7 +23,7 @@ export default function Footer() {
         </NavElement>
       </Link> */}
       <Link href="/expenses">
-        <NavElement active={pathname === "/expenses"}>
+        <NavElement active={pathname.includes("/expenses")}>
           <Image
             src={expensesIcon}
             alt="Expenses Icon"
@@ -33,7 +33,7 @@ export default function Footer() {
         </NavElement>
       </Link>
       <Link href="/revenues">
-        <NavElement active={pathname === "/revenues"}>
+        <NavElement active={pathname.includes("/revenues")}>
           <Image
             src={revenuesIcon}
             alt="Revenues Icon"
