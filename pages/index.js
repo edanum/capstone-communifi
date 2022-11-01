@@ -44,6 +44,7 @@ export default function Home() {
 const Dashboard = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
   top: -30px;
 `;
@@ -51,7 +52,7 @@ const Dashboard = styled.div`
 const Animation = styled.div`
   position: relative;
   width: 100%;
-  margin: 30px;
+  margin: 30px auto;
 `;
 
 const IntroductionText = styled.section`
