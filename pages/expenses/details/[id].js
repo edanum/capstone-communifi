@@ -2,17 +2,9 @@ import ExpenseDetail from "../../../components/expenses/expenseDetail";
 import styled from "styled-components";
 import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
-import useSWR from "swr";
 import lottie from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
-const fetcher = async () => {
-  const pathArray = window.location.pathname.split("/");
-  const id = pathArray[3];
-  const response = await fetch(`/api/expenses/${id}`);
-  const data = await response.json();
-  return data;
-};
 
 export default function ExpenseDetails() {
   const [data, setData] = useState(null);
