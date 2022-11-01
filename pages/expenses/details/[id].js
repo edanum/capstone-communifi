@@ -4,6 +4,7 @@ import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
 import useSWR from "swr";
 import lottie from "lottie-web";
+import { useEffect, useRef } from "react";
 
 const fetcher = async () => {
   const pathArray = window.location.pathname.split("/");
