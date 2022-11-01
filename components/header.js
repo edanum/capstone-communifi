@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      {pathname === "/" ? "" :
+      {pathname === "/" ? false :
       pathname === "/expenses" ||
       pathname === "/revenues" ||
       pathname === "/profile" ? (
