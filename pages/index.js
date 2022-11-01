@@ -45,14 +45,13 @@ const Dashboard = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-`;
-const Main = styled.main`
-  text-align: center;
+  top: -30px;
 `;
 
 const Animation = styled.div`
   position: relative;
   width: 100%;
+  margin: 30px;
 `;
 
 const IntroductionText = styled.section`
@@ -86,7 +85,7 @@ const Button = styled.div`
   align-items: center;
   height: 50px;
   border-radius: 10px;
-  margin: 20px;
+  margin: 30px;
   color: white;
   background-color: #0570db;
   position: relative;
