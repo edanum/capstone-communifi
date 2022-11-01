@@ -52,7 +52,6 @@ const Main = styled.main`
 
 const Animation = styled.div`
   position: relative;
-  top: -50px;
   width: 100%;
 `;
 
@@ -87,6 +86,7 @@ const Button = styled.div`
   align-items: center;
   height: 50px;
   border-radius: 10px;
+  margin: 20px;
   color: white;
   background-color: #0570db;
   position: relative;
