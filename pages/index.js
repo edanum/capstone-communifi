@@ -45,7 +45,6 @@ const Dashboard = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  top: -40px;
 `;
 const Main = styled.main`
   text-align: center;
@@ -80,7 +79,6 @@ const CallToAction = styled.section`
   font-size: 20px;
   text-align: center;
   position: relative;
-  top: -100px;
 `;
 
 const Button = styled.div`
@@ -92,6 +90,5 @@ const Button = styled.div`
   color: white;
   background-color: #0570db;
   position: relative;
-  top: -60px;
   font-size: 24px;
 `;
