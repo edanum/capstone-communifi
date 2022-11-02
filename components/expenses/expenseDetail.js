@@ -8,9 +8,7 @@ export default function ExpenseDetail({ expense }) {
       <CardHeader>#{expense.receiptNumber}</CardHeader>
       <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
       <Description>{expense.description}</Description>
-      {expense.receipt === "" ? (
-        ""
-      ) : (
+      {expense.receipt === "" ? null : (
         <Receipt>
           <Image
             src={expense.receipt}

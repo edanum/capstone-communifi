@@ -1,7 +1,7 @@
 import Card from "../card";
 import styled from "styled-components";
 
-export default function WinAndLoss({expenseSum,revenueSum,result}) {
+export default function WinAndLoss({ expenseSum, revenueSum, result }) {
   return (
     <Card>
       <Heading>Gewinn&Verlust:</Heading>

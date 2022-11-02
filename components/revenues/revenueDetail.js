@@ -9,9 +9,7 @@ export default function RevenueDetail({ revenue }) {
         <CardHeader>#{revenue.receiptNumber}</CardHeader>
         <Amount>{revenue.amount.toFixed(2).replace(".", ",")}€</Amount>
         <Description>{revenue.description}</Description>
-        {revenue.receipt === "" ? (
-          ""
-        ) : (
+        {revenue.receipt === "" ? null : (
           <Receipt>
             <Image
               src={revenue.receipt}
