@@ -1,62 +1,49 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Card from "../card";
 
 export default function ExpenseDetail({ expense }) {
   return (
-    <>
-      <Card>
-        <CardHeader>#{expense.receiptNumber}</CardHeader>
-        <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
-        <Description>{expense.description}</Description>
-        {expense.receipt === "" ? (
-          ""
-        ) : (
-          <Receipt>
-            <Image
-              src={expense.receipt}
-              layout="fill"
-              objectFit="contain"
-              alt="receipt image"
-            />
-          </Receipt>
-        )}
+    <Card>
+      <CardHeader>#{expense.receiptNumber}</CardHeader>
+      <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
+      <Description>{expense.description}</Description>
+      {expense.receipt === "" ? (
+        ""
+      ) : (
+        <Receipt>
+          <Image
+            src={expense.receipt}
+            layout="fill"
+            objectFit="contain"
+            alt="receipt image"
+          />
+        </Receipt>
+      )}
 
-        <CardDetailContainer>
-          <Date>
-            <ToBold>Eingereicht am:</ToBold>
-            {expense.dateOfSubmit}
-          </Date>
-          <Name>
-            <ToBold>Eingereicht von:</ToBold>
-            {expense.name}
-          </Name>
-          <Comment>
-            <ToBold>Kommentar:</ToBold>
-            {expense.comment}
-          </Comment>
-        </CardDetailContainer>
-      </Card>
-    </>
+      <CardDetailContainer>
+        <Date>
+          <ToBold>Eingereicht am:</ToBold>
+          {expense.dateOfSubmit}
+        </Date>
+        <Name>
+          <ToBold>Eingereicht von:</ToBold>
+          {expense.name}
+        </Name>
+        <Comment>
+          <ToBold>Kommentar:</ToBold>
+          {expense.comment}
+        </Comment>
+      </CardDetailContainer>
+    </Card>
   );
 }
 
 const Amount = styled.h2`
   font-size: 1.5rem;
   margin: 0px;
-`;
-
-const Card = styled.article`
-  background-color: #f9f1f1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 20px;
-  background: #f9f1f1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
+  width: 100%;
+  text-align: center;
 `;
 
 const CardDetailContainer = styled.div`
@@ -64,7 +51,7 @@ const CardDetailContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 10px;
-  margin: 20px;
+  margin-top: 20px;
   width: 100%;
 `;
 
@@ -81,6 +68,7 @@ const Comment = styled.section`
   justify-content: space-between;
   font-size: 0.8rem;
   margin: 0px;
+  word-wrap: break-word;
 `;
 
 const Date = styled.section`
@@ -95,7 +83,8 @@ const Description = styled.p`
   font-size: 1.2rem;
   text-align: center;
   width: 100%;
-  margin: 0px;
+  margin: 15px 0px;
+  word-wrap: break-word;
 `;
 
 const Name = styled.div`

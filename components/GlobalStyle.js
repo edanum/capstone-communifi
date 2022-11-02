@@ -4,10 +4,17 @@ const GlobalStyle = createGlobalStyle`
       :root {
           --text-primary: #0c2c4d;
           --background-primary: #edf0f5;
+          --background-secondary: #f3ecec;
       }
   
       * {
           box-sizing: border-box;
+      }
+
+      a{
+        text-decoration: none;
+        color: var(--text-primary)
+        
       }
   
       body {
