@@ -16,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
         color: var(--text-primary)
         
       }
+
+      p{
+        margin: 0px;
+        
+      }
   
       body {
           font-family: 'Noto Sans', sans-serif;
