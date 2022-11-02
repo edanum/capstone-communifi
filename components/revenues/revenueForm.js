@@ -1,16 +1,16 @@
-import styled, { ThemeConsumer } from "styled-components";
+import styled from "styled-components";
 import { useState, useRef } from "react";
 import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
 import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
 
-export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
+export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
   const fileInputRef = useRef();
 
-  const [description, setDescription] = useState(expense?.description ?? "");
-  const [amount, setAmount] = useState(expense?.amount ?? "");
-  const [comment, setComment] = useState(expense?.comment ?? "");
-  const [receipt, setReceipt] = useState(expense?.receipt ?? "");
+  const [description, setDescription] = useState(revenue?.description ?? "");
+  const [amount, setAmount] = useState(revenue?.amount ?? "");
+  const [comment, setComment] = useState(revenue?.comment ?? "");
+  const [receipt, setReceipt] = useState(revenue?.receipt ?? "");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,10 +21,13 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(fileList,"communifi_expenses");
+    const uploadedFiles = await uploadOnCloudinary(
+      fileList,
+      "communifi_revenues"
+    );
     setReceipt(uploadedFiles.secure_url);
 
-    //send all data to expenseAdd page (upload to MongoDB after that step)
+    //send all data to revenueAdd page (upload to MongoDB after that step)
     const data = {
       amount,
       description,

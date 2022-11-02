@@ -6,6 +6,8 @@ export function printSubhead(pathname) {
       return "Ausgaben";
     case "/expenses/add":
       return "Ausgabe hinzufügen";
+    case "/revenues/add":
+      return "Einnahme hinzufügen";
     case "/revenues":
       return "Einnahmen";
     case "/profile":
@@ -18,5 +20,13 @@ export function printSubhead(pathname) {
 
   if (pathname.includes("/expenses/edit/")) {
     return "Ausgabe editieren";
+  }
+
+  if (pathname.includes("/revenues/details/")) {
+    return "Einnahmendetails";
+  }
+
+  if (pathname.includes("/revenues/edit/")) {
+    return "Einnahme editieren";
   }
 }

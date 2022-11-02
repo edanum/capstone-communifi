@@ -1,13 +1,15 @@
-import ExpenseDetail from "../../../components/expenses/expenseDetail";
+import RevenueDetail from "../../../components/revenues/revenueDetail";
 import styled from "styled-components";
 import Link from "next/link";
-import EditButton from "../../../components/buttons/editButton";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
+import EditButton from "../../../components/buttons/editButton";
+
 import { useEffect, useRef, useState } from "react";
 
-export default function ExpenseDetails() {
+export default function RevenueDetails() {
   //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
+
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
@@ -20,7 +22,7 @@ export default function ExpenseDetails() {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
     setLoading(true);
-    fetch(`/api/expenses/${id}`)
+    fetch(`/api/revenues/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -32,14 +34,14 @@ export default function ExpenseDetails() {
   if (!data) return <div ref={container}></div>;
   //
 
-  const expense = data;
+  const revenue = data;
 
   return (
     <>
-      <StyledExpenseDetails>
-        <ExpenseDetail expense={expense} />
-      </StyledExpenseDetails>
-      <Link href={`/expenses/edit/${expense.id}`}>
+      <StyledRevenueDetails>
+        <RevenueDetail revenue={revenue} />
+      </StyledRevenueDetails>
+      <Link href={`/revenues/edit/${revenue.id}`}>
         <a>
           <EditButton />
         </a>
@@ -48,7 +50,7 @@ export default function ExpenseDetails() {
   );
 }
 
-const StyledExpenseDetails = styled.div`
+const StyledRevenueDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

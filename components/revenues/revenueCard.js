@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function ExpenseCard({ expense }) {
+export default function RevenueCard({ revenue }) {
   return (
-    <Link href={"/expenses/details/" + expense.id}>
+    <Link href={"/revenues/details/" + revenue.id}>
       <Card>
-        <CardHeader>#{expense.receiptNumber}</CardHeader>
-        <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
-        <Description>{expense.description}</Description>
+        <CardHeader>#{revenue.receiptNumber}</CardHeader>
+        <Amount>{revenue.amount.toFixed(2).replace(".", ",")}€</Amount>
+        <Description>{revenue.description}</Description>
 
         <CardFooter>
-          <Date>{expense.dateOfSubmit}</Date>
-          <Name>{expense.name}</Name>
+          <Date>{revenue.dateOfSubmit}</Date>
+          <Name>{revenue.name}</Name>
         </CardFooter>
       </Card>
     </Link>
@@ -41,8 +41,6 @@ const Amount = styled.h2`
 `;
 
 const Description = styled.p`
-  display: flex;
-  flex-wrap: wrap;
   font-size: 1rem;
   margin: 0px;
   width: 100%;

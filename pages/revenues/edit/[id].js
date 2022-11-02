@@ -1,9 +1,9 @@
-import ExpeneForm from "../../../components/expenses/expenseForm";
+import RevenueForm from "../../../components/revenues/revenueForm";
 import Router from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 
-export default function ExpenseEdit() {
+export default function RevenueEdit() {
   //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
   useEffect(() => {
@@ -18,37 +18,37 @@ export default function ExpenseEdit() {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
     setLoading(true);
-    fetch(`/api/expenses/${id}`)
+    fetch(`/api/revenues/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       });
   }, []);
-  //
 
   if (isLoading) return <div ref={container}></div>;
   if (!data) <div ref={container}></div>;
+  //
 
-  const expense = data;
+  const revenue = data;
 
   async function onSubmit(formData) {
     try {
-      const response = await fetch(`/api/expenses/${expense.id}`, {
+      const response = await fetch(`/api/revenues/${revenue.id}`, {
         method: "PUT",
         body: JSON.stringify(formData),
       });
       await response.json();
-      Router.push(`/expenses/details/${expense.id}`);
+      Router.push(`/revenues/details/${revenue.id}`);
     } catch (error) {
       console.log(error);
     }
   }
 
   return (
-    <ExpeneForm
+    <RevenueForm
       onSubmit={onSubmit}
-      expense={expense}
+      revenue={revenue}
       buttonLabel="Änderungen speichern"
     />
   );

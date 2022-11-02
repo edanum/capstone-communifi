@@ -5,7 +5,7 @@ import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
 import { useRef, useEffect } from "react";
-import lottie from "lottie-web"
+import { getLoadingAnimation } from "../../library/getLoadingAnimation";
 
 const fetcher = async () => {
   const response = await fetch("/api/expenses");
@@ -14,24 +14,20 @@ const fetcher = async () => {
 };
 
 export default function Einnahmen() {
- const container = useRef(null);
+  //PREPARE LOTTIE ANIMATION (LOADING)
+  const container = useRef(null);
 
- useEffect(() => {
-   lottie.loadAnimation({
-     container: container.current,
-     render: "svg",
-     loop: true,
-     autoplay: true,
-     animationData: require("../../public/loading_animation.json"),
-   });
- }, []);
+  useEffect(() => {
+    getLoadingAnimation(container);
+  }, []);
+  //
 
+  //GET DATA VIA SWR
   const { data, error } = useSWR("expenses", fetcher);
   if (error) return "An error has occured";
-  if (!data) return (<div ref={container}></div>);
+  if (!data) return <div ref={container}></div>;
   const expenses = data;
-
- 
+  //
 
   sortArrayByReceiptNumber(expenses, "decending");
 
