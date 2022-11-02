@@ -7,10 +7,16 @@ import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber
 import { useRef, useEffect, useState } from "react";
 import lottie from "lottie-web";
 
+const fetcher = async () => {
+  const response = await fetch("/api/revenues");
+  const data = await response.json();
+  return data;
+};
+
+
 export default function Ausgaben() {
   const container = useRef(null);
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -22,19 +28,12 @@ export default function Ausgaben() {
     });
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/revenues")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
-
-  if (isLoading) return <div ref={container}></div>;
+  const { data, error } = useSWR("revenues", fetcher);
+  if (error) return "An error has occured";
   if (!data) return <div ref={container}></div>;
   const revenues = data;
+
+  
 
   sortArrayByReceiptNumber(revenues, "decending");
 
