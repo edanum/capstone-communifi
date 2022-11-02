@@ -5,7 +5,7 @@ import EditButton from "../../../components/buttons/editButton";
 import lottie from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 
-export default function ExpenseDetails() {
+export default function RevenueDetails() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -41,9 +41,9 @@ export default function ExpenseDetails() {
 
   return (
     <>
-      <StyledExpenseDetails>
+      <StyledRevenueDetails>
         <RevenueDetail revenue={revenue} />
-      </StyledExpenseDetails>
+      </StyledRevenueDetails>
       <Link href={`/revenues/edit/${revenue.id}`}>
         <a>
           <EditButton />
@@ -53,7 +53,7 @@ export default function ExpenseDetails() {
   );
 }
 
-const StyledExpenseDetails = styled.div`
+const StyledRevenueDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

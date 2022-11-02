@@ -13,10 +13,8 @@ const fetcher = async () => {
   return data;
 };
 
-
-export default function Ausgaben() {
+export default function Einnahmen() {
   const container = useRef(null);
-
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -33,17 +31,15 @@ export default function Ausgaben() {
   if (!data) return <div ref={container}></div>;
   const revenues = data;
 
-  
-
   sortArrayByReceiptNumber(revenues, "decending");
 
   return (
     <>
-      <StyledExpenses>
+      <StyledRevenues>
         {revenues?.map((revenue) => {
           return <RevenueCard key={revenue.id} revenue={revenue} />;
         })}
-      </StyledExpenses>
+      </StyledRevenues>
       <Link href="/revenues/add">
         <a>
           <AddButton />
@@ -53,7 +49,7 @@ export default function Ausgaben() {
   );
 }
 
-const StyledExpenses = styled.div`
+const StyledRevenues = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
