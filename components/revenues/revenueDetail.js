@@ -81,6 +81,7 @@ const Comment = styled.section`
   justify-content: space-between;
   font-size: 0.8rem;
   margin: 0px;
+  word-wrap: break-word;
 `;
 
 const Date = styled.section`
@@ -93,6 +94,7 @@ const Date = styled.section`
 
 const Description = styled.p`
   font-size: 1.2rem;
+  word-wrap: break-word;
   text-align: center;
   width: 100%;
   margin: 0px;

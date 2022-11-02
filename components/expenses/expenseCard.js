@@ -41,8 +41,12 @@ const Amount = styled.h2`
 `;
 
 const Description = styled.p`
+  display: flex;
+  flex-wrap: wrap;
   font-size: 1rem;
   margin: 0px;
+  width: 100%;
+  word-wrap: break-word;
 `;
 
 const Date = styled.p`
