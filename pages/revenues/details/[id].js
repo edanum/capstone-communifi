@@ -1,26 +1,23 @@
 import RevenueDetail from "../../../components/revenues/revenueDetail";
 import styled from "styled-components";
 import Link from "next/link";
+import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import EditButton from "../../../components/buttons/editButton";
-import lottie from "lottie-web";
+
 import { useEffect, useRef, useState } from "react";
 
 export default function RevenueDetails() {
+  //PREPARE LOTTIE ANIMATION (LOADING)
+  const container = useRef(null);
+
+  useEffect(() => {
+    getLoadingAnimation(container);
+  }, []);
+  //
+
+  //GET DATA VIA USEEFFECT FETCH
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
-
-  const container = useRef(null);
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current,
-      render: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: require("../../../public/loading_animation.json"),
-    });
-  }, []);
-  //Loading Data via SWR
-
   useEffect(() => {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
@@ -35,9 +32,9 @@ export default function RevenueDetails() {
 
   if (isLoading) return <div ref={container}></div>;
   if (!data) return <div ref={container}></div>;
+  //
 
   const revenue = data;
- 
 
   return (
     <>

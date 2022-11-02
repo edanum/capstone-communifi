@@ -2,25 +2,20 @@ import ExpenseDetail from "../../../components/expenses/expenseDetail";
 import styled from "styled-components";
 import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
-import lottie from "lottie-web";
+import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import { useEffect, useRef, useState } from "react";
 
 export default function ExpenseDetails() {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-
+  //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
   useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current,
-      render: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: require("../../../public/loading_animation.json"),
-    });
+    getLoadingAnimation(container);
   }, []);
-  //Loading Data via SWR
+  //
 
+  //GET DATA VIA USEEFFECT FETCH
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
@@ -35,10 +30,9 @@ export default function ExpenseDetails() {
 
   if (isLoading) return <div ref={container}></div>;
   if (!data) return <div ref={container}></div>;
+  //
 
   const expense = data;
-  console.log(expense.id);
-  console.log(typeof expense.id);
 
   return (
     <>
