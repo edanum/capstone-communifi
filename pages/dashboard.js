@@ -37,12 +37,10 @@ export default function Dashboard() {
   if (!expenseData || !revenueData) return <div ref={container}></div>;
   //
 
-  //GENERATE FINANCE DATE
+  //GENERATE FINANCE DATA
   function getSum(array) {
-    let sum = 0;
     const amounts = array.map((item) => item.amount);
-
-    amounts.forEach((amount) => (sum = sum + amount));
+    const sum = amounts.reduce((a, b) => a + b);
     return sum;
   }
 
