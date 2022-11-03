@@ -10,10 +10,8 @@ import { useData } from "../../context/DataContext";
 
 export default function Einnahmen() {
   //GET GLOBAL DATA STATE
-  
-  const expenses = useData().filteredExpenses;
-  console.log("expenses", expenses);
 
+  const expenses = useData().filteredExpenses;
   //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
   useEffect(() => {
