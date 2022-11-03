@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import searchIcon from "../public/search_icon.svg";
 import Image from "next/image";
 
@@ -9,8 +9,8 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
 
   function handleToggle() {
     setIconToggle(!iconToggle);
-    setToggleIndicator(!iconToggle);
-    // setData(data);
+    setToggleIndicator(!iconToggle); // Passes Toggle State to Parent
+    setData(data); // Delete all filters
   }
 
   function filterData(event) {
@@ -39,16 +39,20 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
             type="text"
             onChange={filterData}
             placeholder="tippe ..."
+            name="search"
+            id="search"
           ></StyledInput>
         ) : null}
-        <Image
-          onClick={handleToggle}
-          src={searchIcon}
-          alt="Search Icon"
-          height={30}
-          width={30}
-          objectFit="contain"
-        />
+        <label for="search">
+          <Image
+            onClick={handleToggle}
+            src={searchIcon}
+            alt="Search Icon"
+            height={30}
+            width={30}
+            objectFit="contain"
+          />
+        </label>
       </Bar>
     </>
   );
