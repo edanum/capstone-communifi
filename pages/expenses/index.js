@@ -17,29 +17,26 @@ export default function Einnahmen() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-
+  if (!expenses|| expenses === []) return <div ref={container}></div>;
   //
 
   sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
-      {typeof expenses === "undefined" ? (
-        <div ref={container}></div>
-      ) : (
-        <>
-          <StyledExpenses>
-            {expenses?.map((expense) => {
-              return <ExpenseCard key={expense.id} expense={expense} />;
-            })}
-          </StyledExpenses>
-          <Link href="/expenses/add">
-            <a>
-              <AddButton />
-            </a>
-          </Link>
-        </>
-      )}
+      <>
+        <StyledExpenses>
+          {expenses?.map((expense) => {
+            return <ExpenseCard key={expense.id} expense={expense} />;
+          })}
+        </StyledExpenses>
+        <Link href="/expenses/add">
+          <a>
+            <AddButton />
+          </a>
+        </Link>
+      </>
+      )
     </>
   );
 }
