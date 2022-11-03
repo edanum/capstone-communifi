@@ -27,11 +27,12 @@ const revenueFetcher = async () => {
 
 export function DataProvider({ children }) {
   //GET DATA VIA SWR
-  const { data: expenseData, error: expenseError } = useSWR(
-    "expenses",
-    expenseFetcher
-  );
-  const { data: revenueData, error: revenueError } = useSWR(
+  const {
+    data: expenseData,
+    mutate: mutateExpenses,
+    error: expenseError,
+  } = useSWR("expenses", expenseFetcher);
+  const { data: revenueData, mutate: mutateRevenues, error: revenueError } = useSWR(
     "revenues",
     revenueFetcher
   );
@@ -59,8 +60,10 @@ export function DataProvider({ children }) {
       value={{
         expenses,
         filteredExpenses,
+        mutateExpenses,
         revenues,
-        filteredRevenues,
+              filteredRevenues,
+        mutateRevenues,
       }}
     >
       <DataUpdateContext.Provider

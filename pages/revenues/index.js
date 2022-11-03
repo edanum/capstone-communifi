@@ -11,6 +11,10 @@ import { useData } from "../../context/DataContext";
 export default function Einnahmen() {
   //GET GLOBAL DATA STATE
   const revenues = useData().filteredRevenues;
+  const mutateRevenues = useData().mutateRevenues;
+
+  mutateRevenues(); // refreshes cache to synchronyze with globald state after add function
+
   //
 
   //IMPLEMENT LOADING ANIMATION

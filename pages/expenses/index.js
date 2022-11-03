@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import ExpenseCard from "../../components/expenses/expenseCard";
 import styled from "styled-components";
 import Link from "next/link";
@@ -12,12 +12,15 @@ export default function Einnahmen() {
   //GET GLOBAL DATA STATE
 
   const expenses = useData().filteredExpenses;
+  const mutateExpenses = useData().mutateExpenses;
+
+  mutateExpenses(); // refreshes cache to synchronyze with globald state after add function
   //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  if (!expenses|| expenses === []) return <div ref={container}></div>;
+  if (!expenses || expenses === []) return <div ref={container}></div>;
   //
 
   sortArrayByReceiptNumber(expenses, "decending");
