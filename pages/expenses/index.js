@@ -4,8 +4,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
+import SearchBar from "../../components/searchBar";
 
 const fetcher = async () => {
   const response = await fetch("/api/expenses");
@@ -14,6 +15,8 @@ const fetcher = async () => {
 };
 
 export default function Einnahmen() {
+  const [expenses, setExpenses] = useState([]);
+
   //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
 
@@ -22,18 +25,22 @@ export default function Einnahmen() {
   }, []);
   //
 
+  useEffect(() => {
+    setExpenses(data)
+  },[data])
+
   //GET DATA VIA SWR
   const { data, error } = useSWR("expenses", fetcher);
   if (error) return "An error has occured";
   if (!data) return <div ref={container}></div>;
-  const expenses = data;
-  //
+  setExpenses(data);
 
   sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
       <StyledExpenses>
+        <SearchBar data={expenses} setData={setExpenses}  />
         {expenses?.map((expense) => {
           return <ExpenseCard key={expense.id} expense={expense} />;
         })}
