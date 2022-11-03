@@ -43,7 +43,7 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
             id="search"
           ></StyledInput>
         ) : null}
-        <label for="search">
+        <label htmlFor="search">
           <Image
             onClick={handleToggle}
             src={searchIcon}
