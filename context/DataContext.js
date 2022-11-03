@@ -38,10 +38,10 @@ export function DataProvider({ children }) {
   //
 
   // MANAGE STATES FOR EXPENSE AND REVENUE DATA
-  const [expenses, setExpenses] = useState([""]);
-  const [filteredExpenses, setFilteredExpenses] = useState([""]);
-  const [revenues, setRevenues] = useState([""]);
-  const [filteredRevenues, setFilteredRevenues] = useState([""]);
+  const [expenses, setExpenses] = useState(null);
+  const [filteredExpenses, setFilteredExpenses] = useState(null);
+  const [revenues, setRevenues] = useState(null);
+  const [filteredRevenues, setFilteredRevenues] = useState(null);
 
   useEffect(() => {
     setExpenses(expenseData);
