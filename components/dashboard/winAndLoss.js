@@ -5,15 +5,15 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
   return (
     <Card>
       <Heading>Gewinn&Verlust:</Heading>
-      <Amount result={result}>{result.toFixed(2).replace(".", ",")}€ </Amount>
+      <Amount result={result}>{result?.toFixed(2).replace(".", ",")}€ </Amount>
       <SummaryContainer>
         <Summary>
           <p>Einnahmen:</p>
-          <p> {revenueSum.toFixed(2).replace(".", ",")}€</p>
+          <p> {revenueSum?.toFixed(2).replace(".", ",")}€</p>
         </Summary>
         <Summary>
           <p>Ausgaben:</p>
-          <p> {expenseSum.toFixed(2).replace(".", ",")}€</p>
+          <p> {expenseSum?.toFixed(2).replace(".", ",")}€</p>
         </Summary>
       </SummaryContainer>
     </Card>

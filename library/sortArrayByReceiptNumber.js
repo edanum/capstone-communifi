@@ -1,4 +1,7 @@
 export function sortArrayByReceiptNumber(array, direction) {
+  if (!array) {
+    return null;
+  }
   if (direction === "ascending") {
     const sortedArray = array.sort((a, b) => a.receiptNumber - b.receiptNumber);
     return sortedArray;
