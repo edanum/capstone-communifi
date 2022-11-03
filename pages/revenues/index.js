@@ -4,30 +4,21 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
-
-
-const fetcher = async () => {
-  const response = await fetch("/api/revenues");
-  const data = await response.json();
-  return data;
-};
+import { useData } from "../../context/DataContext";
 
 export default function Einnahmen() {
-  //PREPARE LOTTIE ANIMATION (LOADING)
-  const container = useRef(null);
+  //GET GLOBAL DATA STATE
+  const revenues = useData().filteredRevenues;
+  //
 
+  //IMPLEMENT LOADING ANIMATION
+  const container = useRef(null);
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  //
-
-  //GET DATA VIA SWR
-  const { data, error } = useSWR("revenues", fetcher);
-  if (error) return "An error has occured";
-  if (!data) return <div ref={container}></div>;
-  const revenues = data;
+  if (!revenues || revenues === []) return <div ref={container}></div>;
   //
 
   sortArrayByReceiptNumber(revenues, "decending");

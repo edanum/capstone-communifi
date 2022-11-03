@@ -4,43 +4,30 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect} from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
-import SearchBar from "../../components/searchBar";
-
-const fetcher = async () => {
-  const response = await fetch("/api/expenses");
-  const data = await response.json();
-  return data;
-};
+import { useData} from "../../context/DataContext";
 
 export default function Einnahmen() {
-  const [expenses, setExpenses] = useState([]);
+  //GET GLOBAL DATA STATE
+  const expenses = useData().filteredExpenses;
+  //
 
-  //PREPARE LOTTIE ANIMATION (LOADING)
+
+  //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
-
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  //
 
-  useEffect(() => {
-    setExpenses(data)
-  },[data])
-
-  //GET DATA VIA SWR
-  const { data, error } = useSWR("expenses", fetcher);
-  if (error) return "An error has occured";
-  if (!data) return <div ref={container}></div>;
-  setExpenses(data);
-
+  if (!expenses || expenses === []) return <div ref={container}></div>;
+//
+  
   sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
       <StyledExpenses>
-        <SearchBar data={expenses} setData={setExpenses}  />
         {expenses?.map((expense) => {
           return <ExpenseCard key={expense.id} expense={expense} />;
         })}
