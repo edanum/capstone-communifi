@@ -12,8 +12,8 @@ export default function Footer() {
 
   return (
     <StyledFooter>
-      {/* <Link href="/">
-        <NavElement active={pathname === "/"}>
+      <Link href="/dashboard">
+        <NavElement active={pathname === "/dashboard"}>
           <Image
             src={dashboardIcon}
             alt="Dashboard Icon"
@@ -21,7 +21,7 @@ export default function Footer() {
             objectFit="contain"
           />
         </NavElement>
-      </Link> */}
+      </Link>
       <Link href="/expenses">
         <NavElement active={pathname.includes("/expenses")}>
           <Image

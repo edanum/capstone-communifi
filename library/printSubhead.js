@@ -1,6 +1,6 @@
 export function printSubhead(pathname) {
   switch (pathname) {
-    case "/":
+    case "/dashboard":
       return "Dashboard";
     case "/expenses":
       return "Ausgaben";

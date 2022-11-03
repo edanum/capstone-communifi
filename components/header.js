@@ -13,7 +13,8 @@ export default function Header() {
     <StyledHeader>
       {pathname === "/" ? (
         false
-      ) : pathname === "/expenses" ||
+      ) : pathname === "/dashboard" ||
+        pathname === "/expenses" ||
         pathname === "/revenues" ||
         pathname === "/profile" ? (
         <>
