@@ -4,15 +4,15 @@ import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
-import { useRef, useEffect} from "react";
+import { useRef, useEffect } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
-import { useData} from "../../context/DataContext";
+import { useData } from "../../context/DataContext";
 
 export default function Einnahmen() {
   //GET GLOBAL DATA STATE
+  
   const expenses = useData().filteredExpenses;
-  //
-
+  console.log("expenses", expenses);
 
   //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
@@ -20,23 +20,28 @@ export default function Einnahmen() {
     getLoadingAnimation(container);
   }, []);
 
-  if (!expenses || expenses === []) return <div ref={container}></div>;
-//
-  
+  //
+
   sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
-      <StyledExpenses>
-        {expenses?.map((expense) => {
-          return <ExpenseCard key={expense.id} expense={expense} />;
-        })}
-      </StyledExpenses>
-      <Link href="/expenses/add">
-        <a>
-          <AddButton />
-        </a>
-      </Link>
+      {typeof expenses === "undefined" ? (
+        <div ref={container}></div>
+      ) : (
+        <>
+          <StyledExpenses>
+            {expenses?.map((expense) => {
+              return <ExpenseCard key={expense.id} expense={expense} />;
+            })}
+          </StyledExpenses>
+          <Link href="/expenses/add">
+            <a>
+              <AddButton />
+            </a>
+          </Link>
+        </>
+      )}
     </>
   );
 }
