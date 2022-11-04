@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
           --text-primary: #0c2c4d;
           --background-primary: #edf0f5;
           --background-secondary: #f3ecec;
+          --accent-color: #64A1E8;
       }
   
       * {

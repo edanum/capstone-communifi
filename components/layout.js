@@ -14,7 +14,9 @@ export default function Layout({ children }) {
 
 const Main = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
   z-index: -1;
   top: 52.2px;

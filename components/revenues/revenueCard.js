@@ -8,7 +8,7 @@ export default function RevenueCard({ revenue }) {
       <a>
         <Card>
           <CardHeader>#{revenue.receiptNumber}</CardHeader>
-          <Amount>{revenue.amount.toFixed(2).replace(".", ",")}€</Amount>
+          <Amount>{revenue?.amount?.toFixed(2).replace(".", ",")}€</Amount>
           <Description>{revenue.description}</Description>
 
           <CardFooter>

@@ -8,7 +8,7 @@ export default function ExpenseCard({ expense }) {
       <a>
         <Card>
           <CardHeader>#{expense.receiptNumber}</CardHeader>
-          <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
+          <Amount>{expense?.amount?.toFixed(2).replace(".", ",")}€</Amount>
           <Description>{expense.description}</Description>
 
           <CardFooter>

@@ -1,24 +1,48 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import Router from "next/router";
+import SearchBar from "./searchBar";
 import backButton from "../public/back_button.svg";
 import Image from "next/image";
 import { printSubhead } from "../library/printSubhead";
 import { getBackPath } from "../library/getBackPath";
+import { useState, useEffect } from "react";
+import { useData, useDataUpdate } from "../context/DataContext";
 
 export default function Header() {
-  const { pathname } = useRouter();
+  //GET GLOBAL DATA STATES
+  const expenses = useData().expenses;
+  const setFilteredExpenses = useDataUpdate().setFilteredExpenses;
+  const revenues = useData().revenues;
+  const setFilteredRevenues = useDataUpdate().setFilteredRevenues;
+  //
 
+  const [searchbarToggle, setSearchbarToggle] = useState();
+
+  const { pathname } = useRouter();
   return (
     <StyledHeader>
       {pathname === "/" ? (
         false
-      ) : pathname === "/dashboard" ||
-        pathname === "/expenses" ||
-        pathname === "/revenues" ||
-        pathname === "/profile" ? (
+      ) : pathname === "/dashboard" || pathname === "/profile" ? (
         <>
           <Title>CommuniFI</Title> <SubTitle>{printSubhead(pathname)}</SubTitle>
+        </>
+      ) : pathname === "/expenses" || pathname === "/revenues" ? (
+        <>
+          <Title>CommuniFI</Title>
+          {searchbarToggle ? null : (
+            <SubTitle>{printSubhead(pathname)}</SubTitle>
+          )}
+          <SearchBar
+            data={pathname === "/expenses" ? expenses : revenues}
+            setData={
+              pathname === "/expenses"
+                ? setFilteredExpenses
+                : setFilteredRevenues
+            }
+            entityName="Ausgaben"
+            setToggleIndicator={setSearchbarToggle}
+          />
         </>
       ) : (
         <>

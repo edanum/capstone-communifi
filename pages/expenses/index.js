@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import ExpenseCard from "../../components/expenses/expenseCard";
 import styled from "styled-components";
 import Link from "next/link";
@@ -6,43 +6,39 @@ import AddButton from "../../components/buttons/addButton";
 import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
 import { useRef, useEffect } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
-
-const fetcher = async () => {
-  const response = await fetch("/api/expenses");
-  const data = await response.json();
-  return data;
-};
+import { useData } from "../../context/DataContext";
 
 export default function Einnahmen() {
-  //PREPARE LOTTIE ANIMATION (LOADING)
-  const container = useRef(null);
+  //GET GLOBAL DATA STATE
 
+  const expenses = useData().filteredExpenses;
+  const mutateExpenses = useData().mutateExpenses;
+
+  mutateExpenses(); // refreshes cache to synchronyze with globald state after add function
+  //IMPLEMENT LOADING ANIMATION
+  const container = useRef(null);
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  //
-
-  //GET DATA VIA SWR
-  const { data, error } = useSWR("expenses", fetcher);
-  if (error) return "An error has occured";
-  if (!data) return <div ref={container}></div>;
-  const expenses = data;
+  if (!expenses || expenses === []) return <div ref={container}></div>;
   //
 
   sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
-      <StyledExpenses>
-        {expenses?.map((expense) => {
-          return <ExpenseCard key={expense.id} expense={expense} />;
-        })}
-      </StyledExpenses>
-      <Link href="/expenses/add">
-        <a>
-          <AddButton />
-        </a>
-      </Link>
+      <>
+        <StyledExpenses>
+          {expenses?.map((expense) => {
+            return <ExpenseCard key={expense.id} expense={expense} />;
+          })}
+        </StyledExpenses>
+        <Link href="/expenses/add">
+          <a>
+            <AddButton />
+          </a>
+        </Link>
+      </>
     </>
   );
 }
