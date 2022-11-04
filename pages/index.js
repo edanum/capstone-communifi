@@ -43,7 +43,7 @@ export default function Home() {
         for you and your team!
       </IntroductionText>
       <Animation ref={container} />
-      <Button onClick={() => Router.push("/login")}>Let's start!</Button>
+      <Button onClick={() => Router.push("/login")}>Lets start!</Button>
     </Dashboard>
   );
 }
