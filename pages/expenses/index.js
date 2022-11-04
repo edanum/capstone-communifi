@@ -39,7 +39,6 @@ export default function Einnahmen() {
           </a>
         </Link>
       </>
-      )
     </>
   );
 }

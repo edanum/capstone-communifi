@@ -7,6 +7,10 @@ export default function Dashboard() {
   //GET GLOBAL DATA STATES
   const revenues = useData().revenues;
   const expenses = useData().expenses;
+  const mutateExpenses = useData().mutateExpenses;
+  const mutateRevenues = useData().mutateRevenues;
+  mutateExpenses();
+  mutateRevenues();
   //
 
   //IMPLEMENT LOADING ANIMATION
