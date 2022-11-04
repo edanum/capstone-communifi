@@ -11,6 +11,7 @@ const expenseSchema = new Schema(
     comment: { type: String, required: false },
     receipt: { type: String, required: false },
     name: { type: String, required: true },
+    status: { type: String, required: false },
   },
   { timestamps: true }
 );

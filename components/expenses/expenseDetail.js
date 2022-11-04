@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Card from "../card";
+import StatusSection from "./statusSection";
 
 export default function ExpenseDetail({ expense }) {
   return (
     <Card>
-      <CardHeader>#{expense.receiptNumber}</CardHeader>
+      <CardHeader>
+        <p>#{expense.receiptNumber}</p>
+        <StatusSection status={expense.status} />
+      </CardHeader>
       <Amount>{expense.amount.toFixed(2).replace(".", ",")}€</Amount>
       <Description>{expense.description}</Description>
       {expense.receipt === "" ? null : (
@@ -53,9 +57,12 @@ const CardDetailContainer = styled.div`
   width: 100%;
 `;
 
-const CardHeader = styled.section`
+const CardHeader = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   font-size: 0.8rem;
+  margin-bottom: 15px;
 `;
 
 const Comment = styled.section`

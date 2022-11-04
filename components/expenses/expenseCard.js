@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Card from "../card";
+import StatusSection from "./statusSection";
 
 export default function ExpenseCard({ expense }) {
   return (
     <Link href={"/expenses/details/" + expense.id}>
       <a>
         <Card>
-          <CardHeader>#{expense.receiptNumber}</CardHeader>
+          <CardHeader>
+            <p>#{expense.receiptNumber}</p>
+            <StatusSection status={expense.status} />
+          </CardHeader>
           <Amount>{expense?.amount?.toFixed(2).replace(".", ",")}€</Amount>
           <Description>{expense.description}</Description>
 
@@ -24,6 +28,18 @@ export default function ExpenseCard({ expense }) {
 const Amount = styled.h2`
   font-size: 1.5rem;
   margin: 0px;
+`;
+
+const CardHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+`;
+
+const CardFooter = styled.div`
+  margin: 20px;
 `;
 
 const Description = styled.p`
@@ -51,11 +67,3 @@ const Name = styled.p`
   bottom: 15px;
 `;
 
-const CardHeader = styled.div`
-  font-size: 0.8rem;
-  margin-bottom: 15px;
-`;
-
-const CardFooter = styled.div`
-  margin: 20px;
-`;

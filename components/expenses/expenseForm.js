@@ -11,6 +11,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   const [amount, setAmount] = useState(expense?.amount ?? "");
   const [comment, setComment] = useState(expense?.comment ?? "");
   const [receipt, setReceipt] = useState(expense?.receipt ?? "");
+  const [status, setStatus] = useState(expense?.status ?? "");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,8 +22,13 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(fileList,"communifi_expenses");
-    setReceipt(uploadedFiles.secure_url);
+    if (receipt) {
+      const uploadedFiles = await uploadOnCloudinary(
+        fileList,
+        "communifi_expenses"
+      );
+      setReceipt(uploadedFiles.secure_url);
+    }
 
     //send all data to expenseAdd page (upload to MongoDB after that step)
     const data = {
@@ -30,6 +36,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       description,
       comment,
       receipt,
+      status,
     };
     onSubmit(data);
   }
@@ -71,20 +78,21 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
 
       {receipt !== "" ? (
         <>
-          <ImageDeleteButton onClick={() => setReceipt("")}>
+          <DeleteImageButton onClick={() => setReceipt("")}>
             Foto löschen
-          </ImageDeleteButton>
-          <ImagePreviewContainer>
+          </DeleteImageButton>
+
+          <PreviewImageContainer>
             <Image
               src={receipt}
               layout="fill"
               objectFit="contain"
               alt="receipt"
             />
-          </ImagePreviewContainer>
+          </PreviewImageContainer>
         </>
       ) : (
-        <ImageUploadButton
+        <UploadImageButton
           src={addImageButton}
           objectFit="contain"
           onClick={(event) => {
@@ -111,6 +119,28 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
+      <Status>
+        <p>Status</p>
+        <StatusSelection>
+          <StatusButton
+            type="button"
+            onClick={() => setStatus("Eingereicht")}
+            status={status}
+            indicator={"Eingereicht"}
+          >
+            Eingereicht
+          </StatusButton>
+          <StatusButton
+            type="button"
+            onClick={() => setStatus("Bezahlt")}
+            status={status}
+            indicator={"Bezahlt"}
+          >
+            Bezahlt
+          </StatusButton>
+        </StatusSelection>
+      </Status>
+
       <SubmitButton type="submit">{buttonLabel}</SubmitButton>
     </Form>
   );
@@ -157,17 +187,43 @@ const Textarea = styled.textarea`
   color: #5b5b5b;
 `;
 
-const ImageUploadButton = styled(Image)`
+const UploadImageButton = styled(Image)`
   cursor: pointer;
 `;
 
-const ImagePreviewContainer = styled.div`
+const PreviewImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 500px;
   overflow: hidden;
 `;
 
-const ImageDeleteButton = styled.button`
+const DeleteImageButton = styled.button`
   z-index: 2;
+`;
+
+const Status = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StatusButton = styled.button`
+  display: flex;
+  height: 30px;
+  border-radius: 5px;
+  border: solid 1px black;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: ${({ status, indicator }) =>
+    status === "Eingereicht" && indicator === "Eingereicht"
+      ? "orange"
+      : status === "Bezahlt" && indicator === "Bezahlt"
+      ? "green"
+      : "none"};
+`;
+
+const StatusSelection = styled.div`
+  display: flex;
+  gap: 5px;
 `;
