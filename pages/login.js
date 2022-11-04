@@ -1,42 +1,54 @@
 import Logo from "../components/logo";
 import styled from "styled-components";
+import Link from "next/link";
+import Router from "next/router";
+import SkipButton from "../components/skipButton";
 
 export default function Login() {
+  function handleSubmit(event) {
+    event.preventDefault();
+    Router.push("/dashboard");
+  }
+
   return (
     <StyledLogin>
       <Logo fontSize={"40px"} />
-      <StyledForm>
-        <StyledInput
-          type="text"
-          id="E-Mail"
-          name="E-Mail"
-          placeholder="E-Mail"
+      <Form onSubmit={handleSubmit}>
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="E-Mail*"
+          required
         />
-        <StyledInput
-          type="text"
+        <Input
+          type="password"
           id="Password"
           name="Password"
-          placeholder="Password"
+          placeholder="Password*"
+          minLength="6"
+          required
         />
-        <StyledButton>Login</StyledButton>
-      </StyledForm>
+        <Button type="submit">Login</Button>
+      </Form>
       <CallToRegister>
         <p>No account yet?</p>
-        <ToColor>Register!</ToColor>
+        <Link href="/register">
+          <ToColor>Register!</ToColor>
+        </Link>
       </CallToRegister>
+      <SkipButton />
     </StyledLogin>
   );
 }
 
 const CallToRegister = styled.section`
-margin-top: 30px;
-text-align: center;
-font-size: 1.3rem;
-`
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.3rem;
+`;
 
-
-
-const StyledButton = styled.button`
+const Button = styled.button`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border: none;
   border-radius: 4px;
@@ -44,6 +56,7 @@ const StyledButton = styled.button`
   background-color: #5676e6;
   font-size: 24px;
   color: #e7e1e1;
+  cursor: pointer;
 `;
 
 const StyledLogin = styled.div`
@@ -53,7 +66,7 @@ const StyledLogin = styled.div`
   padding: 100px 0px;
 `;
 
-const StyledForm = styled.form`
+const Form = styled.form`
   margin-top: 60px;
   display: flex;
   flex-direction: column;
@@ -61,16 +74,20 @@ const StyledForm = styled.form`
   width: 100%;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
   text-align: center;
   height: 40px;
   font-size: 20px;
   background-color: #d9d9d9;
   border: none;
   color: #8f8f8f;
+  ::placeholder {
+    color: #8f8f8f;
+  }
 `;
 
 const ToColor = styled.p`
   color: #0570db;
   margin: 0px;
+  cursor: pointer;
 `;
