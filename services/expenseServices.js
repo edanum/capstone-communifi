@@ -16,6 +16,7 @@ export async function getAllExpenses() {
       comment,
       receipt,
       name,
+      status,
     }) => ({
       id,
       receiptNumber,
@@ -25,6 +26,7 @@ export async function getAllExpenses() {
       comment,
       receipt,
       name,
+      status,
     })
   );
   return mappedExpenses;
@@ -44,6 +46,7 @@ export async function getExpenseById(expenseId) {
     comment,
     receipt,
     name,
+    status,
   } = expense;
   return {
     id,
@@ -54,12 +57,12 @@ export async function getExpenseById(expenseId) {
     comment,
     receipt,
     name,
+    status,
   };
 }
 
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
- 
 
   const newExpense = await Expense.create({
     receiptNumber: highestReceiptNumber(expenses) + 1,
@@ -69,6 +72,7 @@ export async function addExpense(expense) {
     comment: expense.comment,
     receipt: expense.receipt,
     name: "Marc Becker",
+    status: "Eingereicht",
   });
 
   return newExpense;
