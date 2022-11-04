@@ -8,9 +8,17 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {pathname === "/" || pathname === "/login" ? null : <Header />}
+      {pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ? null : (
+        <Header />
+      )}
       <Main>{children}</Main>
-      {pathname === "/" || pathname === "/login" ? null : <Footer />}
+      {pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ? null : (
+        <Footer />
+      )}
     </>
   );
 }
