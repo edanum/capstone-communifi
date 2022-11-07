@@ -1,13 +1,24 @@
 import Header from "./header";
 import Footer from "./footer";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 export default function Layout({ children }) {
+  const { pathname } = useRouter();
+
   return (
     <>
-      <Header />
+      {pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ? null : (
+        <Header />
+      )}
       <Main>{children}</Main>
-      <Footer />
+      {pathname === "/" ||
+      pathname === "/login" ||
+      pathname === "/register" ? null : (
+        <Footer />
+      )}
     </>
   );
 }

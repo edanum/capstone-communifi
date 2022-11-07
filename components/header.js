@@ -21,9 +21,7 @@ export default function Header() {
   const { pathname } = useRouter();
   return (
     <StyledHeader>
-      {pathname === "/" ? (
-        false
-      ) : pathname === "/dashboard" || pathname === "/profile" ? (
+      { pathname === "/dashboard" || pathname === "/profile" ? (
         <>
           <Title>CommuniFI</Title> <SubTitle>{printSubhead(pathname)}</SubTitle>
         </>
