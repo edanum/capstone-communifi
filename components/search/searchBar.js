@@ -3,16 +3,18 @@ import { useRef, useState } from "react";
 import searchIcon from "../../public/search_icon.svg";
 import Image from "next/image";
 import FilterBar from "./filterBar";
+import filterIcon from "../../public/filter_icon.png"
+
 
 export default function SearchBar({ data, filteredData, setFilteredData, setToggleIndicator }) {
-  const [iconToggle, setIconToggle] = useState(false);
+  const [searchToggle, setSearchToggle] = useState(false);
   const [filterToggle, setFilterToggle] = useState(false);
 
 
 
   function handleToggle() {
-    setIconToggle(!iconToggle);
-    setToggleIndicator(!iconToggle); // Passes Toggle State to Parent
+    setSearchToggle(!searchToggle);
+    setToggleIndicator(!searchToggle); // Passes Toggle State to Parent
     setFilteredData(data); // Delete all filters
   }
 
@@ -36,7 +38,7 @@ export default function SearchBar({ data, filteredData, setFilteredData, setTogg
   return (
     <>
       <Bar>
-        {iconToggle ? (
+        {searchToggle ? (
           <StyledInput
             type="text"
             onChange={filterData}
@@ -55,7 +57,17 @@ export default function SearchBar({ data, filteredData, setFilteredData, setTogg
             objectFit="contain"
           />
         </label>
-        <FilterButton onClick={() => setFilterToggle(true)}>F</FilterButton>
+        <FilterButton searchToggle={searchToggle} onClick={() => setFilterToggle(true)}>
+          <Image
+            onClick={handleToggle}
+            src={filterIcon}
+            alt="Filter Icon"
+            height={30}
+            width={30}
+            objectFit="contain"
+          />
+        </FilterButton>
+
         <FilterBar
           filterToggle={filterToggle}
           setFilterToggle={setFilterToggle}
@@ -76,9 +88,11 @@ const Bar = styled.div`
 `;
 
 const FilterButton = styled.button`
-  display: inline;
+  display: ${({searchToggle}) => searchToggle ? "flex" : "none"};
   position: absolute;
   right: 65px;
+  background-color: transparent;
+  border: none
 `;
 
 const StyledInput = styled.input`
