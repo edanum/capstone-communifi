@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
-import searchIcon from "../public/search_icon.svg";
+import searchIcon from "../../public/search_icon.svg";
 import Image from "next/image";
+import FilterBar from "./filterBar";
 
-export default function SearchBar({ data, setData, setToggleIndicator }) {
-  const [filteredData, setFilteredData] = useState(data);
+export default function SearchBar({ data, filteredData, setFilteredData, setToggleIndicator }) {
   const [iconToggle, setIconToggle] = useState(false);
+  const [filterToggle, setFilterToggle] = useState(false);
+
+
 
   function handleToggle() {
     setIconToggle(!iconToggle);
     setToggleIndicator(!iconToggle); // Passes Toggle State to Parent
-    setData(data); // Delete all filters
+    setFilteredData(data); // Delete all filters
   }
 
   function filterData(event) {
@@ -27,7 +30,6 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
         item.name.toLowerCase().includes(input.toLowerCase()) ||
         item.dateOfSubmit.toLowerCase().includes(input.toLowerCase())
     );
-    setData(searchResults);
     setFilteredData(searchResults);
   }
 
@@ -53,6 +55,13 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
             objectFit="contain"
           />
         </label>
+        <FilterButton onClick={() => setFilterToggle(true)}>F</FilterButton>
+        <FilterBar
+          filterToggle={filterToggle}
+          setFilterToggle={setFilterToggle}
+          filteredData={filteredData}
+          setFilteredData={setFilteredData}
+        />
       </Bar>
     </>
   );
@@ -64,6 +73,12 @@ const Bar = styled.div`
   width: 100%;
   justify-content: flex-end;
   align-items: center;
+`;
+
+const FilterButton = styled.button`
+  display: inline;
+  position: absolute;
+  right: 65px;
 `;
 
 const StyledInput = styled.input`
