@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SortOption from "./sortOption";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import FilterElement from "./filterElement";
 
 export default function FilterBar({
   data,
@@ -16,7 +17,7 @@ export default function FilterBar({
     <FilterContainer filterToggle={filterToggle}>
       <StyledFilterBar>
         <Navigation>
-          <button onClick={() => setFilterToggle(false)}>b</button>
+          <CloseButton onClick={() => setFilterToggle(false)}>x</CloseButton>
           <b>Sortierung/Filter</b>
         </Navigation>
         <p>Sortieren nach:</p>
@@ -63,6 +64,12 @@ export default function FilterBar({
           activeSort={activeSort}
           setActiveSort={setActiveSort}
         />
+        <p>Filter nach:</p>
+        <FilterElement
+          title={"Status"}
+          filteredData={filteredData}
+          setFilteredData={setFilteredData}
+        ></FilterElement>
       </StyledFilterBar>
       <BackgroundDarkener
         onClick={() => setFilterToggle(false)}
@@ -71,6 +78,13 @@ export default function FilterBar({
   );
 }
 
+const CloseButton = styled.button`
+  border-radius: 50%;
+  border: solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const FilterContainer = styled.div`
   display: ${({ filterToggle }) => (filterToggle === false ? "none" : "flex")};
 `;
