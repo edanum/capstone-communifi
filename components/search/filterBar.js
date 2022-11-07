@@ -16,7 +16,7 @@ export default function FilterBar({
     <FilterContainer filterToggle={filterToggle}>
       <StyledFilterBar>
         <Navigation>
-          <button onClick={() => setFilterToggle(false)}>b</button>
+          <button onClick={() => setFilterToggle(false)}>x</button>
           <b>Sortierung/Filter</b>
         </Navigation>
         <p>Sortieren nach:</p>
