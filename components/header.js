@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import SearchBar from "./searchBar";
+import SearchBar from "./search/searchBar";
 import backButton from "../public/back_button.svg";
 import Image from "next/image";
 import { printSubhead } from "../library/printSubhead";
@@ -11,8 +11,10 @@ import { useData, useDataUpdate } from "../context/DataContext";
 export default function Header() {
   //GET GLOBAL DATA STATES
   const expenses = useData().expenses;
+  const filteredExpenses = useData().filteredExpenses
   const setFilteredExpenses = useDataUpdate().setFilteredExpenses;
   const revenues = useData().revenues;
+  const filteredRevenues = useData().filteredRevenues
   const setFilteredRevenues = useDataUpdate().setFilteredRevenues;
   //
 
@@ -21,7 +23,7 @@ export default function Header() {
   const { pathname } = useRouter();
   return (
     <StyledHeader>
-      { pathname === "/dashboard" || pathname === "/profile" ? (
+      {pathname === "/dashboard" || pathname === "/profile" ? (
         <>
           <Title>CommuniFI</Title> <SubTitle>{printSubhead(pathname)}</SubTitle>
         </>
@@ -33,7 +35,10 @@ export default function Header() {
           )}
           <SearchBar
             data={pathname === "/expenses" ? expenses : revenues}
-            setData={
+            filteredData={
+              pathname === "/expenses" ? filteredExpenses : filteredRevenues
+            }
+            setFilteredData={
               pathname === "/expenses"
                 ? setFilteredExpenses
                 : setFilteredRevenues

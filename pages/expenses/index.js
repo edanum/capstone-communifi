@@ -15,15 +15,13 @@ export default function Einnahmen() {
   const mutateExpenses = useData().mutateExpenses;
 
   mutateExpenses(); // refreshes cache to synchronyze with globald state after add function
-  //IMPLEMENT LOADING ANIMATION
+  // //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
   if (!expenses || expenses === []) return <div ref={container}></div>;
   //
-
-  sortArrayByReceiptNumber(expenses, "decending");
 
   return (
     <>
@@ -32,7 +30,7 @@ export default function Einnahmen() {
           {expenses?.map((expense) => {
             return <ExpenseCard key={expense.id} expense={expense} />;
           })}
-        </StyledExpenses>
+        </StyledExpenses><></>
         <Link href="/expenses/add">
           <a>
             <AddButton />

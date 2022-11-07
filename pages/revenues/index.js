@@ -25,8 +25,6 @@ export default function Einnahmen() {
   if (!revenues || revenues === []) return <div ref={container}></div>;
   //
 
-  sortArrayByReceiptNumber(revenues, "decending");
-
   return (
     <>
       <StyledRevenues>
