@@ -1,16 +1,21 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
-import searchIcon from "../public/search_icon.svg";
+import searchIcon from "../../public/search_icon.svg";
 import Image from "next/image";
+import FilterBar from "./filterBar";
+import filterIcon from "../../public/filter_icon.png"
 
-export default function SearchBar({ data, setData, setToggleIndicator }) {
-  const [filteredData, setFilteredData] = useState(data);
-  const [iconToggle, setIconToggle] = useState(false);
+
+export default function SearchBar({ data, filteredData, setFilteredData, setToggleIndicator }) {
+  const [searchToggle, setSearchToggle] = useState(false);
+  const [filterToggle, setFilterToggle] = useState(false);
+
+
 
   function handleToggle() {
-    setIconToggle(!iconToggle);
-    setToggleIndicator(!iconToggle); // Passes Toggle State to Parent
-    setData(data); // Delete all filters
+    setSearchToggle(!searchToggle);
+    setToggleIndicator(!searchToggle); // Passes Toggle State to Parent
+    setFilteredData(data); // Delete all filters
   }
 
   function filterData(event) {
@@ -27,14 +32,13 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
         item.name.toLowerCase().includes(input.toLowerCase()) ||
         item.dateOfSubmit.toLowerCase().includes(input.toLowerCase())
     );
-    setData(searchResults);
     setFilteredData(searchResults);
   }
 
   return (
     <>
       <Bar>
-        {iconToggle ? (
+        {searchToggle ? (
           <StyledInput
             type="text"
             onChange={filterData}
@@ -53,6 +57,23 @@ export default function SearchBar({ data, setData, setToggleIndicator }) {
             objectFit="contain"
           />
         </label>
+        <FilterButton searchToggle={searchToggle} onClick={() => setFilterToggle(true)}>
+          <Image
+            onClick={handleToggle}
+            src={filterIcon}
+            alt="Filter Icon"
+            height={30}
+            width={30}
+            objectFit="contain"
+          />
+        </FilterButton>
+
+        <FilterBar
+          filterToggle={filterToggle}
+          setFilterToggle={setFilterToggle}
+          filteredData={filteredData}
+          setFilteredData={setFilteredData}
+        />
       </Bar>
     </>
   );
@@ -64,6 +85,14 @@ const Bar = styled.div`
   width: 100%;
   justify-content: flex-end;
   align-items: center;
+`;
+
+const FilterButton = styled.button`
+  display: ${({searchToggle}) => searchToggle ? "flex" : "none"};
+  position: absolute;
+  right: 65px;
+  background-color: transparent;
+  border: none
 `;
 
 const StyledInput = styled.input`
