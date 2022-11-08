@@ -1,5 +1,6 @@
 import Card from "../card";
 import styled from "styled-components";
+import WinAndLossChart from "./winAndLossChart";
 
 export default function WinAndLoss({ expenseSum, revenueSum, result }) {
   return (
@@ -16,6 +17,7 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
           <p> {expenseSum?.toFixed(2).replace(".", ",")}€</p>
         </Summary>
       </SummaryContainer>
+      <WinAndLossChart expenseSum={expenseSum} revenueSum={revenueSum} />
     </Card>
   );
 }
@@ -38,6 +40,7 @@ const SummaryContainer = styled.div`
   justify-content: space-between;
   font-size: 1rem;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Heading = styled.p`
