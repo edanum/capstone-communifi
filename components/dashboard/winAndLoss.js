@@ -5,7 +5,9 @@ import WinAndLossChart from "./winAndLossChart";
 export default function WinAndLoss({ expenseSum, revenueSum, result }) {
   return (
     <Card>
-      <Heading>Gewinn&Verlust:</Heading>
+      <Heading>
+        <b>Gewinn&Verlust:</b>
+      </Heading>
       <Amount result={result}>{result?.toFixed(2).replace(".", ",")}€ </Amount>
       <SummaryContainer>
         <Summary>

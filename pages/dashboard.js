@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import WinAndLoss from "../components/dashboard/winAndLoss";
 import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
+import StatusOverview from "../components/dashboard/statusOverview";
+import styled from "styled-components";
 
 export default function Dashboard() {
   //GET GLOBAL DATA STATES
@@ -35,11 +37,20 @@ export default function Dashboard() {
   
 
   return (
-
-    <WinAndLoss
-      expenseSum={expenseSum}
-      revenueSum={revenueSum}
-      result={result}
-    />
+    <DashboardContainer>
+      <WinAndLoss
+        expenseSum={expenseSum}
+        revenueSum={revenueSum}
+        result={result}
+      />
+      <StatusOverview expenses={expenses} />
+    </DashboardContainer>
   );
 }
+
+const DashboardContainer = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+gap: 20px;
+`
