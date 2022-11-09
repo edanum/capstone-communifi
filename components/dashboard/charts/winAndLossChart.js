@@ -29,9 +29,7 @@ export default function WinAndLossChart({ expenseSum, revenueSum }) {
           bottom: 5,
         }}
       >
-        <XAxis dataKey="name" />
         <ReferenceLine y={0} stroke="#000" />
-        <Tooltip />
         <Bar dataKey="Einnahmen" fill="#73ac67" />
         <Bar dataKey="Ausgaben" fill="#fd7769" />
       </BarChart>
