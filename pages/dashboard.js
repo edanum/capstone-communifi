@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import WinAndLoss from "../components/dashboard/winAndLoss";
 import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
+import styled from "styled-components";
+import ExpensesOverview from "../components/dashboard/yearOverview";
 
 export default function Dashboard() {
   //GET GLOBAL DATA STATES
@@ -23,7 +25,6 @@ export default function Dashboard() {
 
   //GENERATE FINANCE DATA
   function getSum(array) {
-    
     const amounts = array.map((item) => item.amount);
     const sum = amounts.reduce((a, b) => a + b);
     return sum;
@@ -32,14 +33,22 @@ export default function Dashboard() {
   const expenseSum = getSum(expenses);
   const revenueSum = getSum(revenues);
   const result = revenueSum - expenseSum;
-  
 
   return (
-
-    <WinAndLoss
-      expenseSum={expenseSum}
-      revenueSum={revenueSum}
-      result={result}
-    />
+    <DashboardContainer>
+      <WinAndLoss
+        expenseSum={expenseSum}
+        revenueSum={revenueSum}
+        result={result}
+      />
+      <ExpensesOverview expenses={expenses} />
+    </DashboardContainer>
   );
 }
+
+const DashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+`;

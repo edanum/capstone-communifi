@@ -6,8 +6,19 @@ const GlobalStyle = createGlobalStyle`
           --background-primary: #edf0f5;
           --background-secondary: #f3ecec;
           --accent-color: #64A1E8;
+
+          
       }
   
+      h2{
+        margin: 0px;
+        font-size: 22px;
+      }
+h3{
+       margin: 0px;
+                font-size: 16px;
+      }
+
       * {
           box-sizing: border-box;
       }
