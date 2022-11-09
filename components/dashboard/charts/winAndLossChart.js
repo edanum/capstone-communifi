@@ -1,18 +1,18 @@
 import {
   BarChart,
   Bar,
+  XAxis,
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
-import styled from "styled-components";
 
 export default function WinAndLossChart({ expenseSum, revenueSum }) {
   const data = [
     {
-      name: "Gewinn&Verlust",
-      Einnahmen: revenueSum,
-      Ausgaben: -expenseSum,
+      name: "Einnahmen&Ausnahmen gesamt",
+      Einnahmen: revenueSum.toFixed(2),
+      Ausgaben: -expenseSum.toFixed(2),
     },
   ];
 
@@ -29,6 +29,7 @@ export default function WinAndLossChart({ expenseSum, revenueSum }) {
           bottom: 5,
         }}
       >
+        <XAxis dataKey="name" />
         <ReferenceLine y={0} stroke="#000" />
         <Tooltip />
         <Bar dataKey="Einnahmen" fill="#73ac67" />
