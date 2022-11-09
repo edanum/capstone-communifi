@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import WinAndLoss from "../components/dashboard/winAndLoss/winAndLoss";
+import WinAndLoss from "../components/dashboard/winAndLoss";
 import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
 import styled from "styled-components";
-import ExpensesOverview from "../components/dashboard/expenseOverview/expensesOverview";
+import ExpensesOverview from "../components/dashboard/yearOverview";
 
 export default function Dashboard() {
   //GET GLOBAL DATA STATES
