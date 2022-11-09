@@ -31,8 +31,8 @@ export default function WinAndLossChart({ expenseSum, revenueSum }) {
       >
         <ReferenceLine y={0} stroke="#000" />
         <Tooltip />
-        <Bar dataKey="Einnahmen" fill="#82ca9d" />
-        <Bar dataKey="Ausgaben" fill="#c8331c" />
+        <Bar dataKey="Einnahmen" fill="#73ac67" />
+        <Bar dataKey="Ausgaben" fill="#fd7769" />
       </BarChart>
     </ResponsiveContainer>
   );

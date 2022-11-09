@@ -103,8 +103,8 @@ export default function ExpensesTimeChart() {
           <XAxis dataKey="name" />
           <Tooltip />
           <ReferenceLine y={0} stroke="#000" />
-          <Bar dataKey="expenses" fill="#c8331c" stackId="stack" />
-          <Bar dataKey="revenues" fill="#82ca9d" stackId="stack" />
+          <Bar dataKey="expenses" fill="#fd7769" stackId="stack" />
+          <Bar dataKey="revenues" fill="#73ac67" stackId="stack" />
         </BarChart>
       </ResponsiveContainer>
     </Box>
