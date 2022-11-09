@@ -37,11 +37,3 @@ export default function WinAndLossChart({ expenseSum, revenueSum }) {
     </ResponsiveContainer>
   );
 }
-
-const Box = styled.div`
-  margin-top: 20px;
-  display: flex;
-  width: 300px;
-  height: 200px;
-  justify-content: flex-start;
-`;

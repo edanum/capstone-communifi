@@ -11,7 +11,7 @@ export default function ExpensesOverview() {
   return (
     <Card>
       <Box>
-        <b>Jahresübersicht</b>
+        <h2>Jahresübersicht</h2>
         <ExpensesTimeChart expenses={expenses} />
         <ResultLine />
       </Box>
@@ -24,5 +24,6 @@ const Box = styled.div`
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  
+  margin-bottom: 10px;
+
 `;

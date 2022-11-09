@@ -7,7 +7,7 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
     <>
       <Card>
         <Heading>
-          <b>Gewinn&Verlust:</b>
+          <h2>Gewinn&Verlust:</h2>
         </Heading>
         <Amount result={result}>
           {result?.toFixed(2).replace(".", ",")}€{" "}

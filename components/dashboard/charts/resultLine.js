@@ -84,7 +84,7 @@ export default function ResultLine() {
   const off = gradientOffset();
   return (
     <Box>
-      <div>Ergebnis</div>
+      <h3>Ergebnis</h3>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={500}

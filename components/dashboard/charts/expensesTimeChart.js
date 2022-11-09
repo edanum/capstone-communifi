@@ -85,7 +85,7 @@ export default function ExpensesTimeChart() {
 
   return (
     <Box>
-      <div>Einnahmen vs. Ausgaben</div>
+      <h3>Einnahmen vs. Ausgaben</h3>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
