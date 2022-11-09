@@ -10,7 +10,7 @@ import styled from "styled-components";
 export default function WinAndLossChart({ expenseSum, revenueSum }) {
   const data = [
     {
-      name: "",
+      name: "Gewinn&Verlust",
       Einnahmen: revenueSum,
       Ausgaben: -expenseSum,
     },

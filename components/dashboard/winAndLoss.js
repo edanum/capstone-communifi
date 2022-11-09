@@ -1,6 +1,6 @@
-import Card from "../../card";
+import Card from "../card";
 import styled from "styled-components";
-import WinAndLossChart from "../charts/winAndLossChart";
+import WinAndLossChart from "./charts/winAndLossChart";
 
 export default function WinAndLoss({ expenseSum, revenueSum, result }) {
   return (
@@ -44,7 +44,7 @@ const Summary = styled.div`
 
 const SummaryContainer = styled.div`
   display: flex;
- 
+
   justify-content: space-between;
   font-size: 1rem;
   width: 100%;
