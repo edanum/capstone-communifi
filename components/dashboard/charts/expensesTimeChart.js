@@ -20,9 +20,6 @@ export default function ExpensesTimeChart() {
   const expenses = useData().expenses;
   const revenues = useData().revenues;
 
-  console.log("expenses November", getDataSumByMonth(expenses, 11));
-  console.log("revenues November", getDataSumByMonth(revenues, 11));
-
   const data = [
     {
       name: "Jan",
@@ -89,7 +86,7 @@ export default function ExpensesTimeChart() {
   return (
     <Box>
       <div>Einnahmen vs. Ausgaben</div>
-      <ResponsiveContainer width="110%" height="100%">
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
           height={300}
@@ -104,7 +101,6 @@ export default function ExpensesTimeChart() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          {/* <YAxis /> */}
           <Tooltip />
           <ReferenceLine y={0} stroke="#000" />
           <Bar dataKey="expenses" fill="#c8331c" stackId="stack" />
