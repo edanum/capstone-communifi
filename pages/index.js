@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
-import Head from "next/head";
 import styled from "styled-components";
 import lottie from "lottie-web";
 import Router from "next/router";
 import { useData } from "../context/DataContext";
 import Logo from "../components/logo";
+import Head from "next/head";
+import Button from "../components/buttons/button";
 
 export default function Home() {
   //GET GLOBAL DATA STATES TO PRELOAD DB DATA IN THE BACKGROUND
@@ -15,6 +16,10 @@ export default function Home() {
   mutateExpenses();
   mutateRevenues();
   //
+
+  <Head>
+    <title>Test</title>
+  </Head>;
 
   //SHOW ANIMATION
   const container = useRef(null);
@@ -31,19 +36,16 @@ export default function Home() {
 
   return (
     <Dashboard>
-      <Head>
-        <title>CommuniFI</title>
-      </Head>
       <Heading>
-        Welcome to
+        Willkommen bei
         <Logo fontSize={"50px"} />
       </Heading>
       <IntroductionText>
-        Great to have you on board! Lets start to create your personal Dashboard
-        for you and your team!
+        Toll, dass du dabei bist! Mit CommuniFI wird das managen gemeinsamer
+        Konten und Finanzen zum Kinderspiel. Bist du bereit?
       </IntroductionText>
       <Animation ref={container} />
-      <Button onClick={() => Router.push("/login")}>Lets start!</Button>
+      <Button onClick={() => Router.push("/login")} label="Los gehts!" />
     </Dashboard>
   );
 }
@@ -52,21 +54,6 @@ const Animation = styled.div`
   position: relative;
   width: 100%;
   margin: 30px auto;
-`;
-
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  border-radius: 10px;
-  margin: 30px auto;
-  color: white;
-  background-color: #0570db;
-  position: relative;
-  font-size: 24px;
-  cursor: pointer;
 `;
 
 const Dashboard = styled.div`
@@ -79,7 +66,7 @@ const Dashboard = styled.div`
 
 const Heading = styled.h1`
   margin-top: 0px;
-
+  color: var(--headline);
   text-align: center;
 `;
 
@@ -88,4 +75,4 @@ const IntroductionText = styled.section`
   text-align: center;
 `;
 
-
+const StyledSpan = styled.span``;
