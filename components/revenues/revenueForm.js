@@ -24,11 +24,13 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(
-      fileList,
-      "communifi_revenues"
-    );
-    setReceipt(uploadedFiles.secure_url);
+    if (receipt) {
+      const uploadedFiles = await uploadOnCloudinary(
+        fileList,
+        "communifi_revenues"
+      );
+      setReceipt(uploadedFiles.secure_url);
+    }
 
     //send all data to revenueAdd page (upload to MongoDB after that step)
     const data = {
@@ -117,7 +119,7 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <Button type="submit" label={buttonLabel}/>
+      <Button type="submit" label={buttonLabel} />
     </Form>
   );
 }
@@ -141,7 +143,6 @@ const Form = styled.form`
   width: 85%;
   font-size: 20px;
 `;
-
 
 const FileInput = styled.input`
   display: none;

@@ -62,9 +62,7 @@ const CardHeader = styled.section`
 `;
 
 const Comment = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
   gap: 5px;
   justify-content: space-between;
   font-size: 0.8rem;
