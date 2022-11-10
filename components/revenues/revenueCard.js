@@ -24,6 +24,7 @@ export default function RevenueCard({ revenue }) {
 const Amount = styled.h2`
   font-size: 1.5rem;
   margin: 0px;
+  color: var(--card-heading);
 `;
 
 const Description = styled.p`
@@ -31,6 +32,7 @@ const Description = styled.p`
   margin: 0px;
   width: 100%;
   word-wrap: break-word;
+  color: var(--card-heading);
 `;
 
 const Date = styled.p`

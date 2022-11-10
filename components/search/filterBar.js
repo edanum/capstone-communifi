@@ -16,7 +16,7 @@ export default function FilterBar({
     <FilterContainer filterToggle={filterToggle}>
       <StyledFilterBar>
         <Navigation>
-          <button onClick={() => setFilterToggle(false)}>x</button>
+          <CloseButton onClick={() => setFilterToggle(false)}>x</CloseButton>
           <b>Sortierung/Filter</b>
         </Navigation>
         <p>Sortieren nach:</p>
@@ -70,6 +70,12 @@ export default function FilterBar({
     </FilterContainer>
   );
 }
+const CloseButton = styled.button`
+border-radius: 50%;
+background-color: var(--button);
+border: var(--border);
+color: var(--button-text)
+`
 
 const FilterContainer = styled.div`
   display: ${({ filterToggle }) => (filterToggle === false ? "none" : "flex")};

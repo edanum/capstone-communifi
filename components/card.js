@@ -10,14 +10,15 @@ export default function Card({ children}) {
 }
 
 const StyledCard = styled.article`
-  background-color: var(--background-secondary);
+  background-color: var(--card-background);
+  color: var(--card-paragraph);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 15px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 9px;
+  border: solid 1px var(--border);
+  border-radius: 7px;
   width: 100%;
 `;

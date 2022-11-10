@@ -11,7 +11,7 @@ export default function ExpensesOverview() {
   return (
     <Card>
       <Box>
-        <h2>Jahresübersicht</h2>
+        <Heading>Jahresübersicht</Heading>
         <ExpensesTimeChart expenses={expenses} />
         <ResultLine />
       </Box>
@@ -26,4 +26,8 @@ const Box = styled.div`
   width: 100%;
   margin-bottom: 10px;
 
+`;
+const Heading = styled.h2`
+  margin: 0px;
+  color: var(--headline);
 `;

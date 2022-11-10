@@ -2,12 +2,22 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
       :root {
-          --text-primary: #0c2c4d;
-          --background-primary: #edf0f5;
-          --background-secondary: #f3ecec;
-          --accent-color: #64A1E8;
-
-          
+        --text-primary: #9ba2aa;
+        --background-primary: #242629;
+        --background-secondary: #16161a;
+        --headline: #ececea;
+        --card-background: #242629;
+        --card-heading: #fffffe;
+        --card-paragraph: #afb8c3;
+        --paragraph: #94a1b2;
+        --button: #3da9fc;
+        --button-text: #fffffe;
+        --accent-color: #3da9fc;
+        --accent-color-secondary: #2cb67d;
+        --border: #444443;;
+        --fonty-family: 'Noto Sans', sans-serif;
+        --revenues: #73ac67;
+        --expenses: #fd7769;
       }
   
       h2{
@@ -25,7 +35,7 @@ h3{
 
       a{
         text-decoration: none;
-        color: var(--text-primary)
+        color: var(--text-primary);
         
       }
 
@@ -34,9 +44,12 @@ h3{
         
       }
   
+      svg{
+        color: red;
+      }
       body {
           font-family: 'Noto Sans', sans-serif;
-          background-color: var(--background-primary);
+          background-color: var(--background-secondary);
           color: var(--text-primary);
       }
 

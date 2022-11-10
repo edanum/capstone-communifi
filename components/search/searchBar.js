@@ -1,16 +1,19 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
-import searchIcon from "../../public/search_icon.svg";
+import searchIcon from "../../public/search_icon.png";
 import Image from "next/image";
 import FilterBar from "./filterBar";
-import filterIcon from "../../public/filter_icon.png"
+import filterIcon from "../../public/filter_icon.png";
+import Input from "../formComponents/input";
 
-
-export default function SearchBar({ data, filteredData, setFilteredData, setToggleIndicator }) {
+export default function SearchBar({
+  data,
+  filteredData,
+  setFilteredData,
+  setToggleIndicator,
+}) {
   const [searchToggle, setSearchToggle] = useState(false);
   const [filterToggle, setFilterToggle] = useState(false);
-
-
 
   function handleToggle() {
     setSearchToggle(!searchToggle);
@@ -57,7 +60,10 @@ export default function SearchBar({ data, filteredData, setFilteredData, setTogg
             objectFit="contain"
           />
         </label>
-        <FilterButton searchToggle={searchToggle} onClick={() => setFilterToggle(true)}>
+        <FilterButton
+          searchToggle={searchToggle}
+          onClick={() => setFilterToggle(true)}
+        >
           <Image
             onClick={handleToggle}
             src={filterIcon}
@@ -88,19 +94,25 @@ const Bar = styled.div`
 `;
 
 const FilterButton = styled.button`
-  display: ${({searchToggle}) => searchToggle ? "flex" : "none"};
+  display: ${({ searchToggle }) => (searchToggle ? "flex" : "none")};
   position: absolute;
   right: 65px;
   background-color: transparent;
-  border: none
+  border: none;
 `;
 
 const StyledInput = styled.input`
-  height: 40px;
+  height: 38px;
   border-radius: 10px;
-  border: solid 1px var(--accent-color);
   padding: 10px;
   font-size: 1rem;
   width: 100%;
   margin-right: 10px;
+  background-color: var(--headline);
+  color: var(--background-secondary);
+
+  &:focus {
+    outline: none !important;
+    border-color: var(--button);
+  }
 `;

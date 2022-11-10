@@ -2,6 +2,7 @@ import Header from "./header";
 import Footer from "./footer";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import GlobalStyle from "./GlobalStyle";
 
 export default function Layout({ children }) {
   const { pathname } = useRouter();
@@ -31,5 +32,5 @@ const Main = styled.div`
   position: relative;
   z-index: -1;
   top: 52.2px;
-  padding: 20px 20px 70px 20px;
+  padding: 10px 20px 70px 20px;
 `;

@@ -14,10 +14,11 @@ const StyledLogo = styled.section`
   justify-content: center;
   font-size: ${({ fontSize }) => fontSize};
   font-weight: bold;
+  color: var(--headline)
   
 `;
 
 const ToColor = styled.p`
-  color: #0570db;
+  color: var(--accent-color);
   margin: 0px;
 `;
