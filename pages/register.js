@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import Link from "next/link";
+import Input from "../components/formComponents/input";
 import SkipButton from "../components/skipButton";
 import { Router } from "next/router";
+import Button from "../components/buttons/button";
+import Logo from "../components/logo";
 
 export default function Register() {
   function handleSubmit(event) {
@@ -11,6 +13,7 @@ export default function Register() {
 
   return (
     <>
+      <Logo fontSize={"35px"} />
       <Form onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -40,7 +43,7 @@ export default function Register() {
           placeholder="Password (repeat)*"
           minLength="6"
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit" label="Registrieren"/>
       </Form>
       <SkipButton />
     </>
@@ -48,32 +51,10 @@ export default function Register() {
 }
 
 const Form = styled.form`
-  margin-top: 20px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  width: 100%;
+  gap: 30px;
+  width: 90%;
 `;
 
-const Input = styled.input`
-  text-align: center;
-  height: 40px;
-  font-size: 20px;
-  background-color: #d9d9d9;
-  border: none;
-  color: black;
-  ::placeholder {
-    color: #8f8f8f;
-  }
-`;
-
-const Button = styled.button`
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border: none;
-  border-radius: 4px;
-  height: 40px;
-  background-color: #5676e6;
-  font-size: 24px;
-  color: #e7e1e1;
-  cursor: pointer;
-`;

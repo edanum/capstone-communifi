@@ -44,6 +44,7 @@ const Amount = styled.h2`
   margin: 0px;
   width: 100%;
   text-align: center;
+  color: var(--card-heading);
 `;
 
 const CardDetailContainer = styled.div`
@@ -61,9 +62,7 @@ const CardHeader = styled.section`
 `;
 
 const Comment = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
   gap: 5px;
   justify-content: space-between;
   font-size: 0.8rem;
@@ -85,6 +84,7 @@ const Description = styled.p`
   width: 100%;
   margin: 15px 0px;
   word-wrap: break-word;
+  color: var(--card-heading);
 `;
 
 const Name = styled.div`

@@ -100,11 +100,11 @@ export default function ExpensesTimeChart() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" color="#000" />
           <Tooltip />
-          <ReferenceLine y={0} stroke="#000" />
-          <Bar dataKey="Ausgaben" fill="#fd7769" stackId="stack" />
-          <Bar dataKey="Einnahmen" fill="#73ac67" stackId="stack" />
+          <ReferenceLine y={0} stroke="var(--heading)" />
+          <Bar dataKey="Ausgaben" fill="var(--expenses)" stackId="stack" />
+          <Bar dataKey="Einnahmen" fill="var(--revenues)" stackId="stack" />
         </BarChart>
       </ResponsiveContainer>
     </Box>

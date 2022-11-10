@@ -1,5 +1,5 @@
 import Image from "next/image";
-import addButton from "../../public/add_button.svg";
+import addButton from "../../public/add_button.png";
 import styled from "styled-components";
 
 export default function AddButton() {
@@ -12,8 +12,8 @@ export default function AddButton() {
 
 const ToPosition = styled.button`
   position: fixed;
-  bottom: 60px;
-  right: 15px;
+  bottom: 65px;
+  right: 10px;
   z-index: 3;
   border: none;
   background-color: transparent;

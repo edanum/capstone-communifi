@@ -30,7 +30,8 @@ export default function Einnahmen() {
           {expenses?.map((expense) => {
             return <ExpenseCard key={expense.id} expense={expense} />;
           })}
-        </StyledExpenses><></>
+        </StyledExpenses>
+        <></>
         <Link href="/expenses/add">
           <a>
             <AddButton />
@@ -44,6 +45,6 @@ export default function Einnahmen() {
 const StyledExpenses = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
 `;

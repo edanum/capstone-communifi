@@ -3,6 +3,9 @@ import { useState, useRef } from "react";
 import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
 import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
+import Input from "../formComponents/input";
+import TextArea from "../formComponents/textArea";
+import Button from "../buttons/button";
 
 export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   const fileInputRef = useRef();
@@ -74,7 +77,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         onChange={(event) => setAmount(event.target.value)}
         required
       ></Input>
-      <Label>Beleg</Label>
+      <Label>Beleg:</Label>
 
       {receipt !== "" ? (
         <>
@@ -111,7 +114,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         accept="image/*"
       />
       <Label htmlFor="comment">Kommentar</Label>
-      <Textarea
+      <TextArea
         type="text"
         name="comment"
         id="comment"
@@ -119,59 +122,45 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <Status>
-        <p>Status</p>
-        <StatusSelection>
-          <StatusButton
-            type="button"
-            onClick={() => setStatus("Eingereicht")}
-            status={status}
-            indicator={"Eingereicht"}
-          >
-            Eingereicht
-          </StatusButton>
-          <StatusButton
-            type="button"
-            onClick={() => setStatus("Bezahlt")}
-            status={status}
-            indicator={"Bezahlt"}
-          >
-            Bezahlt
-          </StatusButton>
-        </StatusSelection>
-      </Status>
 
-      <SubmitButton type="submit">{buttonLabel}</SubmitButton>
+      {status === "" ? null : (
+        <Status>
+          <p>Status</p>
+          <StatusSelection>
+            <StatusButton
+              type="button"
+              onClick={() => setStatus("Eingereicht")}
+              status={status}
+              indicator={"Eingereicht"}
+            >
+              Eingereicht
+            </StatusButton>
+            <StatusButton
+              type="button"
+              onClick={() => setStatus("Bezahlt")}
+              status={status}
+              indicator={"Bezahlt"}
+            >
+              Bezahlt
+            </StatusButton>
+          </StatusSelection>
+        </Status>
+      )}
+      <Button type="submit" label={buttonLabel} />
     </Form>
   );
 }
 
-const SubmitButton = styled.button`
-  margin-top: 15px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  background-color: #64a1e8;
-  border: none;
-  height: 40px;
-  border-radius: 5px;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
+const DeleteImageButton = styled.button`
+  z-index: 2;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 85%;
+  width: 100%;
   font-size: 20px;
-`;
-
-const Input = styled.input`
-  background-color: #d9d9d9;
-  height: 40px;
-  font-size: 18px;
-  color: #5b5b5b;
-  border: none;
 `;
 
 const FileInput = styled.input`
@@ -179,13 +168,6 @@ const FileInput = styled.input`
 `;
 
 const Label = styled.label``;
-
-const Textarea = styled.textarea`
-  background-color: #d9d9d9;
-  border: none;
-  font-size: 18px;
-  color: #5b5b5b;
-`;
 
 const UploadImageButton = styled(Image)`
   cursor: pointer;
@@ -198,10 +180,6 @@ const PreviewImageContainer = styled.div`
   overflow: hidden;
 `;
 
-const DeleteImageButton = styled.button`
-  z-index: 2;
-`;
-
 const Status = styled.div`
   display: flex;
   flex-direction: column;
@@ -209,6 +187,8 @@ const Status = styled.div`
 
 const StatusButton = styled.button`
   display: flex;
+  background-color: var(--card-background);
+  color: var(--card-paragraph);
   height: 30px;
   border-radius: 5px;
   border: solid 1px black;
@@ -220,6 +200,12 @@ const StatusButton = styled.button`
       ? "orange"
       : status === "Bezahlt" && indicator === "Bezahlt"
       ? "green"
+      : "none"};
+  color: ${({ status, indicator }) =>
+    status === "Eingereicht" && indicator === "Eingereicht"
+      ? "black"
+      : status === "Bezahlt" && indicator === "Bezahlt"
+      ? "black"
       : "none"};
 `;
 

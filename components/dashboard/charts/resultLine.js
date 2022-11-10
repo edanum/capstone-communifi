@@ -115,7 +115,7 @@ export default function ResultLine() {
           data={data}
           margin={{
             top: 10,
-            right: 30,
+            right: 0,
             left: 0,
             bottom: 0,
           }}
@@ -126,14 +126,14 @@ export default function ResultLine() {
           <Tooltip />
           <defs>
             <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-              <stop offset={off} stopColor="green" stopOpacity={1} />
-              <stop offset={off} stopColor="red" stopOpacity={1} />
+              <stop offset={off} stopColor="var(--revenues)" stopOpacity={1} />
+              <stop offset={off} stopColor="var(--expenses)" stopOpacity={1} />
             </linearGradient>
           </defs>
           <Area
             type="monotone"
             dataKey="Ergebnis"
-            stroke="#000"
+            stroke="var(--background-primary)"
             fill="url(#splitColor)"
           />
         </AreaChart>

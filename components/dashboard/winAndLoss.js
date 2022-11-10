@@ -7,7 +7,7 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
     <>
       <Card>
         <Heading>
-          <h2>Gewinn&Verlust:</h2>
+          Gewinn&Verlust:
         </Heading>
         <Amount result={result}>
           {result?.toFixed(2).replace(".", ",")}€{" "}
@@ -31,7 +31,11 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
 const Amount = styled.p`
   margin: 10px 0px;
   font-size: 2rem;
-  color: ${(props) => (props.result < 0 ? "red" : "green")};
+  color: ${(props) => (props.result < 0 ? "var(--expenses)" : "var(--revenues)")};
+`;
+const Heading = styled.h2`
+  margin: 0px;
+  color: var(--headline);
 `;
 
 const Summary = styled.div`
@@ -52,7 +56,4 @@ const SummaryContainer = styled.div`
   padding: 0px 20px;
 `;
 
-const Heading = styled.p`
-  margin: 0px;
-  font-size: 1.1rem;
-`;
+

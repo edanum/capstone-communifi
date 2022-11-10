@@ -3,6 +3,9 @@ import { useState, useRef } from "react";
 import addImageButton from "../../public/add_image_button.png";
 import Image from "next/image";
 import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
+import Input from "../formComponents/input";
+import TextArea from "../formComponents/textArea";
+import Button from "../buttons/button";
 
 export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
   const fileInputRef = useRef();
@@ -21,11 +24,13 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
       ({ name }) => name === "file"
     );
     const fileList = fileInput.files;
-    const uploadedFiles = await uploadOnCloudinary(
-      fileList,
-      "communifi_revenues"
-    );
-    setReceipt(uploadedFiles.secure_url);
+    if (receipt) {
+      const uploadedFiles = await uploadOnCloudinary(
+        fileList,
+        "communifi_revenues"
+      );
+      setReceipt(uploadedFiles.secure_url);
+    }
 
     //send all data to revenueAdd page (upload to MongoDB after that step)
     const data = {
@@ -70,7 +75,7 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
         onChange={(event) => setAmount(event.target.value)}
         required
       ></Input>
-      <Label>Beleg</Label>
+      <Label>Beleg:</Label>
 
       {receipt !== "" ? (
         <>
@@ -105,8 +110,8 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
         onChange={handleChange}
         accept="image/*"
       />
-      <Label htmlFor="comment">Kommentar</Label>
-      <Textarea
+      <Label htmlFor="comment">Kommentar:</Label>
+      <TextArea
         type="text"
         name="comment"
         id="comment"
@@ -114,7 +119,7 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
         value={comment}
         onChange={(event) => setComment(event.target.value)}
       />
-      <SubmitButton type="submit">{buttonLabel}</SubmitButton>
+      <Button type="submit" label={buttonLabel} />
     </Form>
   );
 }
@@ -137,14 +142,6 @@ const Form = styled.form`
   gap: 10px;
   width: 85%;
   font-size: 20px;
-`;
-
-const Input = styled.input`
-  background-color: #d9d9d9;
-  height: 40px;
-  font-size: 18px;
-  color: #5b5b5b;
-  border: none;
 `;
 
 const FileInput = styled.input`

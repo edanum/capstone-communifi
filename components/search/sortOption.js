@@ -76,24 +76,17 @@ const AttributeButton = styled.button`
 `;
 
 const ArrowDown = styled.div`
-  border: ${({ activeSort, title, filterState }) =>
-    activeSort === title && filterState === 1
-      ? "solid 1px #64A1E8"
-      : "lightgray"};
-  background-color: ${({ activeSort, title, filterState }) =>
-    activeSort === title && filterState === 1 ? "lightgray" : ""};
+
+  color: ${({ activeSort, title, filterState }) =>
+    activeSort === title && filterState === 1 ? `var(--accent-color)` : ""};
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const ArrowUp = styled.div`
-  border: ${({ activeSort, title, filterState }) =>
-    activeSort === title && filterState === -1
-      ? "solid 1px #64A1E8"
-      : "lightgray"};
-  background-color: ${({ activeSort, title, filterState }) =>
-    activeSort === title && filterState === -1 ? "lightgray" : ""};
+  color: ${({ activeSort, title, filterState }) =>
+    activeSort === title && filterState === -1 ? `var(--accent-color)` : ""};
   display: flex;
   align-items: center;
   justify-content: center;

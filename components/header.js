@@ -1,20 +1,21 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import SearchBar from "./search/searchBar";
-import backButton from "../public/back_button.svg";
+import backButton from "../public/back_button.png";
 import Image from "next/image";
 import { printSubhead } from "../library/printSubhead";
 import { getBackPath } from "../library/getBackPath";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useData, useDataUpdate } from "../context/DataContext";
+import Logo from "./logo";
 
 export default function Header() {
   //GET GLOBAL DATA STATES
   const expenses = useData().expenses;
-  const filteredExpenses = useData().filteredExpenses
+  const filteredExpenses = useData().filteredExpenses;
   const setFilteredExpenses = useDataUpdate().setFilteredExpenses;
   const revenues = useData().revenues;
-  const filteredRevenues = useData().filteredRevenues
+  const filteredRevenues = useData().filteredRevenues;
   const setFilteredRevenues = useDataUpdate().setFilteredRevenues;
   //
 
@@ -25,11 +26,12 @@ export default function Header() {
     <StyledHeader>
       {pathname === "/dashboard" || pathname === "/profile" ? (
         <>
-          <Title>CommuniFI</Title> <SubTitle>{printSubhead(pathname)}</SubTitle>
+          <Logo fontSize={"23px"} />
+          <SubTitle>{printSubhead(pathname)}</SubTitle>
         </>
       ) : pathname === "/expenses" || pathname === "/revenues" ? (
         <>
-          <Title>CommuniFI</Title>
+          <Logo fontSize={"23px"} />
           {searchbarToggle ? null : (
             <SubTitle>{printSubhead(pathname)}</SubTitle>
           )}
@@ -52,8 +54,8 @@ export default function Header() {
           <BackButton
             onClick={() => getBackPath(pathname)}
             src={backButton}
-            width={50}
-            height={50}
+            width={40}
+            height={35}
           />
           <SubTitle>{printSubhead(pathname)}</SubTitle>
         </>
@@ -63,7 +65,7 @@ export default function Header() {
 }
 
 const StyledHeader = styled.div`
-  background-color: #cfd6de;
+  background-color: var(--background-primary);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -73,11 +75,11 @@ const StyledHeader = styled.div`
   left: 0px;
   right: 0px;
   padding: 0px 20px 0px 20px;
+  color: var(--headline);
+  height: 55px;
+  border-bottom: solid 1px var(--border);
 `;
 
-const Title = styled.h1`
-  font-size: 21px;
-`;
 const SubTitle = styled.p`
   font-size: 18px;
 `;
