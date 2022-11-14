@@ -10,51 +10,57 @@ import { useSession } from "next-auth/react";
 
 export default function Login() {
   const { data: session } = useSession();
-  
+
   function handleSubmit(event) {
     event.preventDefault();
     Router.push("/dashboard");
   }
 
-  console.log(session)
+  console.log(session);
 
-  // if (session) {
-  //   setTimeout(() => {
-  //     Router.push("/dashboard")
-  //   }, 3000);
-  // }
+  if (session) {
+    setTimeout(() => {
+      Router.push("/dashboard");
+    }, 5000);
+  }
   return (
     <StyledLogin>
-      <Logo fontSize={"40px"} />
-      <Form onSubmit={() => handleSubmit()}>
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="E-Mail*"
-          required
-          autocomplete="off"
-        />
-        <Input
-          type="password"
-          id="Password"
-          name="Password"
-          placeholder="Passwort*"
-          minLength="6"
-          required
-        />
-        <Button type="submit" label="Login">
-          Login
-        </Button>
-      </Form>
-      <LoginButton />
-      <CallToRegister>
-        <p>Noch kein Account?</p>
-        <Link href="/register">
-          <ToColor>Registriere dich!</ToColor>
-        </Link>
-      </CallToRegister>
-      <SkipButton />
+      {!session ? (
+        <>
+          <Logo fontSize={"40px"} />
+          <Form onSubmit={() => handleSubmit()}>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="E-Mail*"
+              required
+              autocomplete="off"
+            />
+            <Input
+              type="password"
+              id="Password"
+              name="Password"
+              placeholder="Passwort*"
+              minLength="6"
+              required
+            />
+            <Button type="submit" label="Login">
+              Login
+            </Button>
+          </Form>
+          <LoginButton />
+          <CallToRegister>
+            <p>Noch kein Account?</p>
+            <Link href="/register">
+              <ToColor>Registriere dich!</ToColor>
+            </Link>
+          </CallToRegister>
+          <SkipButton />
+        </>
+      ) : (
+        `Du bist bereits als ${session.user.name} eingelogged und wirst zum Dashboard weitergeleitet.`
+      )}
     </StyledLogin>
   );
 }

@@ -2,7 +2,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 import Image from "next/image";
 import GitHubIcon from "../../public/github_logo.png"
-import Router from "next/router";
+
+
 
 
 export default function LoginButton() {
@@ -14,7 +15,7 @@ export default function LoginButton() {
 
   return (
     <>
-      <Button onClick={() => signIn()}>
+      <Button onClick={() => signIn("github")}>
           <Image
             src={GitHubIcon}
             alt="GitHub Icon"
