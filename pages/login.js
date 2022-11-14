@@ -5,17 +5,28 @@ import Router from "next/router";
 import SkipButton from "../components/skipButton";
 import Input from "../components/formComponents/input";
 import Button from "../components/buttons/button";
+import LoginButton from "../components/buttons/loginButton";
+import { useSession } from "next-auth/react";
 
 export default function Login() {
+  const { data: session } = useSession();
+  
   function handleSubmit(event) {
     event.preventDefault();
     Router.push("/dashboard");
   }
 
+  console.log(session)
+
+  // if (session) {
+  //   setTimeout(() => {
+  //     Router.push("/dashboard")
+  //   }, 3000);
+  // }
   return (
     <StyledLogin>
       <Logo fontSize={"40px"} />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={() => handleSubmit()}>
         <Input
           type="email"
           id="email"
@@ -36,6 +47,7 @@ export default function Login() {
           Login
         </Button>
       </Form>
+      <LoginButton />
       <CallToRegister>
         <p>Noch kein Account?</p>
         <Link href="/register">
@@ -57,7 +69,7 @@ const StyledLogin = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 100px 0px;
+  padding: 60px 0px;
 `;
 
 const Form = styled.form`
