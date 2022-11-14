@@ -1,0 +1,46 @@
+import { useSession, signIn, signOut } from "next-auth/react";
+import styled from "styled-components";
+import Image from "next/image";
+import GitHubIcon from "../../public/github_logo.png"
+import Router from "next/router";
+
+
+export default function LoginButton() {
+
+
+  const { data: session } = useSession();
+ 
+ 
+
+  return (
+    <>
+      <Button onClick={() => signIn()}>
+          <Image
+            src={GitHubIcon}
+            alt="GitHub Icon"
+           width={25}
+            objectFit="contain"
+          />
+        <p>Login with GitHub</p>
+      </Button>
+    </>
+  );
+}
+
+const Button = styled.button`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  margin-top: 15px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background-color: black;
+  color: var(--paragraph);
+  height: 40px;
+  border: solid 2px var(--border);
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%;
+`;
