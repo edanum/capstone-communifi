@@ -16,8 +16,6 @@ export default function Login() {
     Router.push("/dashboard");
   }
 
-  console.log(session);
-
   if (session) {
     setTimeout(() => {
       Router.push("/dashboard");
@@ -25,7 +23,9 @@ export default function Login() {
   }
   return (
     <StyledLogin>
-      {!session ? (
+      {session ?  (
+        `Du bist bereits als ${session.user.name} eingelogged und wirst zum Dashboard weitergeleitet.`
+      ):(
         <>
           <Logo fontSize={"40px"} />
           <Form onSubmit={() => handleSubmit()}>
@@ -58,8 +58,6 @@ export default function Login() {
           </CallToRegister>
           <SkipButton />
         </>
-      ) : (
-        `Du bist bereits als ${session.user.name} eingelogged und wirst zum Dashboard weitergeleitet.`
       )}
     </StyledLogin>
   );
