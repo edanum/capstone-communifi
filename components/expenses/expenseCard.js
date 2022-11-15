@@ -7,7 +7,7 @@ export default function ExpenseCard({ expense }) {
   return (
     <Link href={"/expenses/details/" + expense.id}>
       <a>
-        <Card>
+        <Card animation={"slide-left"}>
           <CardHeader>
             <p>#{expense.receiptNumber}</p>
             <StatusSection status={expense.status} />
@@ -68,3 +68,4 @@ const Name = styled.p`
   right: 15px;
   bottom: 15px;
 `;
+
