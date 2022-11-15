@@ -30,8 +30,9 @@ export default function RevenueDetails() {
       });
   }, []);
 
-  if (isLoading) return <div ref={container}></div>;
-  if (!data) return <div ref={container}></div>;
+  if (isLoading)
+    return <AnimationContainer ref={container}></AnimationContainer>;
+  if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
   const revenue = data;
@@ -49,6 +50,9 @@ export default function RevenueDetails() {
     </>
   );
 }
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const StyledRevenueDetails = styled.div`
   display: flex;

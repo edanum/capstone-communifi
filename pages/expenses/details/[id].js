@@ -28,8 +28,9 @@ export default function ExpenseDetails() {
       });
   }, []);
 
-  if (isLoading) return <div ref={container}></div>;
-  if (!data) return <div ref={container}></div>;
+  if (isLoading)
+    return <AnimationContainer ref={container}></AnimationContainer>;
+  if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
   const expense = data;
@@ -47,6 +48,9 @@ export default function ExpenseDetails() {
     </>
   );
 }
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const StyledExpenseDetails = styled.div`
   display: flex;

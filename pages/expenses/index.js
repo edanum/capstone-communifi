@@ -20,7 +20,8 @@ export default function Einnahmen() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  if (!expenses || expenses === []) return <div ref={container}></div>;
+  if (!expenses || expenses === [])
+    return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
   return (
@@ -41,6 +42,10 @@ export default function Einnahmen() {
     </>
   );
 }
+
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const StyledExpenses = styled.div`
   display: flex;
