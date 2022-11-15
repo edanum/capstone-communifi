@@ -17,7 +17,7 @@ export default function Profile() {
       <ImageContainer>
         <StyledImage
           src={session?.user.image}
-          alt="Revenues Icon"
+          alt="GitHub Icon"
           height={200}
           width={200}
           objectFit="contain"
@@ -39,7 +39,9 @@ const ImageContainer = styled.div`
   background-color: var(--background-primary);
   border-radius: 50%;
 `;
-const Name = styled.h1``;
+const Name = styled.h1`
+color: var(--headline)
+`;
 
 const StyledImage = styled(Image)`
   border-radius: 50%;
