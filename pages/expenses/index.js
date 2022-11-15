@@ -13,6 +13,7 @@ export default function Einnahmen() {
   const expenses = useData().filteredExpenses;
   const mutateExpenses = useData().mutateExpenses;
   mutateExpenses(); // refreshes cache to synchronyze with globald state after add function
+  //
 
   //PROTECT PAGE
   const { data: session, status } = useSession({
@@ -22,12 +23,9 @@ export default function Einnahmen() {
     },
   });
 
-  if (status === "loading") {
-    return null;
-  }
   //
 
-  // //IMPLEMENT LOADING ANIMATION
+  //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
   useEffect(() => {
     getLoadingAnimation(container);
@@ -36,6 +34,10 @@ export default function Einnahmen() {
     return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
+ if (status === "loading") {
+   //BREAKPOINT FOR PROTECTED PAGE
+   return null;
+ }
   return (
     <>
       <>

@@ -8,6 +8,9 @@ import { useSession } from "next-auth/react";
 import Router from "next/router";
 
 export default function ExpenseDetails() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
   //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
   useEffect(() => {
@@ -22,15 +25,9 @@ export default function ExpenseDetails() {
       Router.push("/login");
     },
   });
-
-  if (status === "loading") {
-    return null;
-  }
   //
 
   //GET DATA VIA USEEFFECT FETCH
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
@@ -42,12 +39,14 @@ export default function ExpenseDetails() {
         setLoading(false);
       });
   }, []);
-
+ 
   if (isLoading)
     return <AnimationContainer ref={container}></AnimationContainer>;
   if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
-
+ if (status === "loading") { //BREAKPOINT FOR PROTECTED PAGE
+   return null;
+ }
   const expense = data;
 
   return (

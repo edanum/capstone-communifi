@@ -23,10 +23,6 @@ export default function Einnahmen() {
       Router.push("/login");
     },
   });
-
-  if (status === "loading") {
-    return null;
-  }
   //
 
   //IMPLEMENT LOADING ANIMATION
@@ -38,6 +34,10 @@ export default function Einnahmen() {
     return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
+  if (status === "loading") {
+    //BREAKPOINT FOR PROTECTED PAGE
+    return null;
+  }
   return (
     <>
       <StyledRevenues>

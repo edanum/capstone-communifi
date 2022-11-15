@@ -20,9 +20,6 @@ export default function RevenueEdit() {
     },
   });
 
-  if (status === "loading") {
-    return null;
-  }
   //
   //GET DATA VIA USEEFFECT FETCH
   const [data, setData] = useState(null);
@@ -43,7 +40,10 @@ export default function RevenueEdit() {
   if (!data) <div ref={container}></div>;
   //
 
-  
+  if (status === "loading") {
+    //BREAKPOINT FOR PROTECTED PAGE
+    return null;
+  }
 
   const revenue = data;
 
