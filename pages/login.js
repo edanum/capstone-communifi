@@ -7,9 +7,24 @@ import Input from "../components/formComponents/input";
 import Button from "../components/buttons/button";
 import LoginButton from "../components/buttons/loginButton";
 import { useSession } from "next-auth/react";
+import { useRef, useEffect, useState } from "react";
+import lottie from "lottie-web";
 
 export default function Login() {
   const { data: session } = useSession();
+
+  //LOAD LOGIN ANIMATION
+  const container = useRef(null);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      render: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../public/login_animation.json"),
+    });
+  }, []);
+  //
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,9 +38,15 @@ export default function Login() {
   }
   return (
     <StyledLogin>
-      {session ?  (
-        `Du bist bereits als ${session.user.name} eingelogged und wirst zum Dashboard weitergeleitet.`
-      ):(
+      {session ? (
+        <>
+          <WelcomeBack>
+            Willkommen zurück {session.user.name}. Du wirst gleich zum Dashboard
+            weitergeleitet und kannst starten.
+          </WelcomeBack>
+          <div ref={container}></div>
+        </>
+      ) : (
         <>
           <Logo fontSize={"40px"} />
           <Form onSubmit={() => handleSubmit()}>
@@ -88,4 +109,8 @@ const ToColor = styled.p`
   color: #0570db;
   margin: 0px;
   cursor: pointer;
+`;
+
+const WelcomeBack = styled.h2`
+  text-align: center;
 `;
