@@ -35,7 +35,7 @@ export default function Home() {
   //
 
   return (
-    <Dashboard>
+    <LandingPage>
       <Heading>
         Willkommen bei
         <Logo fontSize={"50px"} />
@@ -46,22 +46,24 @@ export default function Home() {
       </IntroductionText>
       <Animation ref={container} />
       <Button onClick={() => Router.push("/login")} label="Los gehts!" />
-    </Dashboard>
+    </LandingPage>
   );
 }
 
 const Animation = styled.div`
   position: relative;
   width: 100%;
-  margin: 30px auto;
+  margin: 20px auto;
 `;
 
-const Dashboard = styled.div`
+const LandingPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
-  top: -30px;
+  top: 30px;
+  height: 100vh;
 `;
 
 const Heading = styled.h1`
