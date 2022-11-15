@@ -30,15 +30,16 @@ export default function Dashboard() {
       Router.push("/login");
     },
   });
-  if (status === "loading") {
-    return null;
-  }
   //
 
   //SHOW LOADING ANIMATION WHILE WAITING ON DATA
   if (!expenses || !revenues)
     return <AnimationContainer ref={container}></AnimationContainer>;
   //
+
+  if (status === "loading") {
+    return null;
+  }
 
   //GENERATE FINANCE DATA
   function getSum(array) {

@@ -2,7 +2,6 @@ import Logo from "../components/logo";
 import styled from "styled-components";
 import Link from "next/link";
 import Router from "next/router";
-import SkipButton from "../components/skipButton";
 import Input from "../components/formComponents/input";
 import Button from "../components/buttons/button";
 import LoginButton from "../components/buttons/loginButton";
@@ -77,7 +76,6 @@ export default function Login() {
               <ToColor>Registriere dich!</ToColor>
             </Link>
           </CallToRegister>
-          <SkipButton />
         </>
       )}
     </StyledLogin>
