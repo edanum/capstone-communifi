@@ -62,12 +62,10 @@ const LandingPage = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 30px;
   height: 100vh;
 `;
 
 const Heading = styled.h1`
-  margin-top: 0px;
   color: var(--headline);
   text-align: center;
 `;
