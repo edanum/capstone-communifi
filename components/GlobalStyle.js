@@ -16,8 +16,8 @@ const GlobalStyle = createGlobalStyle`
         --accent-color-secondary: #2cb67d;
         --border: #444443;;
         --fonty-family: 'Noto Sans', sans-serif;
-        --revenues: #73ac67;
-        --expenses: #fd7769;
+        --revenues: #2cb67d;
+        --expenses: #fc5d3d;
       }
   
       h2{
