@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+      
       :root {
         --text-primary: #9ba2aa;
         --background-primary: #242629;
@@ -16,8 +17,8 @@ const GlobalStyle = createGlobalStyle`
         --accent-color-secondary: #2cb67d;
         --border: #444443;;
         --fonty-family: 'Noto Sans', sans-serif;
-        --revenues: #2cb67d;
-        --expenses: #e53170;
+        --revenues: #3da9fc;
+        --expenses: #ed6a1f;
       }
   
       h2{
