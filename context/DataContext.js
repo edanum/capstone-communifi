@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useContext, useState, useEffect } from "react";
 import useSWR from "swr";
+import { sortArray } from "../library/sortArray";
 
 export const DataContext = createContext();
 export const DataUpdateContext = createContext();
@@ -46,12 +47,12 @@ export function DataProvider({ children }) {
 
   useEffect(() => {
     setExpenses(expenseData);
-    setFilteredExpenses(expenseData);
+    setFilteredExpenses(sortArray(expenseData,"receiptNumber",-1));
   }, [expenseData]);
 
   useEffect(() => {
     setRevenues(revenueData);
-    setFilteredRevenues(revenueData);
+    setFilteredRevenues(sortArray(revenueData, "receiptNumber", -1));
   }, [revenueData]);
   //
 
