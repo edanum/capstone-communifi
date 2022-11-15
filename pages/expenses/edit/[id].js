@@ -2,6 +2,7 @@ import ExpeneForm from "../../../components/expenses/expenseForm";
 import Router from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
+import { useSession } from "next-auth/react";
 
 export default function ExpenseEdit() {
   //PREPARE LOTTIE ANIMATION (LOADING)
@@ -25,6 +26,19 @@ export default function ExpenseEdit() {
         setLoading(false);
       });
   }, []);
+  //
+
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
   //
 
   if (isLoading) return <div ref={container}></div>;

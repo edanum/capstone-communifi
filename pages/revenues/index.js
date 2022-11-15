@@ -1,12 +1,12 @@
-import useSWR from "swr";
+import Router from "next/router";
 import RevenueCard from "../../components/revenues/revenueCard";
 import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
-import { sortArrayByReceiptNumber } from "../../library/sortArrayByReceiptNumber";
 import { useRef, useEffect } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
 import { useData } from "../../context/DataContext";
+import { useSession } from "next-auth/react";
 
 export default function Einnahmen() {
   //GET GLOBAL DATA STATE
@@ -14,7 +14,15 @@ export default function Einnahmen() {
   const mutateRevenues = useData().mutateRevenues;
 
   mutateRevenues(); // refreshes cache to synchronyze with globald state after add function
+  //
 
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
   //
 
   //IMPLEMENT LOADING ANIMATION
@@ -22,9 +30,14 @@ export default function Einnahmen() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  if (!revenues || revenues === []) return <div ref={container}></div>;
+  if (!revenues || revenues === [])
+    return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
+  if (status === "loading") {
+    //BREAKPOINT FOR PROTECTED PAGE
+    return null;
+  }
   return (
     <>
       <StyledRevenues>
@@ -40,6 +53,9 @@ export default function Einnahmen() {
     </>
   );
 }
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const StyledRevenues = styled.div`
   display: flex;

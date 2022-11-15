@@ -2,14 +2,28 @@ import Logo from "../components/logo";
 import styled from "styled-components";
 import Link from "next/link";
 import Router from "next/router";
-import SkipButton from "../components/skipButton";
 import Input from "../components/formComponents/input";
 import Button from "../components/buttons/button";
 import LoginButton from "../components/buttons/loginButton";
 import { useSession } from "next-auth/react";
+import { useRef, useEffect, useState } from "react";
+import lottie from "lottie-web";
 
 export default function Login() {
   const { data: session } = useSession();
+
+  //LOAD LOGIN ANIMATION
+  const container = useRef(null);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      render: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../public/login_animation.json"),
+    });
+  }, []);
+  //
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -19,13 +33,19 @@ export default function Login() {
   if (session) {
     setTimeout(() => {
       Router.push("/dashboard");
-    }, 5000);
+    }, 3000);
   }
   return (
     <StyledLogin>
-      {session ?  (
-        `Du bist bereits als ${session.user.name} eingelogged und wirst zum Dashboard weitergeleitet.`
-      ):(
+      {session ? (
+        <>
+          <WelcomeBack>
+            Hey {session.user.name},
+            <p>Willkommen zurück! Du wirst sofort weitergeleitet.</p>
+          </WelcomeBack>
+          <div ref={container}></div>
+        </>
+      ) : (
         <>
           <Logo fontSize={"40px"} />
           <Form onSubmit={() => handleSubmit()}>
@@ -56,7 +76,6 @@ export default function Login() {
               <ToColor>Registriere dich!</ToColor>
             </Link>
           </CallToRegister>
-          <SkipButton />
         </>
       )}
     </StyledLogin>
@@ -88,4 +107,15 @@ const ToColor = styled.p`
   color: #0570db;
   margin: 0px;
   cursor: pointer;
+`;
+
+const WelcomeBack = styled.h1`
+  color: var(--headline);
+  text-align: center;
+
+  p {
+    font-size: 16px;
+    color: var(--paragraph);
+    margin-top: 20px;
+  }
 `;

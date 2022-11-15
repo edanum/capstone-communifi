@@ -6,6 +6,6 @@ export function getLoadingAnimation(param,) {
     render: "svg",
     loop: true,
     autoplay: true,
-    animationData: require("../public/loading_animation.json"),
+    animationData: require("../public/loading_animation3.json"),
   });
 }

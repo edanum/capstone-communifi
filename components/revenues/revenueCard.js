@@ -6,7 +6,7 @@ export default function RevenueCard({ revenue }) {
   return (
     <Link href={"/revenues/details/" + revenue.id}>
       <a>
-        <Card>
+        <Card animation={"slide-bottom"}>
           <CardHeader>#{revenue.receiptNumber}</CardHeader>
           <Amount>{revenue?.amount?.toFixed(2).replace(".", ",")}€</Amount>
           <Description>{revenue.description}</Description>

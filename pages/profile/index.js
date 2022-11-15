@@ -3,8 +3,22 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "../../components/buttons/button";
 import { signOut } from "next-auth/react";
+import Card from "../../components/card";
+import Router from "next/router";
+
 export default function Profile() {
-  const { data: session } = useSession();
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
+  //
 
   function handleSignOut() {
     signOut({
@@ -17,17 +31,19 @@ export default function Profile() {
       <ImageContainer>
         <StyledImage
           src={session?.user.image}
-          alt="Revenues Icon"
+          alt="GitHub Icon"
           height={200}
           width={200}
           objectFit="contain"
         />
       </ImageContainer>
       <Name>{session?.user.name}</Name>
-      <ProfileDetails>
-        <p>E-Mail:</p>
-        <p>{session?.user.email}</p>
-      </ProfileDetails>
+      <Card>
+        <ProfileDetails>
+          <p>E-Mail:</p>
+          <p>{session?.user.email}</p>
+        </ProfileDetails>
+      </Card>
       <Button label="Ausloggen" onClick={handleSignOut} />
     </StyledProfile>
   );
@@ -38,8 +54,11 @@ const ImageContainer = styled.div`
   height: 200px;
   background-color: var(--background-primary);
   border-radius: 50%;
+  border: solid 2px var(--border);
 `;
-const Name = styled.h1``;
+const Name = styled.h1`
+  color: var(--headline);
+`;
 
 const StyledImage = styled(Image)`
   border-radius: 50%;
@@ -47,6 +66,7 @@ const StyledImage = styled(Image)`
 const StyledProfile = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
@@ -55,6 +75,7 @@ const StyledProfile = styled.div`
 
 const ProfileDetails = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   width: 100%;
   gap: 30px;

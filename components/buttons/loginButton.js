@@ -1,28 +1,22 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import styled from "styled-components";
 import Image from "next/image";
-import GitHubIcon from "../../public/github_logo.png"
-
-
-
+import GitHubIcon from "../../public/github_logo.png";
 
 export default function LoginButton() {
-
-
   const { data: session } = useSession();
- 
- 
 
   return (
     <>
       <Button onClick={() => signIn("github")}>
-          <Image
-            src={GitHubIcon}
-            alt="GitHub Icon"
-           width={25}
-            objectFit="contain"
-          />
-        <p>Login with GitHub</p>
+        <Image
+          src={GitHubIcon}
+          alt="GitHub Icon"
+          height={28}
+          width={28}
+          objectFit="contain"
+        />
+        <p>Login mit GitHub</p>
       </Button>
     </>
   );
@@ -30,7 +24,7 @@ export default function LoginButton() {
 
 const Button = styled.button`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   gap: 10px;
   position: relative;

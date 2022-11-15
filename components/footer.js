@@ -52,7 +52,7 @@ export default function Footer() {
         <NavElement active={pathname.includes("/profile")}>
           <Image
             src={profileIcon}
-            alt="Revenues Icon"
+            alt="Profile Icon"
             height={30}
             width={25}
             objectFit="contain"

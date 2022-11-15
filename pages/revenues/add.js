@@ -1,7 +1,21 @@
 import RevenueForm from "../../components/revenues/revenueForm";
 import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function RevenueAdd() {
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
+  //
+
   async function onSubmit(formData) {
     try {
       const response = await fetch("/api/revenues", {
@@ -15,5 +29,5 @@ export default function RevenueAdd() {
     }
   }
 
-  return <RevenueForm onSubmit={onSubmit} buttonLabel="Einnahme hinzufügen"/>;
+  return <RevenueForm onSubmit={onSubmit} buttonLabel="Einnahme hinzufügen" />;
 }

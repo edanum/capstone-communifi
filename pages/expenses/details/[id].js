@@ -4,8 +4,13 @@ import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function ExpenseDetails() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
   //PREPARE LOTTIE ANIMATION (LOADING)
   const container = useRef(null);
   useEffect(() => {
@@ -13,9 +18,16 @@ export default function ExpenseDetails() {
   }, []);
   //
 
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+  //
+
   //GET DATA VIA USEEFFECT FETCH
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const pathArray = window.location.pathname.split("/");
     const id = pathArray[3];
@@ -27,11 +39,14 @@ export default function ExpenseDetails() {
         setLoading(false);
       });
   }, []);
-
-  if (isLoading) return <div ref={container}></div>;
-  if (!data) return <div ref={container}></div>;
+ 
+  if (isLoading)
+    return <AnimationContainer ref={container}></AnimationContainer>;
+  if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
-
+ if (status === "loading") { //BREAKPOINT FOR PROTECTED PAGE
+   return null;
+ }
   const expense = data;
 
   return (
@@ -47,6 +62,9 @@ export default function ExpenseDetails() {
     </>
   );
 }
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const StyledExpenseDetails = styled.div`
   display: flex;
