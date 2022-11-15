@@ -20,7 +20,7 @@ export default function Dashboard() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  if (!expenses || !revenues) return <div ref={container}></div>;
+  if (!expenses || !revenues) return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
   //GENERATE FINANCE DATA
@@ -45,6 +45,10 @@ export default function Dashboard() {
     </DashboardContainer>
   );
 }
+
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
+`;
 
 const DashboardContainer = styled.div`
   display: flex;
