@@ -8,7 +8,6 @@ import Card from "../../components/card";
 export default function Profile() {
   const { data: session } = useSession();
 
-  console.log(session);
   function handleSignOut() {
     signOut({
       callbackUrl: `/login`,
