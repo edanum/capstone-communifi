@@ -41,8 +41,8 @@ export default function Login() {
       {session ? (
         <>
           <WelcomeBack>
-            Willkommen zurück {session.user.name}. Du wirst gleich zum Dashboard
-            weitergeleitet und kannst starten.
+            Hey {session.user.name},
+            <p>Willkommen zurück! Du wirst sofort weitergeleitet.</p>
           </WelcomeBack>
           <div ref={container}></div>
         </>
@@ -111,6 +111,13 @@ const ToColor = styled.p`
   cursor: pointer;
 `;
 
-const WelcomeBack = styled.h2`
+const WelcomeBack = styled.h1`
+  color: var(--headline);
   text-align: center;
+
+  p {
+    font-size: 16px;
+    color: var(--paragraph);
+    margin-top: 20px;
+  }
 `;
