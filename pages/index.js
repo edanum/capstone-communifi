@@ -63,6 +63,7 @@ const LandingPage = styled.div`
   align-items: center;
   position: relative;
   height: 100vh;
+  top: -60px;
 `;
 
 const Heading = styled.h1`
