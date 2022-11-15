@@ -7,7 +7,6 @@ import expensesIcon from "../public/expenses_icon.png";
 import revenuesIcon from "../public/revenues_icon.png";
 import profileIcon from "../public/profile_icon.png";
 
-
 export default function Footer() {
   const { pathname } = useRouter();
 
@@ -49,7 +48,18 @@ export default function Footer() {
           <p>Einnahmen</p>
         </NavElement>
       </Link>
-    
+      <Link href="/profile">
+        <NavElement active={pathname.includes("/profile")}>
+          <Image
+            src={profileIcon}
+            alt="Revenues Icon"
+            height={30}
+            width={25}
+            objectFit="contain"
+          />
+          <p>Profile</p>
+        </NavElement>
+      </Link>
     </StyledFooter>
   );
 }
@@ -65,7 +75,7 @@ const StyledFooter = styled.footer`
   left: 0;
   right: 0;
   border-radius: 20px 20px 0px 0px;
-  border-top: solid 1px var(--border);
+  border-top: solid 2px var(--border);
 `;
 
 const NavElement = styled.div`
@@ -87,10 +97,14 @@ const NavElement = styled.div`
 
   &:first-child {
     border-radius: 20px 0px 0px 0px;
-    border-right: solid 1px var(--border);
+    border-right: solid 2px var(--border);
+  }
+  &:nth-child(2) {
+
+    border-right: solid 2px var(--border);
   }
   &:last-child {
     border-radius: 0px 20px 0px 0px;
-    border-left: solid 1px var(--border);
+    border-left: solid 2px var(--border);
   }
 `;
