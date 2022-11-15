@@ -4,6 +4,8 @@ import Link from "next/link";
 import EditButton from "../../../components/buttons/editButton";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function ExpenseDetails() {
   //PREPARE LOTTIE ANIMATION (LOADING)
@@ -11,6 +13,19 @@ export default function ExpenseDetails() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
+  //
+
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
   //
 
   //GET DATA VIA USEEFFECT FETCH

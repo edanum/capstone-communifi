@@ -4,9 +4,21 @@ import Image from "next/image";
 import Button from "../../components/buttons/button";
 import { signOut } from "next-auth/react";
 import Card from "../../components/card";
+import Router from "next/router";
 
 export default function Profile() {
-  const { data: session } = useSession();
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
+  //
 
   function handleSignOut() {
     signOut({
@@ -42,7 +54,7 @@ const ImageContainer = styled.div`
   height: 200px;
   background-color: var(--background-primary);
   border-radius: 50%;
-  border: solid 2px var(--border)
+  border: solid 2px var(--border);
 `;
 const Name = styled.h1`
   color: var(--headline);

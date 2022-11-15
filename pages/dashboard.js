@@ -4,6 +4,8 @@ import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
 import styled from "styled-components";
 import ExpensesOverview from "../components/dashboard/yearOverview";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
   //GET GLOBAL DATA STATES
@@ -20,7 +22,22 @@ export default function Dashboard() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  if (!expenses || !revenues) return <AnimationContainer ref={container}></AnimationContainer>;
+
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+  if (status === "loading") {
+    return null;
+  }
+  //
+
+  //SHOW LOADING ANIMATION WHILE WAITING ON DATA
+  if (!expenses || !revenues)
+    return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
   //GENERATE FINANCE DATA

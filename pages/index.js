@@ -18,7 +18,7 @@ export default function Home() {
   //
 
   <Head>
-    <title>Test</title>
+    <title>CommuniFI</title>
   </Head>;
 
   //SHOW ANIMATION

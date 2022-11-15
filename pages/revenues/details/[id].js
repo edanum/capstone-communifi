@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import EditButton from "../../../components/buttons/editButton";
-
+import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import Router from "next/router";
 
 export default function RevenueDetails() {
   //PREPARE LOTTIE ANIMATION (LOADING)
@@ -29,6 +30,19 @@ export default function RevenueDetails() {
         setLoading(false);
       });
   }, []);
+
+  //PROTECT PAGE
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      Router.push("/login");
+    },
+  });
+
+  if (status === "loading") {
+    return null;
+  }
+  //
 
   if (isLoading)
     return <AnimationContainer ref={container}></AnimationContainer>;
