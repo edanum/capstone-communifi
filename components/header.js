@@ -8,6 +8,8 @@ import { getBackPath } from "../library/getBackPath";
 import { useState } from "react";
 import { useData, useDataUpdate } from "../context/DataContext";
 import Logo from "./logo";
+import { signOut } from "next-auth/react";
+import LogoutButton from "./buttons/logoutButton";
 
 export default function Header() {
   //GET GLOBAL DATA STATES
@@ -22,12 +24,24 @@ export default function Header() {
   const [searchbarToggle, setSearchbarToggle] = useState();
 
   const { pathname } = useRouter();
+
+   function handleSignOut() {
+     signOut({
+       callbackUrl: `/login`,
+     });
+   }
   return (
     <StyledHeader>
-      {pathname === "/dashboard" || pathname === "/profile" ? (
+      {pathname === "/dashboard" ? (
         <>
           <Logo fontSize={"23px"} />
           <SubTitle>{printSubhead(pathname)}</SubTitle>
+        </>
+      ) : pathname === "/profile" ? (
+        <>
+          <Logo fontSize={"23px"} />
+            <SubTitle>{printSubhead(pathname)}</SubTitle>
+           <LogoutButton/>
         </>
       ) : pathname === "/expenses" || pathname === "/revenues" ? (
         <>

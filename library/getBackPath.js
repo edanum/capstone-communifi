@@ -15,17 +15,21 @@ export function getBackPath(pathname) {
     Router.push("/expenses/details/" + id);
   }
 
-   if (pathname.includes("/revenues/add")) {
-     Router.push("/revenues");
-   }
+  if (pathname.includes("/revenues/add")) {
+    Router.push("/revenues");
+  }
 
-   if (pathname.includes("/revenues/details/")) {
-     Router.push("/revenues");
-   }
+  if (pathname.includes("/revenues/details/")) {
+    Router.push("/revenues");
+  }
 
-   if (pathname.includes("/revenues/edit/")) {
-     const pathArray = window.location.pathname.split("/");
-     const id = pathArray[3];
-     Router.push("/revenues/details/" + id);
-   }
+  if (pathname.includes("/revenues/edit/")) {
+    const pathArray = window.location.pathname.split("/");
+    const id = pathArray[3];
+    Router.push("/revenues/details/" + id);
+  }
+
+  if (pathname.includes("/profile/edit/")) {
+    Router.push("/profile/");
+  }
 }
