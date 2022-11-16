@@ -18,7 +18,6 @@ export default function Profile() {
     },
   });
 
-  console.log(session);
   //GET USER-DATA VIA USEEFFECT FETCH
   useEffect(() => {
     if (session) {
