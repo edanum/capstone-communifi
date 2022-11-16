@@ -5,8 +5,11 @@ import Button from "../../components/buttons/button";
 import { signOut } from "next-auth/react";
 import Card from "../../components/card";
 import Router from "next/router";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
+  const [user, setUser] = useState();
+
   //PROTECT PAGE
   const { data: session, status } = useSession({
     required: true,
@@ -15,6 +18,19 @@ export default function Profile() {
     },
   });
 
+  console.log(session);
+  //GET USER-DATA VIA USEEFFECT FETCH
+  useEffect(() => {
+    if (session) {
+      fetch(`/api/users/${session.user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setUser(data);
+        });
+    }
+  }, [session?.user]);
+
+  //BREAKPOINT FOR PROTECTION
   if (status === "loading") {
     return null;
   }
@@ -41,7 +57,11 @@ export default function Profile() {
       <Card>
         <ProfileDetails>
           <p>E-Mail:</p>
-          <p>{session?.user.email}</p>
+          <p>{user?.email}</p>
+        </ProfileDetails>
+        <ProfileDetails>
+          <p>Team:</p>
+          <p>{user?.team}</p>
         </ProfileDetails>
       </Card>
       <Button label="Ausloggen" onClick={handleSignOut} />
