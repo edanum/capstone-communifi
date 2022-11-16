@@ -9,18 +9,21 @@ import Button from "../buttons/button";
 import { useEffect } from "react";
 
 export default function UserForm({ onSubmit, user }) {
-  // WAIT UNTIL USER DATA IS AVAILABLE
-  while (!user) {
-    return null;
-  }
-  //
-
   const [name, setName] = useState(user?.name || "");
   const [city, setCity] = useState(user?.city || "");
   const [plz, setPlz] = useState(user?.plz || "");
   const [street, setStreet] = useState(user?.street || "");
   const [iban, setIban] = useState(user?.iban || "");
   const [team, setTeam] = useState(user?.team || "");
+
+  useEffect(() => {
+    setName(user?.name),
+      setCity(user?.city),
+      setPlz(user?.plz),
+      setStreet(user?.street),
+      setIban(user?.iban),
+      setTeam(user?.team);
+  }, [user]);
 
   async function handleSubmit(event) {
     event.preventDefault();
