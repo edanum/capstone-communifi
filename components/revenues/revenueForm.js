@@ -140,7 +140,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 85%;
+  width: 100%;
   font-size: 20px;
 `;
 
