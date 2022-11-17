@@ -62,10 +62,6 @@ export default function ProfileDetails() {
         <Name>{user?.name}</Name>
         <Card>
           <ProfileDetail>
-            <Attribute>E-Mail:</Attribute>
-            <Data>{user?.email}</Data>
-          </ProfileDetail>
-          <ProfileDetail>
             <Attribute>Wohnort:</Attribute>
             <Data>{user?.city}</Data>
           </ProfileDetail>
