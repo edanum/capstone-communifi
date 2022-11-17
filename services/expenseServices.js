@@ -62,8 +62,6 @@ export async function getExpenseById(expenseId) {
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
   const userName = await getUserByEmail(expense.user.email);
-  console.log("EXPENSE AUS EXPENSE SERVICE", expense);
-
   const newExpense = await Expense.create({
     receiptNumber: highestReceiptNumber(expenses) + 1,
     amount: expense.amount,
