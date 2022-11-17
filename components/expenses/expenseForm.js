@@ -6,6 +6,7 @@ import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
 import Input from "../formComponents/input";
 import TextArea from "../formComponents/textArea";
 import Button from "../buttons/button";
+import { useSession } from "next-auth/react";
 
 export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   const fileInputRef = useRef();
@@ -15,8 +16,9 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   const [comment, setComment] = useState(expense?.comment ?? "");
   const [receipt, setReceipt] = useState(expense?.receipt ?? "");
   const [status, setStatus] = useState(expense?.status ?? "");
+  const { data: session } = useSession();
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event, user) {
     event.preventDefault();
     const form = event.currentTarget;
 
@@ -40,6 +42,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       comment,
       receipt,
       status,
+      user: user,
     };
     onSubmit(data);
   }
@@ -54,7 +57,10 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit} autocomplete="off">
+    <Form
+      onSubmit={(event) => handleSubmit(event, session.user)}
+      autocomplete="off"
+    >
       <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"

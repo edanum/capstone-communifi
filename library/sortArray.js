@@ -4,11 +4,15 @@ export function sortArray(data, attribute, direction) {
   }
 
   //CHECK IF ATTRIBUTE IS STRING OR NUMBER
-  if (typeof data[0][attribute] === "number") {
-    return sortByNumber(data, attribute);
-  }
-  if (typeof data[0][attribute] === "string") {
-    return sortByCharacter(data, attribute);
+  if (data.length === 0) {
+    return data;
+  } else {
+    if (typeof data[0][attribute] === "number") {
+      return sortByNumber(data, attribute);
+    }
+    if (typeof data[0][attribute] === "string") {
+      return sortByCharacter(data, attribute);
+    }
   }
   //
 

@@ -17,12 +17,12 @@ export default function UserForm({ onSubmit, user }) {
   const [team, setTeam] = useState(user?.team || "");
 
   useEffect(() => {
-    setName(user?.name),
-      setCity(user?.city),
-      setPlz(user?.plz),
-      setStreet(user?.street),
-      setIban(user?.iban),
-      setTeam(user?.team);
+    setName(user?.name);
+    setCity(user?.city);
+    setPlz(user?.plz);
+    setStreet(user?.street);
+    setIban(user?.iban);
+    setTeam(user?.team);
   }, [user]);
 
   async function handleSubmit(event) {
