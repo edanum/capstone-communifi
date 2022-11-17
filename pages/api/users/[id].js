@@ -1,6 +1,7 @@
 import dbConnect from "../../../library/dbConnect";
 import { getUserByEmail } from "../../../services/userServices";
 import User from "../../../models/User";
+import { getUserById } from "../../../services/userServices";
 
 export default async function handler(request, response) {
   const { id } = request.query;
@@ -8,8 +9,15 @@ export default async function handler(request, response) {
 
   switch (request.method) {
     case "GET":
-      const user = await getUserByEmail(id);
-      return response.status(200).json(user);
+      // SINCE THERE IS NO ID IN THE BEGINNING (JUST EMAIL) THIS STATEMENT IS DIVIDING THE PATH DEPENDING ON EMAIL/ID
+      if (id.includes("@")) {
+        const user = await getUserByEmail(id);
+        return response.status(200).json(user);
+      } else {
+        const user = await getUserById(id);
+        return response.status(200).json(user);
+      }
+
     case "PUT":
       const formData = JSON.parse(request.body);
       const updatedUser = User.findByIdAndUpdate(
@@ -32,7 +40,7 @@ export default async function handler(request, response) {
           }
         }
       );
-  
+
       return response.status(200).json({
         message: "User updated",
         updatedUser: updatedUser._update,
