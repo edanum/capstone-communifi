@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Card from "../card";
+import Link from "next/link";
 
 export default function RevenueDetail({ revenue }) {
+  
+ 
   return (
     <>
       <Card>
@@ -27,7 +30,9 @@ export default function RevenueDetail({ revenue }) {
           </Date>
           <Name>
             <ToBold>Eingereicht von:</ToBold>
-            {revenue.name}
+            <Link href={`/profile/details/${revenue.name.id}`}>
+              {revenue.name.name}
+            </Link>
           </Name>
           <Comment>
             <ToBold>Kommentar:</ToBold>

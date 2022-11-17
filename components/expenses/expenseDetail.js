@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Card from "../card";
 import StatusSection from "./statusSection";
+import Link from "next/link";
 
 export default function ExpenseDetail({ expense }) {
   return (
@@ -30,7 +31,7 @@ export default function ExpenseDetail({ expense }) {
         </Date>
         <Name>
           <ToBold>Eingereicht von:</ToBold>
-          {expense.name}
+          <Link href={`/profile/details/${expense.name.id}`}>{expense.name.name}</Link>
         </Name>
         <Comment>
           <ToBold>Kommentar:</ToBold>
