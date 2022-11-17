@@ -10,7 +10,7 @@ const expenseSchema = new Schema(
     dateOfSubmit: { type: String, required: true },
     comment: { type: String, required: false },
     receipt: { type: String, required: false },
-    name: { type: String, required: true },
+    name: { type: Schema.Types.ObjectId, ref: "User", required: true },
     status: { type: String, required: false },
   },
   { timestamps: true }
