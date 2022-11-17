@@ -18,7 +18,7 @@ export async function getAllUsers() {
 export async function getUserByEmail(userEmail) {
   const user = await User.findOne({ email: userEmail });
 
-  const { id, name, email, image, emailVerified, team } = user;
+  const { id, name, email, image, emailVerified, city, plz, street, iban, team } = user;
 
   return {
     id,
@@ -26,6 +26,10 @@ export async function getUserByEmail(userEmail) {
     email,
     image,
     emailVerified,
+    city,
+    plz,
+    street,
+    iban,
     team,
   };
 }

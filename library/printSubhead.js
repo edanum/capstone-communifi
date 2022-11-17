@@ -29,4 +29,8 @@ export function printSubhead(pathname) {
   if (pathname.includes("/revenues/edit/")) {
     return "Einnahme editieren";
   }
+
+    if (pathname.includes("/profile/edit/")) {
+      return "Profil editieren";
+    }
 }

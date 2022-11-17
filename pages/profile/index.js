@@ -1,14 +1,14 @@
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
 import Image from "next/image";
-import Button from "../../components/buttons/button";
-import { signOut } from "next-auth/react";
 import Card from "../../components/card";
 import Router from "next/router";
 import { useEffect, useState } from "react";
+import EditButton from "../../components/buttons/editButton";
+import Link from "next/link";
 
 export default function Profile() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState("");
 
   //PROTECT PAGE
   const { data: session, status } = useSession({
@@ -35,35 +35,55 @@ export default function Profile() {
   }
   //
 
-  function handleSignOut() {
-    signOut({
-      callbackUrl: `/login`,
-    });
+  // WAIT UNTIL USER DATA IS AVAILABLE
+  while (user === "") {
+    return null;
   }
+  //
 
   return (
     <StyledProfile>
       <ImageContainer>
         <StyledImage
-          src={session?.user.image}
+          src={user?.image}
           alt="GitHub Icon"
           height={200}
           width={200}
           objectFit="contain"
         />
       </ImageContainer>
-      <Name>{session?.user.name}</Name>
+      <Name>{user?.name}</Name>
       <Card>
-        <ProfileDetails>
-          <p>E-Mail:</p>
-          <p>{user?.email}</p>
-        </ProfileDetails>
-        <ProfileDetails>
-          <p>Team:</p>
-          <p>{user?.team}</p>
-        </ProfileDetails>
+        <ProfileDetail>
+          <Attribute>E-Mail:</Attribute>
+          <Data>{user?.email}</Data>
+        </ProfileDetail>
+        <ProfileDetail>
+          <Attribute>Wohnort:</Attribute>
+          <Data>{user?.city}</Data>
+        </ProfileDetail>
+        <ProfileDetail>
+          <Attribute>PLZ:</Attribute>
+          <Data>{user?.plz}</Data>
+        </ProfileDetail>
+        <ProfileDetail>
+          <Attribute>Straße:</Attribute>
+          <Data>{user?.street}</Data>
+        </ProfileDetail>
+        <ProfileDetail>
+          <Attribute>IBAN:</Attribute>
+          <Data>{user?.iban}</Data>
+        </ProfileDetail>
+        <ProfileDetail>
+          <Attribute>Team:</Attribute>
+          <Data>{user?.team}</Data>
+        </ProfileDetail>
+        <Link href={`/profile/edit/${user.id}`}>
+          <a>
+            <EditButton />
+          </a>
+        </Link>
       </Card>
-      <Button label="Ausloggen" onClick={handleSignOut} />
     </StyledProfile>
   );
 }
@@ -90,12 +110,21 @@ const StyledProfile = styled.div`
   justify-content: center;
   margin-top: 20px;
   width: 90%;
+  max-width: 400px;
 `;
 
-const ProfileDetails = styled.div`
+const ProfileDetail = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  gap: 30px;
+  margin: 5px 0px;
+`;
+
+const Attribute = styled.p`
+  width: 60%;
+`;
+
+const Data = styled.p`
+  width: 100%;
 `;

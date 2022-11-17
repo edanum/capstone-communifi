@@ -17,6 +17,8 @@ export default function Layout({ children }) {
       <Main>{children}</Main>
       {pathname === "/" ||
       pathname === "/login" ||
+      pathname.includes("edit") ||
+      pathname.includes("add") ||
       pathname === "/register" ? null : (
         <Footer />
       )}

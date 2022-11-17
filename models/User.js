@@ -7,6 +7,10 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   image: { type: String, required: false },
   emailVerified: { type: String, required: false },
+  city: { type: String, required: false },
+  plz: { type: Number, required: false },
+  street: { type: String, required: false },
+  iban: { type: String, required: false },
   team: { type: String, required: false },
 });
 
