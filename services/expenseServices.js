@@ -1,11 +1,11 @@
-import dbConnect from "../library/dbConnect";
 import Expense from "../models/Expense";
 import today from "../library/today";
 import { highestReceiptNumber } from "../library/highestReceiptNumber";
+import { getUserByEmail } from "../services/userServices";
 
 export async function getAllExpenses() {
-  // await dbConnect();
-  const expenses = await Expense.find();
+  const expenses = await Expense.find().populate("name");
+
   const mappedExpenses = expenses.map(
     ({
       id,
@@ -25,7 +25,7 @@ export async function getAllExpenses() {
       dateOfSubmit,
       comment,
       receipt,
-      name,
+      name: name.name,
       status,
     })
   );
@@ -33,9 +33,7 @@ export async function getAllExpenses() {
 }
 
 export async function getExpenseById(expenseId) {
-  // await dbConnect();
-
-  const expense = await Expense.findById(expenseId);
+  const expense = await Expense.findById(expenseId).populate("name");
 
   const {
     id,
@@ -56,13 +54,15 @@ export async function getExpenseById(expenseId) {
     dateOfSubmit,
     comment,
     receipt,
-    name,
+    name: name.name,
     status,
   };
 }
 
 export async function addExpense(expense) {
   const expenses = await getAllExpenses();
+  const userName = await getUserByEmail(expense.user.email);
+  console.log("EXPENSE AUS EXPENSE SERVICE", expense);
 
   const newExpense = await Expense.create({
     receiptNumber: highestReceiptNumber(expenses) + 1,
@@ -71,7 +71,7 @@ export async function addExpense(expense) {
     dateOfSubmit: today(),
     comment: expense.comment,
     receipt: expense.receipt,
-    name: "Marc Becker",
+    name: userName._id,
     status: "Eingereicht",
   });
 
