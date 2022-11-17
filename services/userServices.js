@@ -47,3 +47,35 @@ export async function getUserByEmail(userEmail) {
     team,
   };
 }
+
+export async function getUserById(userId) {
+  const user = await User.findById(userId);
+
+  const {
+    _id,
+    id,
+    name,
+    email,
+    image,
+    emailVerified,
+    city,
+    plz,
+    street,
+    iban,
+    team,
+  } = user;
+
+  return {
+    _id,
+    id,
+    name,
+    email,
+    image,
+    emailVerified,
+    city,
+    plz,
+    street,
+    iban,
+    team,
+  };
+}
