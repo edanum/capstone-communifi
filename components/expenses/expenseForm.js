@@ -70,6 +70,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         onChange={(event) => setDescription(event.target.value)}
         pattern=".*[^\s]{1,}.*"
         required
+        autoFocus
       ></Input>
       <Label htmlFor="amount">Betrag*</Label>
       <Input
