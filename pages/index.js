@@ -17,10 +17,6 @@ export default function Home() {
   mutateRevenues();
   //
 
-  <Head>
-    <title>CommuniFI</title>
-  </Head>;
-
   //SHOW ANIMATION
   const container = useRef(null);
   useEffect(() => {
