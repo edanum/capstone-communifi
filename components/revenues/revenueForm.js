@@ -55,7 +55,10 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
   }
 
   return (
-    <Form onSubmit={(event) => handleSubmit(event, session.user)} autocomplete="off">
+    <Form
+      onSubmit={(event) => handleSubmit(event, session.user)}
+      autocomplete="off"
+    >
       <Label htmlFor="description">Beschreibung*</Label>
       <Input
         type="text"
@@ -81,19 +84,17 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
       <Label>Beleg:</Label>
 
       {receipt !== "" ? (
-        <>
+        <ImagePreviewContainer>
+          <Image
+            src={receipt}
+            layout="fill"
+            objectFit="contain"
+            alt="receipt"
+          />
           <ImageDeleteButton onClick={() => setReceipt("")}>
-            Foto löschen
+            x
           </ImageDeleteButton>
-          <ImagePreviewContainer>
-            <Image
-              src={receipt}
-              layout="fill"
-              objectFit="contain"
-              alt="receipt"
-            />
-          </ImagePreviewContainer>
-        </>
+        </ImagePreviewContainer>
       ) : (
         <ImageUploadButton
           src={addImageButton}
@@ -127,17 +128,6 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
   );
 }
 
-const SubmitButton = styled.button`
-  margin-top: 15px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  background-color: #64a1e8;
-  border: none;
-  height: 40px;
-  border-radius: 5px;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-`;
 
 const Form = styled.form`
   display: flex;
@@ -151,13 +141,22 @@ const FileInput = styled.input`
   display: none;
 `;
 
-const Label = styled.label``;
-
-const Textarea = styled.textarea`
-  background-color: #d9d9d9;
-  border: none;
-  font-size: 18px;
-  color: #5b5b5b;
+const ImageDeleteButton = styled.button`
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  font-size: 20px;
+  border: solid 2px var(--border);
+  background-color: var(--background-primary);
+  color: var(--paragraph);
+  padding-bottom: 3px;
+  cursor: pointer;
 `;
 
 const ImageUploadButton = styled(Image)`
@@ -171,6 +170,5 @@ const ImagePreviewContainer = styled.div`
   overflow: hidden;
 `;
 
-const ImageDeleteButton = styled.button`
-  z-index: 2;
-`;
+const Label = styled.label``;
+
