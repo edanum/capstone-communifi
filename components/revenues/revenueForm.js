@@ -68,6 +68,7 @@ export default function RevenueForm({ onSubmit, buttonLabel, revenue }) {
         onChange={(event) => setDescription(event.target.value)}
         pattern=".*[^\s]{1,}.*"
         required
+        autoFocus
       ></Input>
       <Label htmlFor="amount">Betrag*</Label>
       <Input
