@@ -13,14 +13,14 @@ export default function WinAndLoss({ expenseSum, revenueSum, result }) {
           {result?.toFixed(2).replace(".", ",")}€{" "}
         </Amount>
         <SummaryContainer>
-          <Summary>
+          <Revenues>
             <p>Einnahmen:</p>
             <p> {revenueSum?.toFixed(2).replace(".", ",")}€</p>
-          </Summary>
-          <Summary>
+          </Revenues>
+          <Expenses>
             <p>Ausgaben:</p>
             <p> -{expenseSum?.toFixed(2).replace(".", ",")}€</p>
-          </Summary>
+          </Expenses>
         </SummaryContainer>
         <WinAndLossChart expenseSum={expenseSum} revenueSum={revenueSum} />
       </Card>
@@ -38,17 +38,28 @@ const Heading = styled.h2`
   color: var(--headline);
 `;
 
-const Summary = styled.div`
+const Expenses = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 1rem;
   align-items: center;
   width: 100%;
+  position: relative;
+  left: -20px;
+`;
+
+const Revenues = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  left: 8px;
 `;
 
 const SummaryContainer = styled.div`
   display: flex;
-
   justify-content: space-between;
   font-size: 1rem;
   width: 100%;
