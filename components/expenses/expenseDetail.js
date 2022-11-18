@@ -31,12 +31,16 @@ export default function ExpenseDetail({ expense }) {
         </Date>
         <Name>
           <ToBold>Eingereicht von:</ToBold>
-          <Link href={`/profile/details/${expense.name.id}`}>{expense.name.name}</Link>
+          <Link href={`/profile/details/${expense.name.id}`}>
+            <Box>{expense.name.name}</Box>
+          </Link>
         </Name>
-        <Comment>
-          <ToBold>Kommentar:</ToBold>
-          {expense.comment}
-        </Comment>
+        {expense.comment ? (
+          <Comment>
+            <ToBold>Kommentar:</ToBold>
+            {expense.comment}
+          </Comment>
+        ) : null}
       </CardDetailContainer>
     </Card>
   );
@@ -50,6 +54,13 @@ const Amount = styled.h2`
   color: var(--card-heading);
 `;
 
+const Box = styled.div`
+  background-color: var(--button);
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--button-text);
+`;
+
 const CardDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,13 +68,17 @@ const CardDetailContainer = styled.div`
   gap: 10px;
   margin-top: 20px;
   width: 100%;
+
+  p,div,section{
+    font-size: 0.9rem;
+  }
 `;
 
 const CardHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin-bottom: 15px;
 `;
 
@@ -76,6 +91,7 @@ const Comment = styled.section`
   font-size: 0.8rem;
   margin: 0px;
   word-wrap: break-word;
+  
 `;
 
 const Date = styled.section`
