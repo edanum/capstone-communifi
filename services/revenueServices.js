@@ -25,7 +25,7 @@ export async function getAllRevenues() {
       dateOfSubmit,
       comment,
       receipt,
-      name: { name: name.name, id: name._id },
+      name:  name.name,
     })
   );
   return mappedRevenues;

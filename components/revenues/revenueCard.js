@@ -13,7 +13,7 @@ export default function RevenueCard({ revenue }) {
 
           <CardFooter>
             <Date>{revenue.dateOfSubmit}</Date>
-            <Name>{revenue.name.name}</Name>
+            <Name>{revenue.name}</Name>
           </CardFooter>
         </Card>
       </a>
