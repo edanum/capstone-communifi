@@ -33,6 +33,7 @@ export default function Login() {
   if (session) {
     Router.push("/dashboard");
   }
+  
   return (
     <StyledLogin>
       {session ? (
@@ -46,7 +47,7 @@ export default function Login() {
       ) : (
         <>
           <Logo fontSize={"40px"} />
-          <Form onSubmit={() => handleSubmit()}>
+          {/* <Form onSubmit={() => handleSubmit()}>
             <Input
               type="email"
               id="email"
@@ -66,14 +67,14 @@ export default function Login() {
             <Button type="submit" label="Login">
               Login
             </Button>
-          </Form>
+          </Form> */}
           <LoginButton />
-          <CallToRegister>
+          {/* <CallToRegister>
             <p>Noch kein Account?</p>
             <Link href="/register">
               <ToColor>Registriere dich!</ToColor>
             </Link>
-          </CallToRegister>
+          </CallToRegister> */}
         </>
       )}
     </StyledLogin>
@@ -96,9 +97,12 @@ const Form = styled.form`
 
 const StyledLogin = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: column;
-  padding: 60px 0px;
+  height: 100vh;
+  top: -87px;
+  position: relative;
 `;
 
 const ToColor = styled.p`
