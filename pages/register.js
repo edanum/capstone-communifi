@@ -43,7 +43,7 @@ export default function Register() {
           placeholder="Password (repeat)*"
           minLength="6"
         />
-        <Button type="submit" label="Registrieren"/>
+        <Button type="submit" label="Registrieren" />
       </Form>
       <SkipButton />
     </>
@@ -57,4 +57,3 @@ const Form = styled.form`
   gap: 30px;
   width: 90%;
 `;
-

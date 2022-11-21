@@ -28,12 +28,12 @@ export default function ProfileDetails() {
         setLoading(false);
       });
   }, []);
- 
+
   if (isLoading)
     return <AnimationContainer ref={container}></AnimationContainer>;
   if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
- 
+
   const user = data;
   return (
     <>
@@ -94,6 +94,14 @@ const AnimationContainer = styled.div`
   height: calc(100vh - 140px);
 `;
 
+const Attribute = styled.p`
+  width: 60%;
+`;
+
+const Data = styled.p`
+  width: 100%;
+`;
+
 const ImageContainer = styled.div`
   width: 200px;
   height: 200px;
@@ -108,16 +116,6 @@ const Name = styled.h1`
 const StyledImage = styled(Image)`
   border-radius: 50%;
 `;
-const StyledProfile = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  width: 90%;
-  max-width: 400px;
-`;
 
 const ProfileDetail = styled.div`
   display: flex;
@@ -127,10 +125,13 @@ const ProfileDetail = styled.div`
   margin: 5px 0px;
 `;
 
-const Attribute = styled.p`
-  width: 60%;
-`;
-
-const Data = styled.p`
-  width: 100%;
+const StyledProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 400px;
 `;

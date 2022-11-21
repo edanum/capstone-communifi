@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 import EditButton from "../../components/buttons/editButton";
 import Link from "next/link";
 
-export default function Profile({ user}) {
+export default function Profile({ user }) {
   const [fullUserData, setFullUserData] = useState("");
 
   //GET USER-DATA VIA USEEFFECT FETCH
   useEffect(() => {
-      fetch(`/api/users/${user.email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setFullUserData(data);
-        });
+    fetch(`/api/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFullUserData(data);
+      });
   }, []);
   //
 
@@ -83,6 +83,13 @@ export async function getServerSideProps({ req }) {
   };
 }
 
+const Attribute = styled.p`
+  width: 60%;
+`;
+
+const Data = styled.p`
+  width: 100%;
+`;
 
 const ImageContainer = styled.div`
   width: 200px;
@@ -93,6 +100,13 @@ const ImageContainer = styled.div`
 `;
 const Name = styled.h1`
   color: var(--headline);
+`;
+const ProfileDetail = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 5px 0px;
 `;
 
 const StyledImage = styled(Image)`
@@ -106,20 +120,4 @@ const StyledProfile = styled.div`
   justify-content: center;
   width: 90%;
   max-width: 400px;
-`;
-
-const ProfileDetail = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  margin: 5px 0px;
-`;
-
-const Attribute = styled.p`
-  width: 60%;
-`;
-
-const Data = styled.p`
-  width: 100%;
 `;

@@ -19,7 +19,6 @@ export default function RevenueAdd() {
   return <RevenueForm onSubmit={onSubmit} buttonLabel="Einnahme hinzufügen" />;
 }
 
-
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   if (!session) {

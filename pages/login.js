@@ -86,19 +86,19 @@ const CallToRegister = styled.section`
   font-size: 1.3rem;
 `;
 
-const StyledLogin = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 60px 0px;
-`;
-
 const Form = styled.form`
   margin-top: 60px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
+`;
+
+const StyledLogin = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 60px 0px;
 `;
 
 const ToColor = styled.p`

@@ -52,16 +52,6 @@ const Animation = styled.div`
   margin: 20px auto;
 `;
 
-const LandingPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 100vh;
-  top: -60px;
-`;
-
 const Heading = styled.h1`
   color: var(--headline);
   text-align: center;
@@ -72,4 +62,12 @@ const IntroductionText = styled.section`
   text-align: center;
 `;
 
-const StyledSpan = styled.span``;
+const LandingPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  top: -60px;
+`;
