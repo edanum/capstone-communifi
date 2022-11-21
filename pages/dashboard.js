@@ -4,8 +4,7 @@ import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
 import styled from "styled-components";
 import ExpensesOverview from "../components/dashboard/yearOverview";
-import Router from "next/router";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export default function Dashboard() {
   //GET GLOBAL DATA STATES
@@ -23,23 +22,10 @@ export default function Dashboard() {
     getLoadingAnimation(container);
   }, []);
 
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-  //
-
   //SHOW LOADING ANIMATION WHILE WAITING ON DATA
   if (!expenses || !revenues)
     return <AnimationContainer ref={container}></AnimationContainer>;
   //
-
-  if (status === "loading") {
-    return null;
-  }
 
   //GENERATE FINANCE DATA
   function getSum(array) {
@@ -47,10 +33,10 @@ export default function Dashboard() {
     const sum = amounts.reduce((a, b) => a + b);
     return sum;
   }
-
   const expenseSum = getSum(expenses);
   const revenueSum = getSum(revenues);
   const result = revenueSum - expenseSum;
+  //
 
   return (
     <DashboardContainer>
@@ -62,6 +48,23 @@ export default function Dashboard() {
       <ExpensesOverview expenses={expenses} />
     </DashboardContainer>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
 }
 
 const AnimationContainer = styled.div`

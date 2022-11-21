@@ -1,35 +1,33 @@
-import styled, { ThemeConsumer } from "styled-components";
-import { useState, useRef } from "react";
-import addImageButton from "../../public/add_image_button.png";
-import Image from "next/image";
-import { uploadOnCloudinary } from "../../library/uploadOnCloudinary";
+import styled from "styled-components";
+import { useState } from "react";
 import Input from "../formComponents/input";
-import TextArea from "../formComponents/textArea";
 import Button from "../buttons/button";
 import { useEffect } from "react";
+import { getSession } from "next-auth/react";
 
 export default function UserForm({ onSubmit, user }) {
-  const [name, setName] = useState(user?.name || "");
-  const [city, setCity] = useState(user?.city || "");
-  const [plz, setPlz] = useState(user?.plz || "");
-  const [street, setStreet] = useState(user?.street || "");
-  const [iban, setIban] = useState(user?.iban || "");
-  const [team, setTeam] = useState(user?.team || "");
+  const [name, setName] = useState(user.name || "");
+  const [city, setCity] = useState(user.city || "");
+  const [plz, setPlz] = useState(user.plz || "");
+  const [street, setStreet] = useState(user.street || "");
+  const [iban, setIban] = useState(user.iban || "");
+  const [team, setTeam] = useState(user.team || "");
 
   useEffect(() => {
-    setName(user?.name);
-    setCity(user?.city);
-    setPlz(user?.plz);
-    setStreet(user?.street);
-    setIban(user?.iban);
-    setTeam(user?.team);
+    // refill userdata when page is reloaded manually
+    setName(user.name);
+    setCity(user.city);
+    setPlz(user.plz);
+    setStreet(user.street);
+    setIban(user.iban);
+    setTeam(user.team);
   }, [user]);
 
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
 
-    //send all data to expenseAdd page (upload to MongoDB after that step)
+    //send all data to user page (upload to MongoDB after that step)
     const data = {
       name,
       city,

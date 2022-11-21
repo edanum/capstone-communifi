@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import { useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-import Router from "next/router";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Card from "../../../components/card";
 
@@ -15,15 +14,6 @@ export default function ProfileDetails() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
-  //
-
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
   //
 
   //GET DATA VIA USEEFFECT FETCH
@@ -43,9 +33,7 @@ export default function ProfileDetails() {
     return <AnimationContainer ref={container}></AnimationContainer>;
   if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
- if (status === "loading") { //BREAKPOINT FOR PROTECTED PAGE
-   return null;
- }
+ 
   const user = data;
   return (
     <>
@@ -86,15 +74,24 @@ export default function ProfileDetails() {
     </>
   );
 }
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
+}
+
 const AnimationContainer = styled.div`
   height: calc(100vh - 140px);
-`;
-
-const StyledExpenseDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
 `;
 
 const ImageContainer = styled.div`

@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import EditButton from "../../../components/buttons/editButton";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
-import Router from "next/router";
 
 export default function RevenueDetails() {
   //PREPARE LOTTIE ANIMATION (LOADING)
@@ -31,19 +30,6 @@ export default function RevenueDetails() {
       });
   }, []);
 
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-
-  if (status === "loading") {
-    return null;
-  }
-  //
-
   if (isLoading)
     return <AnimationContainer ref={container}></AnimationContainer>;
   if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
@@ -64,6 +50,22 @@ export default function RevenueDetails() {
     </>
   );
 }
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
+}
+
 const AnimationContainer = styled.div`
   height: calc(100vh - 140px);
 `;

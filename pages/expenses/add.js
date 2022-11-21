@@ -1,20 +1,8 @@
 import ExpeneForm from "../../components/expenses/expenseForm";
 import Router from "next/router";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export default function ExpenseAdd() {
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-
-  if (status === "loading") {
-    return null;
-  }
-  //
   async function onSubmit(formData) {
     try {
       const response = await fetch("/api/expenses", {
@@ -27,6 +15,20 @@ export default function ExpenseAdd() {
       console.log(error);
     }
   }
-
   return <ExpeneForm onSubmit={onSubmit} buttonLabel="Ausgabe hinzufügen" />;
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
 }

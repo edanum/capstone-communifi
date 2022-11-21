@@ -1,84 +1,64 @@
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import styled from "styled-components";
 import Image from "next/image";
 import Card from "../../components/card";
-import Router from "next/router";
 import { useEffect, useState } from "react";
 import EditButton from "../../components/buttons/editButton";
 import Link from "next/link";
 
-export default function Profile() {
-  const [user, setUser] = useState("");
-
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
+export default function Profile({ user}) {
+  const [fullUserData, setFullUserData] = useState("");
 
   //GET USER-DATA VIA USEEFFECT FETCH
   useEffect(() => {
-    if (session) {
-      fetch(`/api/users/${session.user.email}`)
+      fetch(`/api/users/${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          setUser(data);
+          setFullUserData(data);
         });
-    }
-  }, [session?.user]);
-
-  //BREAKPOINT FOR PROTECTION
-  if (status === "loading") {
-    return null;
-  }
-  //
-
-  // WAIT UNTIL USER DATA IS AVAILABLE
-  while (user === "") {
-    return null;
-  }
+  }, []);
   //
 
   return (
     <StyledProfile>
       <ImageContainer>
-        <StyledImage
-          src={user?.image}
-          alt="GitHub Icon"
-          height={200}
-          width={200}
-          objectFit="contain"
-        />
+        {fullUserData.image ? (
+          <StyledImage
+            src={fullUserData.image}
+            alt="GitHub Icon"
+            height={200}
+            width={200}
+            objectFit="contain"
+          />
+        ) : null}
       </ImageContainer>
-      <Name>{user?.name}</Name>
+      <Name>{fullUserData.name}</Name>
       <Card>
         <ProfileDetail>
           <Attribute>E-Mail:</Attribute>
-          <Data>{user?.email}</Data>
+          <Data>{fullUserData.email}</Data>
         </ProfileDetail>
         <ProfileDetail>
           <Attribute>Wohnort:</Attribute>
-          <Data>{user?.city}</Data>
+          <Data>{fullUserData.city}</Data>
         </ProfileDetail>
         <ProfileDetail>
           <Attribute>PLZ:</Attribute>
-          <Data>{user?.plz}</Data>
+          <Data>{fullUserData.plz}</Data>
         </ProfileDetail>
         <ProfileDetail>
           <Attribute>Straße:</Attribute>
-          <Data>{user?.street}</Data>
+          <Data>{fullUserData.street}</Data>
         </ProfileDetail>
         <ProfileDetail>
           <Attribute>IBAN:</Attribute>
-          <Data>{user?.iban}</Data>
+          <Data>{fullUserData.iban}</Data>
         </ProfileDetail>
         <ProfileDetail>
           <Attribute>Team:</Attribute>
-          <Data>{user?.team}</Data>
+          <Data>{fullUserData.team}</Data>
         </ProfileDetail>
-        <Link href={`/profile/edit/${user.id}`}>
+        <Link href={`/profile/edit/${fullUserData.id}`}>
           <a>
             <EditButton />
           </a>
@@ -87,6 +67,22 @@ export default function Profile() {
     </StyledProfile>
   );
 }
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
+}
+
 
 const ImageContainer = styled.div`
   width: 200px;

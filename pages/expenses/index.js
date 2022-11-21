@@ -2,27 +2,17 @@ import ExpenseCard from "../../components/expenses/expenseCard";
 import styled from "styled-components";
 import Link from "next/link";
 import AddButton from "../../components/buttons/addButton";
-import Router from "next/router";
 import { useRef, useEffect } from "react";
 import { getLoadingAnimation } from "../../library/getLoadingAnimation";
 import { useData } from "../../context/DataContext";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export default function Einnahmen() {
+  
   //GET GLOBAL DATA STATE
   const expenses = useData().filteredExpenses;
   const mutateExpenses = useData().mutateExpenses;
-  mutateExpenses(); // refreshes cache to synchronyze with globald state after add function
-  //
-
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-
+  mutateExpenses(); // refreshes cache to synchronyze with global state after add function
   //
 
   //IMPLEMENT LOADING ANIMATION
@@ -34,10 +24,6 @@ export default function Einnahmen() {
     return <AnimationContainer ref={container}></AnimationContainer>;
   //
 
- if (status === "loading") {
-   //BREAKPOINT FOR PROTECTED PAGE
-   return null;
- }
   return (
     <>
       <>
@@ -55,6 +41,21 @@ export default function Einnahmen() {
       </>
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
 }
 
 const AnimationContainer = styled.div`
