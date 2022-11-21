@@ -23,63 +23,63 @@ export default function ExpensesTimeChart() {
   const data = [
     {
       name: "Jan",
-      Ausgaben: -getDataSumByMonth(expenses, 1),
       Einnahmen: getDataSumByMonth(revenues, 1),
+      Ausgaben: -getDataSumByMonth(expenses, 1),
     },
     {
       name: "Feb",
-      Ausgaben: -getDataSumByMonth(expenses, 2),
       Einnahmen: getDataSumByMonth(revenues, 2),
+      Ausgaben: -getDataSumByMonth(expenses, 2),
     },
     {
       name: "Mar",
-      Ausgaben: -getDataSumByMonth(expenses, 3),
       Einnahmen: getDataSumByMonth(revenues, 3),
+      Ausgaben: -getDataSumByMonth(expenses, 3),
     },
     {
       name: "Apr",
-      Ausgaben: -getDataSumByMonth(expenses, 4),
       Einnahmen: getDataSumByMonth(revenues, 4),
+      Ausgaben: -getDataSumByMonth(expenses, 4),
     },
     {
       name: "Mai",
-      Ausgaben: -getDataSumByMonth(expenses, 5),
       Einnahmen: getDataSumByMonth(revenues, 5),
+      Ausgaben: -getDataSumByMonth(expenses, 5),
     },
     {
       name: "Jun",
-      Ausgaben: -getDataSumByMonth(expenses, 6),
       Einnahmen: getDataSumByMonth(revenues, 6),
+      Ausgaben: -getDataSumByMonth(expenses, 6),
     },
     {
       name: "Jul",
-      Ausgaben: -getDataSumByMonth(expenses, 7),
       Einnahmen: getDataSumByMonth(revenues, 7),
+      Ausgaben: -getDataSumByMonth(expenses, 7),
     },
     {
       name: "Aug",
-      Ausgaben: -getDataSumByMonth(expenses, 8),
       Einnahmen: getDataSumByMonth(revenues, 8),
+      Ausgaben: -getDataSumByMonth(expenses, 8),
     },
     {
       name: "Sep",
-      Ausgaben: -getDataSumByMonth(expenses, 9),
       Einnahmen: getDataSumByMonth(revenues, 9),
+      Ausgaben: -getDataSumByMonth(expenses, 9),
     },
     {
       name: "Oct",
-      Ausgaben: -getDataSumByMonth(expenses, 10),
       Einnahmen: getDataSumByMonth(revenues, 10),
+      Ausgaben: -getDataSumByMonth(expenses, 10),
     },
     {
       name: "Nov",
-      Ausgaben: -getDataSumByMonth(expenses, 11),
       Einnahmen: getDataSumByMonth(revenues, 11),
+      Ausgaben: -getDataSumByMonth(expenses, 11),
     },
     {
       name: "Dez",
-      Ausgaben: -getDataSumByMonth(expenses, 12),
       Einnahmen: getDataSumByMonth(revenues, 12),
+      Ausgaben: -getDataSumByMonth(expenses, 12),
     },
   ];
 

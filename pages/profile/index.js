@@ -108,7 +108,6 @@ const StyledProfile = styled.div`
   gap: 10px;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
   width: 90%;
   max-width: 400px;
 `;

@@ -25,7 +25,7 @@ export async function getAllRevenues() {
       dateOfSubmit,
       comment,
       receipt,
-      name: name.name,
+      name:  name.name,
     })
   );
   return mappedRevenues;
@@ -52,7 +52,7 @@ export async function getRevenueById(revenueId) {
     dateOfSubmit,
     comment,
     receipt,
-    name: name.name,
+    name: { name: name.name, id: name._id },
   };
 }
 

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import searchIcon from "../../public/search_icon.png";
 import Image from "next/image";
 import FilterBar from "./filterBar";
 import filterIcon from "../../public/filter_icon.png";
-import Input from "../formComponents/input";
+
 
 export default function SearchBar({
   data,

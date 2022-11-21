@@ -70,6 +70,7 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
         onChange={(event) => setDescription(event.target.value)}
         pattern=".*[^\s]{1,}.*"
         required
+        autoFocus
       ></Input>
       <Label htmlFor="amount">Betrag*</Label>
       <Input
@@ -86,20 +87,17 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
       <Label>Beleg:</Label>
 
       {receipt !== "" ? (
-        <>
+        <PreviewImageContainer>
+          <Image
+            src={receipt}
+            layout="fill"
+            objectFit="contain"
+            alt="receipt"
+          />
           <DeleteImageButton onClick={() => setReceipt("")}>
-            Foto löschen
+            x
           </DeleteImageButton>
-
-          <PreviewImageContainer>
-            <Image
-              src={receipt}
-              layout="fill"
-              objectFit="contain"
-              alt="receipt"
-            />
-          </PreviewImageContainer>
-        </>
+        </PreviewImageContainer>
       ) : (
         <UploadImageButton
           src={addImageButton}
@@ -110,7 +108,6 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
           }}
         />
       )}
-
       <FileInput
         type="file"
         ref={fileInputRef}
@@ -159,6 +156,24 @@ export default function ExpenseForm({ onSubmit, buttonLabel, expense }) {
 
 const DeleteImageButton = styled.button`
   z-index: 2;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  font-size: 20px;
+  border: solid 2px var(--border);
+  background-color: var(--background-primary);
+  color: var(--paragraph);
+  padding-bottom: 3px;
+  cursor: pointer;
+`;
+
+const FileInput = styled.input`
+  display: none;
 `;
 
 const Form = styled.form`
@@ -169,14 +184,9 @@ const Form = styled.form`
   font-size: 20px;
 `;
 
-const FileInput = styled.input`
-  display: none;
-`;
-
-const Label = styled.label``;
-
-const UploadImageButton = styled(Image)`
-  cursor: pointer;
+const Label = styled.label`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PreviewImageContainer = styled.div`
@@ -218,4 +228,8 @@ const StatusButton = styled.button`
 const StatusSelection = styled.div`
   display: flex;
   gap: 5px;
+`;
+
+const UploadImageButton = styled(Image)`
+  cursor: pointer;
 `;

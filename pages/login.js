@@ -31,9 +31,7 @@ export default function Login() {
   }
 
   if (session) {
-    setTimeout(() => {
-      Router.push("/dashboard");
-    }, 3000);
+    Router.push("/dashboard");
   }
   return (
     <StyledLogin>

@@ -33,4 +33,8 @@ export function printSubhead(pathname) {
     if (pathname.includes("/profile/edit/")) {
       return "Profil editieren";
     }
+  
+   if (pathname.includes("/profile/details/")) {
+     return "Profildetails";
+   }
 }

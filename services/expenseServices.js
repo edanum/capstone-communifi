@@ -54,7 +54,7 @@ export async function getExpenseById(expenseId) {
     dateOfSubmit,
     comment,
     receipt,
-    name: name.name,
+    name: {name: name.name, id: name._id},
     status,
   };
 }

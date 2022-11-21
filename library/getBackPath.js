@@ -1,5 +1,6 @@
 import Router from "next/router";
 
+
 export function getBackPath(pathname) {
   if (pathname.includes("/expenses/add")) {
     Router.push("/expenses");
@@ -31,5 +32,10 @@ export function getBackPath(pathname) {
 
   if (pathname.includes("/profile/edit/")) {
     Router.push("/profile/");
+  }
+
+  if (pathname.includes("/profile/details/")) {
+    
+    Router.back();
   }
 }

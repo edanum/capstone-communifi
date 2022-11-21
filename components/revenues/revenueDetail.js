@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Card from "../card";
+import Link from "next/link";
 
 export default function RevenueDetail({ revenue }) {
   return (
@@ -27,12 +28,16 @@ export default function RevenueDetail({ revenue }) {
           </Date>
           <Name>
             <ToBold>Eingereicht von:</ToBold>
-            {revenue.name}
+            <Link href={`/profile/details/${revenue.name.id}`}>
+              <Box> {revenue.name.name}</Box>
+            </Link>
           </Name>
-          <Comment>
-            <ToBold>Kommentar:</ToBold>
-            {revenue.comment}
-          </Comment>
+          {revenue.comment ? (
+            <Comment>
+              <ToBold>Kommentar:</ToBold>
+              {revenue.comment}
+            </Comment>
+          ) : null}
         </CardDetailContainer>
       </Card>
     </>
@@ -47,6 +52,13 @@ const Amount = styled.h2`
   color: var(--card-heading);
 `;
 
+const Box = styled.div`
+  background-color: var(--button);
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: var(--button-text);
+`;
+
 const CardDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,11 +66,17 @@ const CardDetailContainer = styled.div`
   gap: 10px;
   margin-top: 20px;
   width: 100%;
+
+  p,
+  div,
+  section {
+    font-size: 0.9rem;
+  }
 `;
 
 const CardHeader = styled.section`
   width: 100%;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 `;
 
 const Comment = styled.section`

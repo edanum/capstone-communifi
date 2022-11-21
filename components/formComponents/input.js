@@ -12,6 +12,7 @@ export default function Input({
   pattern,
   onChange,
   placeholder,
+  autoFocus
 }) {
   return (
     <StyledInput
@@ -26,6 +27,7 @@ export default function Input({
       pattern={pattern}
       onChange={onChange}
       placeholder={placeholder}
+      autoFocus={autoFocus}
     ></StyledInput>
   );
 }
@@ -47,5 +49,8 @@ const StyledInput = styled.input`
   ::placeholder {
     color: #8f8f8f;
     text-align: center;
+
+
+    
   }
 `;

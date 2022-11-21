@@ -21,6 +21,7 @@ const StyledTextArea = styled.textarea`
   color: var(--card-paragraph);
   border: solid 1px var(--border);
   border-radius: 7px;
+  padding: 10px;
 
   &:focus {
     outline: none !important;

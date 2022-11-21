@@ -7,7 +7,7 @@ export default function ExpenseCard({ expense }) {
   return (
     <Link href={"/expenses/details/" + expense.id}>
       <a>
-        <Card animation={"slide-left"}>
+        <Card>
           <CardHeader>
             <p>#{expense.receiptNumber}</p>
             <StatusSection status={expense.status} />

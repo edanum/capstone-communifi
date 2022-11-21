@@ -52,6 +52,7 @@ export default function UserForm({ onSubmit, user }) {
         onChange={(event) => setName(event.target.value)}
         pattern=".*[^\s]{1,}.*"
         required
+        autoFocus
       ></Input>
       <Label htmlFor="city">Wohnort</Label>
       <Input
@@ -87,15 +88,6 @@ export default function UserForm({ onSubmit, user }) {
         id="iban"
         value={iban}
         onChange={(event) => setIban(event.target.value)}
-        pattern=".*[^\s]{1,}.*"
-      ></Input>
-      <Label htmlFor="name">Team</Label>
-      <Input
-        type="text"
-        name="team"
-        id="team"
-        value={team}
-        onChange={(event) => setTeam(event.target.value)}
         pattern=".*[^\s]{1,}.*"
       ></Input>
       <Button type="submit" label={"Profildaten speichern"} />

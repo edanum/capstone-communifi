@@ -34,5 +34,5 @@ const Main = styled.div`
   position: relative;
   z-index: -1;
   top: 52.2px;
-  padding: 10px 20px 70px 20px;
+  padding: 20px 20px 150px 20px;
 `;
