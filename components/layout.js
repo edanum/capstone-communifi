@@ -9,13 +9,13 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {pathname === "/" ||
+      {
       pathname === "/login" ||
       pathname === "/register" ? null : (
         <Header />
       )}
       <Main>{children}</Main>
-      {pathname === "/" ||
+      {
       pathname === "/login" ||
       pathname.includes("edit") ||
       pathname.includes("add") ||

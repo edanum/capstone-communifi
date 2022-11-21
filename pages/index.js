@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
-import lottie from "lottie-web";
-import Router from "next/router";
+import WinAndLoss from "../components/dashboard/winAndLoss";
+import { getLoadingAnimation } from "../library/getLoadingAnimation";
 import { useData } from "../context/DataContext";
-import Logo from "../components/logo";
-import Head from "next/head";
-import Button from "../components/buttons/button";
+import styled from "styled-components";
+import ExpensesOverview from "../components/dashboard/yearOverview";
+import { getSession } from "next-auth/react";
 
 export default function Home() {
-  //GET GLOBAL DATA STATES TO PRELOAD DB DATA IN THE BACKGROUND
+  //GET GLOBAL DATA STATES
   const revenues = useData().revenues;
   const expenses = useData().expenses;
   const mutateExpenses = useData().mutateExpenses;
@@ -17,57 +16,64 @@ export default function Home() {
   mutateRevenues();
   //
 
-  //SHOW ANIMATION
+  //IMPLEMENT LOADING ANIMATION
   const container = useRef(null);
   useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current,
-      render: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: require("../public/budgeting_animation.json"),
-    });
+    getLoadingAnimation(container);
   }, []);
+
+  //SHOW LOADING ANIMATION WHILE WAITING ON DATA
+  if (!expenses || !revenues)
+    return <AnimationContainer ref={container}></AnimationContainer>;
+  //
+
+  //GENERATE FINANCE DATA
+  function getSum(array) {
+    const amounts = array.map((item) => item.amount);
+    const sum = amounts.reduce((a, b) => a + b);
+    return sum;
+  }
+  const expenseSum = getSum(expenses);
+  const revenueSum = getSum(revenues);
+  const result = revenueSum - expenseSum;
   //
 
   return (
-    <LandingPage>
-      <Heading>
-        Willkommen bei
-        <Logo fontSize={"50px"} />
-      </Heading>
-      <IntroductionText>
-        Toll, dass du dabei bist! Mit CommuniFI wird das managen gemeinsamer
-        Konten und Finanzen zum Kinderspiel. Bist du bereit?
-      </IntroductionText>
-      <Animation ref={container} />
-      <Button onClick={() => Router.push("/login")} label="Los gehts!" />
-    </LandingPage>
+    <DashboardContainer>
+      <WinAndLoss
+        expenseSum={expenseSum}
+        revenueSum={revenueSum}
+        result={result}
+      />
+      <ExpensesOverview expenses={expenses} />
+    </DashboardContainer>
   );
 }
 
-const Animation = styled.div`
-  position: relative;
-  width: 100%;
-  margin: 20px auto;
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
+}
+
+const AnimationContainer = styled.div`
+  height: calc(100vh - 140px);
 `;
 
-const Heading = styled.h1`
-  color: var(--headline);
-  text-align: center;
-`;
-
-const IntroductionText = styled.section`
-  font-size: 20px;
-  text-align: center;
-`;
-
-const LandingPage = styled.div`
+const DashboardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 100vh;
-  top: -60px;
+  width: 100%;
+  gap: 20px;
 `;
