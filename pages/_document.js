@@ -28,7 +28,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>CommuniFI</title>
         </Head>
         <body>
           <Main />
