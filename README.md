@@ -10,6 +10,9 @@ Wheter being member of a club, living in flat sharing communities or working on 
 
 ![Group 25](https://user-images.githubusercontent.com/79711003/203284966-a68580de-d44b-4a14-8cec-79d634cfc431.png)
 
+![image](https://user-images.githubusercontent.com/79711003/203396618-19e66d82-4031-415a-b6c5-17c6463121d5.png)
+
+
 
 ## `Tech Stack`
 
