@@ -24,7 +24,7 @@ Wheter being member of a club, living in flat sharing communities or working on 
 - Figma
 - lottie-web;
 
-## `Tech Stack`
+## `Demo`
 
 Unfortunately my vercel account got blocked for 30 days so I can't offer a deployment at the moment. You can use it locally, but need to contact me to get the database URI. Otherwise, here is a quick feature demo:
 
