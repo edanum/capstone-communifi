@@ -23,3 +23,10 @@ Wheter being member of a club, living in flat sharing communities or working on 
 - Recharts
 - Figma
 - lottie-web;
+
+## `Tech Stack`
+
+Unfortunately my vercel account got blocked for 30 days so I can't offer a deployment at the moment. You can use it locally, but need to contact me to get the database URI. Otherwise, here is a quick feature demo:
+
+https://user-images.githubusercontent.com/79711003/203292176-001eb530-5e17-4b96-af4d-57d34585a18e.mov
+
