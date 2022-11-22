@@ -26,7 +26,7 @@ Wheter being member of a club, living in flat sharing communities or working on 
 
 ## `Demo`
 
-Unfortunately my vercel account got blocked for 30 days so I can't offer a deployment at the moment. You can use it locally, but need to contact me to get the database URI. Otherwise, here is a quick feature demo:
+Go to https://capstone-communifi.vercel.app/ and login with GitHub. The E-Mail based login is not available at the moment. Just want a quick demo? Watch the demo-video instead:
 
 https://user-images.githubusercontent.com/79711003/203292176-001eb530-5e17-4b96-af4d-57d34585a18e.mov
 
