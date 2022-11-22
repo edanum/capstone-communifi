@@ -2,8 +2,6 @@
 
 > Digitales Gesellenstück as final project for neuefische web dev bootcamp
 
-![hero](src/images/readme/carbon&lactate.png)
-
 ## `Description`
 
 ### An app for managing finances in a community
