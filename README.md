@@ -22,7 +22,7 @@ Wheter being member of a club, living in flat sharing communities or working on 
 - Cloudinary
 - Recharts
 - Figma
-- lottie-web;
+- lottie-web
 
 ## `Demo`
 
