@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      {pathname === "/dashboard" ? (
+      {pathname === "/" ? (
         <>
           <Logo fontSize={"23px"} />
           <SubTitle>{printSubhead(pathname)}</SubTitle>

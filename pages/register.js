@@ -8,7 +8,7 @@ import Logo from "../components/logo";
 export default function Register() {
   function handleSubmit(event) {
     event.preventDefault();
-    Router.push("/dashboard");
+    Router.push("/");
   }
 
   return (

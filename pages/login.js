@@ -25,13 +25,8 @@ export default function Login() {
   }, []);
   //
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    Router.push("/dashboard");
-  }
-
   if (session) {
-    Router.push("/dashboard");
+    Router.push("/");
   }
   
   return (

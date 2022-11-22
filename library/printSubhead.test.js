@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { printSubhead } from "../library/printSubhead";
 
 test("Test if the right subhead gets printed", async () => {
-  const pathname = "/dashboard"
+  const pathname = "/"
 
   const result = printSubhead(pathname);
   expect(result).toStrictEqual("Dashboard");

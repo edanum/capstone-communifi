@@ -12,7 +12,7 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/dashboard",
+    signIn: "/login",
   },
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
