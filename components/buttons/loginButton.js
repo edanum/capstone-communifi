@@ -11,7 +11,7 @@ export default function LoginButton() {
       <Button
         onClick={() =>
           signIn("github", {
-            callbackUrl: "/dashboard",
+            callbackUrl: "/",
           })
         }
       >
