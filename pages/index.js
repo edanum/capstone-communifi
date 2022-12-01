@@ -6,7 +6,7 @@ import styled from "styled-components";
 import ExpensesOverview from "../components/dashboard/yearOverview";
 import { getSession } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import { Router } from "next/router";
+import Router from "next/router";
 
 export default function Home() {
   //GET GLOBAL DATA STATES
@@ -24,16 +24,16 @@ export default function Home() {
     getLoadingAnimation(container);
   }, []);
 
+  // PAGE PROTECTION
   const { data: session, status } = useSession();
-
   if (status === "loading") {
     return <p>Loading...</p>;
   }
-
   if (status === "unauthenticated") {
+    Router.push("/login");
     return <p>Access Denied</p>;
-    Router.push("/login")
   }
+  //
 
   //SHOW LOADING ANIMATION WHILE WAITING ON DATA
   if (!expenses || !revenues)
