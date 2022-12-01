@@ -25,14 +25,10 @@ export default function Login() {
   }, []);
   //
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    Router.push("/dashboard");
-  }
-
   if (session) {
-    Router.push("/dashboard");
+    Router.push("/");
   }
+  
   return (
     <StyledLogin>
       {session ? (
@@ -46,7 +42,7 @@ export default function Login() {
       ) : (
         <>
           <Logo fontSize={"40px"} />
-          <Form onSubmit={() => handleSubmit()}>
+          {/* <Form onSubmit={() => handleSubmit()}>
             <Input
               type="email"
               id="email"
@@ -66,14 +62,14 @@ export default function Login() {
             <Button type="submit" label="Login">
               Login
             </Button>
-          </Form>
+          </Form> */}
           <LoginButton />
-          <CallToRegister>
+          {/* <CallToRegister>
             <p>Noch kein Account?</p>
             <Link href="/register">
               <ToColor>Registriere dich!</ToColor>
             </Link>
-          </CallToRegister>
+          </CallToRegister> */}
         </>
       )}
     </StyledLogin>
@@ -86,19 +82,22 @@ const CallToRegister = styled.section`
   font-size: 1.3rem;
 `;
 
-const StyledLogin = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 60px 0px;
-`;
-
 const Form = styled.form`
   margin-top: 60px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
+`;
+
+const StyledLogin = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100vh;
+  top: -87px;
+  position: relative;
 `;
 
 const ToColor = styled.p`

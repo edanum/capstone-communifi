@@ -57,6 +57,7 @@ const Box = styled.div`
   padding: 2px 5px;
   border-radius: 5px;
   color: var(--button-text);
+  cursor: pointer;
 `;
 
 const CardDetailContainer = styled.div`

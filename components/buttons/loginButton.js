@@ -8,7 +8,13 @@ export default function LoginButton() {
 
   return (
     <>
-      <Button onClick={() => signIn("github")}>
+      <Button
+        onClick={() =>
+          signIn("github", {
+            callbackUrl: "/",
+          })
+        }
+      >
         <Image
           src={GitHubIcon}
           alt="GitHub Icon"

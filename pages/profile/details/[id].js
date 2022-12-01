@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
 import { useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-import Router from "next/router";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Card from "../../../components/card";
 
@@ -17,15 +16,6 @@ export default function ProfileDetails() {
   }, []);
   //
 
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-  //
-
   //GET DATA VIA USEEFFECT FETCH
   useEffect(() => {
     const pathArray = window.location.pathname.split("/");
@@ -38,14 +28,12 @@ export default function ProfileDetails() {
         setLoading(false);
       });
   }, []);
- 
+
   if (isLoading)
     return <AnimationContainer ref={container}></AnimationContainer>;
   if (!data) return <AnimationContainer ref={container}></AnimationContainer>;
   //
- if (status === "loading") { //BREAKPOINT FOR PROTECTED PAGE
-   return null;
- }
+
   const user = data;
   return (
     <>
@@ -86,14 +74,31 @@ export default function ProfileDetails() {
     </>
   );
 }
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
+}
+
 const AnimationContainer = styled.div`
   height: calc(100vh - 140px);
 `;
 
-const StyledExpenseDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+const Attribute = styled.p`
+  width: 60%;
+`;
+
+const Data = styled.p`
   width: 100%;
 `;
 
@@ -111,16 +116,6 @@ const Name = styled.h1`
 const StyledImage = styled(Image)`
   border-radius: 50%;
 `;
-const StyledProfile = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  width: 90%;
-  max-width: 400px;
-`;
 
 const ProfileDetail = styled.div`
   display: flex;
@@ -130,10 +125,13 @@ const ProfileDetail = styled.div`
   margin: 5px 0px;
 `;
 
-const Attribute = styled.p`
-  width: 60%;
-`;
-
-const Data = styled.p`
-  width: 100%;
+const StyledProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  width: 90%;
+  max-width: 400px;
 `;

@@ -25,7 +25,6 @@ export default function FilterBar({
           filteredData={filteredData}
           setFilteredData={setFilteredData}
           attribute="receiptNumber"
-          onClick={() => console.log("test")}
           activeSort={activeSort}
           setActiveSort={setActiveSort}
         />

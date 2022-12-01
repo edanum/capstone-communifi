@@ -2,7 +2,7 @@ import RevenueForm from "../../../components/revenues/revenueForm";
 import Router from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { getLoadingAnimation } from "../../../library/getLoadingAnimation";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export default function RevenueEdit() {
   //PREPARE LOTTIE ANIMATION (LOADING)
@@ -12,15 +12,6 @@ export default function RevenueEdit() {
   }, []);
   //
 
-  //PROTECT PAGE
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      Router.push("/login");
-    },
-  });
-
-  //
   //GET DATA VIA USEEFFECT FETCH
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -39,11 +30,6 @@ export default function RevenueEdit() {
   if (isLoading) return <div ref={container}></div>;
   if (!data) <div ref={container}></div>;
   //
-
-  if (status === "loading") {
-    //BREAKPOINT FOR PROTECTED PAGE
-    return null;
-  }
 
   const revenue = data;
 
@@ -67,4 +53,19 @@ export default function RevenueEdit() {
       buttonLabel="Änderungen speichern"
     />
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: session,
+  };
 }

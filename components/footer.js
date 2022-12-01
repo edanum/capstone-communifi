@@ -12,8 +12,8 @@ export default function Footer() {
 
   return (
     <StyledFooter>
-      <Link href="/dashboard">
-        <NavElement active={pathname === "/dashboard"}>
+      <Link href="/">
+        <NavElement active={pathname === "/"}>
           <Image
             src={dashboardIcon}
             alt="Dashboard Icon"

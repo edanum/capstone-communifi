@@ -3,7 +3,7 @@ import Router from "next/router";
 
 export default function SkipButton() {
   return (
-    <StyledSkipButton onClick={() => Router.push("/dashboard")}>
+    <StyledSkipButton onClick={() => Router.push("/")}>
       Skip (just for fishes)
     </StyledSkipButton>
   );
