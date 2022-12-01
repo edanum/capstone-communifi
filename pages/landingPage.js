@@ -8,8 +8,6 @@ import Button from "../components/buttons/button";
 
 export default function Home() {
   //GET GLOBAL DATA STATES TO PRELOAD DB DATA IN THE BACKGROUND
-  const revenues = useData().revenues;
-  const expenses = useData().expenses;
   const mutateExpenses = useData().mutateExpenses;
   const mutateRevenues = useData().mutateRevenues;
   mutateExpenses();
