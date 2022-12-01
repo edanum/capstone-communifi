@@ -5,6 +5,7 @@ import { useData } from "../context/DataContext";
 import styled from "styled-components";
 import ExpensesOverview from "../components/dashboard/yearOverview";
 import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   //GET GLOBAL DATA STATES
@@ -21,6 +22,16 @@ export default function Home() {
   useEffect(() => {
     getLoadingAnimation(container);
   }, []);
+
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (status === "unauthenticated") {
+    return <p>Access Denied</p>;
+  }
 
   //SHOW LOADING ANIMATION WHILE WAITING ON DATA
   if (!expenses || !revenues)
@@ -51,22 +62,22 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req });
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
 
 const AnimationContainer = styled.div`
   height: calc(100vh - 140px);
